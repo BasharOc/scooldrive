@@ -35,7 +35,7 @@ services:
     command: >
       certonly --webroot -w /var/www/certbot
       -d fahrschule-lg.scooldrive.com
-      --email DEINE@EMAIL.DE
+      --email farhatbashar16@gmail.com
       --agree-tos --no-eff-email
 
 networks:
