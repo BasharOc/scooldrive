@@ -1,0 +1,49 @@
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production # überschreibt den Wert aus .env
+    env_file: ./server/.env
+    networks:
+      - app-network
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    # Phase 2 – HTTPS: Volumes einkommentieren
+    # volumes:
+    #   - certbot-certs:/etc/letsencrypt
+    #   - certbot-www:/var/www/certbot
+
+  # Phase 2 – HTTPS: Certbot-Service einkommentieren
+  # certbot:
+  #   image: certbot/certbot
+  #   volumes:
+  #     - certbot-certs:/etc/letsencrypt
+  #     - certbot-www:/var/www/certbot
+  #   command: >
+  #     certonly --webroot -w /var/www/certbot
+  #     -d fahrschule-lg.scooldrive.com
+  #     --email DEINE@EMAIL.DE
+  #     --agree-tos --no-eff-email
+
+networks:
+  app-network:
+    driver: bridge
+
+# Phase 2 – HTTPS: Volumes einkommentieren
+# volumes:
+#   certbot-certs:
+#   certbot-www:
