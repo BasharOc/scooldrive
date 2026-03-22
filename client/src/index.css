@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+html {
+  width: 100vw;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  font-family: "Raleway", "Almarai", sans-serif;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden !important;
+}

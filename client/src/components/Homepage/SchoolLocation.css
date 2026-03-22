@@ -1,0 +1,229 @@
+.school-location {
+  padding: 4rem 1rem;
+  background-color: #f9fafb;
+}
+
+.school-location__container {
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.school-location__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.school-location__title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.school-location__subtitle {
+  font-size: 1.1rem;
+  color: #6b7280;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.school-location__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.school-location__info {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.school-location__info-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 2rem;
+}
+
+.school-location__address {
+  margin-bottom: 2rem;
+}
+
+.school-location__address-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #f5bb00;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.school-location__address-text {
+  color: #374151;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.school-location__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.school-location__contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.school-location__contact-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #f5bb00;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.school-location__contact-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.school-location__contact-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.school-location__contact-value {
+  font-size: 1.1rem;
+  color: #374151;
+  font-weight: 600;
+}
+
+.school-location__contact-link {
+  color: #374151;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.school-location__contact-link:hover {
+  color: #f5bb00;
+}
+
+.school-location__map {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  height: 400px;
+  background-color: #e5e7eb;
+  position: relative;
+}
+
+.school-location__map-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+}
+
+.school-location__map-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #f5bb00;
+}
+
+.school-location__map-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.school-location__cta {
+  margin-top: 2rem;
+  text-align: left; /* Ändert die Ausrichtung auf links */
+}
+
+.school-location__button {
+  background-color: #f5bb00;
+  color: black;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.school-location__button:hover {
+  background-color: #e5a800;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(245, 187, 0, 0.3);
+}
+
+.school-location__button-icon {
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .school-location__content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .school-location__map {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .school-location__title {
+    font-size: 2rem;
+  }
+
+  .school-location__subtitle {
+    font-size: 1rem;
+  }
+
+  .school-location__info {
+    padding: 2rem;
+  }
+
+  .school-location__info-title {
+    font-size: 1.5rem;
+  }
+
+  .school-location__contact-item {
+    gap: 0.8rem;
+  }
+
+  .school-location__contact-icon {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
+}
