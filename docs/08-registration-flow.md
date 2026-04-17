@@ -103,6 +103,8 @@ Beim Submit in Schritt 8 wird `emailjs.send()` aufgerufen mit:
 - `VITE_EMAILJS_SERVICE_ID`
 - `VITE_EMAILJS_TEMPLATE_ID`
 - `VITE_EMAILJS_PUBLIC_KEY`
+- `VITE_REISTRATION_EMAIL_MODE=mock` fuer lokale Tests ohne echten Versand.
+- `VITE_REGISTRATION_EMAIL_MODE=mock` wird als korrekt geschriebener Alias ebenfalls unterstuetzt.
 
 Uebertragene Felder:
 
@@ -112,6 +114,8 @@ Uebertragene Felder:
 - allgemeiner Rabatt
 - Freunde-Rabatt
 - Name des werbenden Freundes
+
+Im Mock-Modus baut `registrationSubmit.js` dieselbe Payload, ueberspringt aber `emailjs.send()` und schreibt die Daten in die Browser-Konsole. Der Wizard geht danach trotzdem auf die Erfolgsseite.
 
 ## Bonus-Einbindung
 

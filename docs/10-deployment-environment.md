@@ -87,6 +87,8 @@ VITE_API_URL
 VITE_EMAILJS_SERVICE_ID
 VITE_EMAILJS_TEMPLATE_ID
 VITE_EMAILJS_PUBLIC_KEY
+VITE_REISTRATION_EMAIL_MODE
+VITE_REGISTRATION_EMAIL_MODE
 VITE_GA_MEASUREMENT_ID
 ```
 
@@ -120,3 +122,10 @@ Fuer lokale Fullstack-Entwicklung sollte `VITE_API_URL` auf das lokale Backend z
 VITE_API_URL=http://localhost:3000/api
 ```
 
+Fuer lokale Anmeldetests ohne echten EmailJS-Versand:
+
+```text
+VITE_REISTRATION_EMAIL_MODE=mock
+```
+
+Der korrekt geschriebene Alias `VITE_REGISTRATION_EMAIL_MODE=mock` funktioniert ebenfalls.
