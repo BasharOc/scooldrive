@@ -32,7 +32,7 @@ Der globale `LanguageContext` enthaelt vor allem:
 
 Viele grosse Seiten definieren zusaetzlich eigene lokale `content`-Objekte fuer DE/EN/AR, zum Beispiel:
 
-- `AnmeldungPage.jsx`
+- `client/src/features/registration/registrationContent.jsx`
 - `TheorieKursPage.jsx`
 - `IntensivKursPage.jsx`
 - `PreisePage.jsx`
@@ -97,4 +97,3 @@ Wichtige Dateien in `client/public/`:
 
 - `client/src/index.css`: Tailwind Import und globale Overflow/Font-Regeln.
 - `client/src/components/Homepage/*.css`: einzelne CSS-Dateien fuer Homepage-Komponenten.
-

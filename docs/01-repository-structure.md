@@ -49,10 +49,8 @@
 Das Projekt hat ungefaehr 19.500 Zeilen in den gezaehlten Frontend- und Backend-Dateien. Besonders grosse Dateien sind:
 
 - `client/src/pages/PunkteAbbauenPage.jsx`
-- `client/src/pages/AnmeldungPage.jsx`
 - `client/src/pages/PreisePage.jsx`
 - `client/src/pages/IntensivKursPage.jsx`
 - `client/src/components/Motorrad/MotorradLicenseSteps MotorradLicenseSteps.jsx`
 - `client/src/components/Navbar.jsx`
 - `client/src/helpers/blogarticles.js`
-

@@ -9,13 +9,25 @@ Die Route `/anmelden` rendert nicht direkt das Formular, sondern `AnmeldungLeitu
 1. laedt `/api/einstellungen`
 2. prueft `einstellungen.anmeldungStopp`
 3. leitet bei aktivem Stop zu `/maximal-capacity`
-4. rendert sonst `AnmeldungPage`
+4. rendert sonst `AnmeldungPage`, das als Wrapper die neue `RegistrationPage` laedt
 
 ## Formular
 
-Hauptdatei: `client/src/pages/AnmeldungPage.jsx`
+Hauptdatei: `client/src/features/registration/RegistrationPage.jsx`
+
+Kompatibilitaets-Wrapper: `client/src/pages/AnmeldungPage.jsx`
 
 Hilfskomponenten: `client/src/components/AnmeldeSteps/`
+
+Neue Feature-Struktur:
+
+- `registrationContent.jsx`: DE/EN/AR-Texte und Step-Optionen.
+- `registrationInitialState.js`: Initialwerte und `TOTAL_REGISTRATION_STEPS`.
+- `registrationReducer.js`: lokaler Wizard-State per `useReducer`.
+- `registrationSteps.js`: Vorwaerts-/Rueckwaertslogik und Filter fuer spezifische Klassen.
+- `registrationValidation.js`: Validierung pro Step.
+- `registrationSubmit.js`: EmailJS-Versand.
+- `components/`: Header, Progress, Navigation, SEO, StepRenderer und Freunde-Rabatt-Box.
 
 Das Formular arbeitet mit:
 
@@ -103,9 +115,8 @@ Uebertragene Felder:
 
 ## Bonus-Einbindung
 
-`AnmeldungPage` laedt `/api/bonus`:
+`RegistrationPage` laedt `/api/bonus`:
 
 - `forAll` wird als allgemeiner Rabatt angezeigt.
 - `forFriend` blendet in Schritt 8 eine Freunde-Rabatt-Option ein.
 - `BonusNavbar` zeigt aktive Boni global im Layout als Ticker.
-

@@ -45,6 +45,7 @@ Oeffentliche Seiten werden meist in `MainLayout` gerendert. Admin und Anmeldung 
 | Anhaenger | `client/src/components/AutoAnhanger/` | Hero, Anforderungen, Schritte, weitere Voraussetzungen. |
 | Motorrad | `client/src/components/Motorrad/` | Hero, Anforderungen, Fakten, Infos, Lizenzschritte. |
 | Anmeldung | `client/src/components/AnmeldeSteps/` | Step1 bis Step9 plus Step3_5. |
+| Anmeldung Feature | `client/src/features/registration/` | Page, Reducer, Content, Validierung, Submit und UI-Bausteine fuer den Wizard. |
 | Admin | `client/src/pages/Admin/components/` | Formulare fuer Backend-Ressourcen. |
 
 ## Seiten
@@ -60,7 +61,7 @@ Oeffentliche Seiten werden meist in `MainLayout` gerendert. Admin und Anmeldung 
 | Intensivkurs | `client/src/pages/IntensivKursPage.jsx` | Intensivkursinfo mit Preis-Daten aus API. |
 | Preise | `client/src/pages/PreisePage.jsx` | Preisuebersicht mit API-Daten. |
 | Punkte abbauen | `client/src/pages/PunkteAbbauenPage.jsx` | ASF/FES/Punkteabbau-Landingpage. |
-| Anmeldung | `client/src/pages/AnmeldungPage.jsx` | Mehrstufiges Formular mit EmailJS. |
+| Anmeldung | `client/src/pages/AnmeldungPage.jsx` | Kompatibler Wrapper auf `features/registration/RegistrationPage.jsx`. |
 | Anmeldung-Leitung | `client/src/pages/AnmeldungLeitung.jsx` | Gate vor Anmeldung, prueft `anmeldungStopp`. |
 | Kapazitaet | `client/src/pages/MaximalCapacity.jsx` | Zielseite bei aktivem Anmeldung-Stopp. |
 | Blog | `client/src/pages/Blog/BlogOverview.jsx` | Liste statischer Blogartikel. |
@@ -85,4 +86,3 @@ const API_BASE =
 - `refetch()` fuer erneutes Laden
 
 Einige Komponenten nutzen weiterhin direkte `fetch()`-Aufrufe mit `API_BASE`, besonders Admin-Komponenten und Layout-Gates.
-

@@ -17,7 +17,6 @@ import IntensivKursPage from "./pages/IntensivKursPage";
 import PreisePage from "./pages/PreisePage";
 import PunkteAbbauenPage from "./pages/PunkteAbbauenPage";
 import ScrollToTop from "./components/ScrollToTop";
-import AnmeldungPage from "./pages/AnmeldungPage";
 import CookieBanner from "./pages/CookieBanner";
 import BlogOverview from "./pages/Blog/BlogOverview";
 import BlogArticlePage from "./pages/Blog/BlogArticlePage";
