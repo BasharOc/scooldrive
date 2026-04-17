@@ -96,9 +96,23 @@ Validiert werden:
 - Schritt 6: Kursart.
 - Schritt 8: Name, Geburtsdatum, Geburtsstadt, Telefon, Email, Adresse, Datenschutz.
 
-## EmailJS
+## Speicherung und EmailJS
 
-Beim Submit in Schritt 8 wird `emailjs.send()` aufgerufen mit:
+Beim Submit in Schritt 8 wird zuerst eine Registrierung in MongoDB gespeichert:
+
+```text
+POST /api/registrations
+```
+
+Erst danach wird EmailJS ausgefuehrt oder im Mock-Modus uebersprungen. Anschliessend wird der Emailstatus im Backend aktualisiert:
+
+```text
+PATCH /api/registrations/:id/email-status
+```
+
+Dadurch bleibt die Anmeldung im Adminbereich sichtbar, auch wenn EmailJS crasht.
+
+EmailJS nutzt:
 
 - `VITE_EMAILJS_SERVICE_ID`
 - `VITE_EMAILJS_TEMPLATE_ID`

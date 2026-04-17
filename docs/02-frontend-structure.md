@@ -70,6 +70,8 @@ Oeffentliche Seiten werden meist in `MainLayout` gerendert. Admin und Anmeldung 
 | Login | `client/src/pages/Admin/Login.jsx` | Admin-Login. |
 | Admin | `client/src/pages/Admin/AdminApp.jsx` | Admin-Dashboard. |
 
+Im Admin-Dashboard ist `Registrierungen` eingebunden. Diese Komponente liest `/api/registrations` mit Admin-JWT und zeigt gespeicherte Anmeldungen inklusive Emailstatus.
+
 ## Datenzugriff im Frontend
 
 `client/src/utils/api.js` definiert:

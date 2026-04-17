@@ -145,3 +145,48 @@ Jeder Wochentag hat:
 
 Zeitfelder werden im Format `HH:MM` validiert.
 
+## Registrierungen
+
+| Methode | Pfad | Auth | Zweck |
+| --- | --- | --- | --- |
+| POST | `/api/registrations` | nein | Anmeldung vor EmailJS sicher in MongoDB speichern. |
+| PATCH | `/api/registrations/:id/email-status` | `clientUpdateToken` | EmailJS-Status fuer genau diese Anmeldung nachtragen. |
+| GET | `/api/registrations` | Bearer Token | Alle Registrierungen fuer Admin abrufen. |
+| GET | `/api/registrations/:id` | Bearer Token | Einzelne Registrierung fuer Admin abrufen. |
+
+POST-Body entspricht der Formular-/Email-Payload, inklusive:
+
+- `fahrzeugTyp`
+- `spezifischeKlasse`
+- `vorname`
+- `nachname`
+- `hatFuehrerschein`
+- `fuehrerscheinTyp`
+- `getriebe`
+- `pruefung`
+- `kursart`
+- `geburtsdatum`
+- `geburtsstadt`
+- `telefon`
+- `email`
+- `adresse`
+- `datenschutz`
+- `isFriendDiscount`
+- `friendName`
+- `rabatt`
+- `freundeRabatt`
+- `nameVonFreund`
+
+Der Server setzt initial `emailStatus: "pending"` und gibt `registration.id` sowie einen `clientUpdateToken` zurueck. Dieser Token darf nur den Emailstatus derselben Anmeldung aktualisieren, aber keine Daten lesen.
+
+PATCH-Body fuer Emailstatus:
+
+```json
+{
+  "clientUpdateToken": "token-aus-post-response",
+  "emailStatus": "mocked",
+  "emailError": ""
+}
+```
+
+Erlaubte Werte fuer `emailStatus`: `sent`, `failed`, `mocked`.

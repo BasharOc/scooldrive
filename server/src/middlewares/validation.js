@@ -200,6 +200,138 @@ const validateTermine = [
   handleValidationErrors,
 ];
 
+// Registration Validation
+const validateRegistration = [
+  body("fahrzeugTyp")
+    .isIn(["auto", "motorrad", "auto-anhaenger"])
+    .withMessage("fahrzeugTyp ist ungueltig"),
+  body("spezifischeKlasse")
+    .optional({ checkFalsy: true })
+    .isString()
+    .trim()
+    .isLength({ max: 100 })
+    .withMessage("spezifischeKlasse darf maximal 100 Zeichen lang sein"),
+  body("vorname")
+    .notEmpty()
+    .withMessage("vorname ist erforderlich")
+    .trim()
+    .isLength({ max: 100 })
+    .withMessage("vorname darf maximal 100 Zeichen lang sein"),
+  body("nachname")
+    .notEmpty()
+    .withMessage("nachname ist erforderlich")
+    .trim()
+    .isLength({ max: 100 })
+    .withMessage("nachname darf maximal 100 Zeichen lang sein"),
+  body("hatFuehrerschein")
+    .optional()
+    .isBoolean()
+    .withMessage("hatFuehrerschein muss ein Boolean sein"),
+  body("fuehrerscheinTyp")
+    .optional({ checkFalsy: true })
+    .isString()
+    .trim()
+    .isLength({ max: 150 })
+    .withMessage("fuehrerscheinTyp darf maximal 150 Zeichen lang sein"),
+  body("getriebe")
+    .optional({ checkFalsy: true })
+    .isString()
+    .trim()
+    .isLength({ max: 100 })
+    .withMessage("getriebe darf maximal 100 Zeichen lang sein"),
+  body("pruefung")
+    .optional({ checkFalsy: true })
+    .isString()
+    .trim()
+    .isLength({ max: 100 })
+    .withMessage("pruefung darf maximal 100 Zeichen lang sein"),
+  body("kursart")
+    .optional({ checkFalsy: true })
+    .isString()
+    .trim()
+    .isLength({ max: 100 })
+    .withMessage("kursart darf maximal 100 Zeichen lang sein"),
+  body("geburtsdatum")
+    .isISO8601()
+    .withMessage("geburtsdatum muss ein gueltiges Datum sein"),
+  body("geburtsstadt")
+    .notEmpty()
+    .withMessage("geburtsstadt ist erforderlich")
+    .trim()
+    .isLength({ max: 150 })
+    .withMessage("geburtsstadt darf maximal 150 Zeichen lang sein"),
+  body("telefon")
+    .notEmpty()
+    .withMessage("telefon ist erforderlich")
+    .trim()
+    .isLength({ max: 60 })
+    .withMessage("telefon darf maximal 60 Zeichen lang sein"),
+  body("email")
+    .isEmail()
+    .withMessage("email muss gueltig sein")
+    .normalizeEmail()
+    .isLength({ max: 254 })
+    .withMessage("email darf maximal 254 Zeichen lang sein"),
+  body("adresse")
+    .notEmpty()
+    .withMessage("adresse ist erforderlich")
+    .trim()
+    .isLength({ max: 500 })
+    .withMessage("adresse darf maximal 500 Zeichen lang sein"),
+  body("datenschutz")
+    .isBoolean()
+    .withMessage("datenschutz muss ein Boolean sein")
+    .custom((value) => value === true || value === "true")
+    .withMessage("datenschutz muss akzeptiert werden"),
+  body("isFriendDiscount")
+    .optional()
+    .isBoolean()
+    .withMessage("isFriendDiscount muss ein Boolean sein"),
+  body("friendName")
+    .optional({ checkFalsy: true })
+    .isString()
+    .trim()
+    .isLength({ max: 150 })
+    .withMessage("friendName darf maximal 150 Zeichen lang sein"),
+  body("rabatt")
+    .optional({ checkFalsy: true })
+    .isString()
+    .trim()
+    .isLength({ max: 300 })
+    .withMessage("rabatt darf maximal 300 Zeichen lang sein"),
+  body("freundeRabatt")
+    .optional({ checkFalsy: true })
+    .isString()
+    .trim()
+    .isLength({ max: 300 })
+    .withMessage("freundeRabatt darf maximal 300 Zeichen lang sein"),
+  body("nameVonFreund")
+    .optional({ checkFalsy: true })
+    .isString()
+    .trim()
+    .isLength({ max: 300 })
+    .withMessage("nameVonFreund darf maximal 300 Zeichen lang sein"),
+  handleValidationErrors,
+];
+
+const validateRegistrationEmailStatus = [
+  body("clientUpdateToken")
+    .notEmpty()
+    .withMessage("clientUpdateToken ist erforderlich")
+    .isLength({ min: 32, max: 128 })
+    .withMessage("clientUpdateToken ist ungueltig"),
+  body("emailStatus")
+    .isIn(["sent", "failed", "mocked"])
+    .withMessage("emailStatus ist ungueltig"),
+  body("emailError")
+    .optional({ checkFalsy: true })
+    .isString()
+    .trim()
+    .isLength({ max: 1000 })
+    .withMessage("emailError darf maximal 1000 Zeichen lang sein"),
+  handleValidationErrors,
+];
+
 module.exports = {
   validateLogin,
   validateBonus,
@@ -207,5 +339,7 @@ module.exports = {
   validateOeffnungszeiten,
   validatePreise,
   validateTermine,
+  validateRegistration,
+  validateRegistrationEmailStatus,
   handleValidationErrors,
 };

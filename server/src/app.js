@@ -12,6 +12,7 @@ const termineRoutes = require("./routes/termineRoutes");
 const einstellungenRoutes = require("./routes/einstellungenRoutes");
 const bonusRoutes = require("./routes/bonusRoutes");
 const oeffnungszeitenRoutes = require("./routes/oeffnungszeitenRoutes");
+const registrationRoutes = require("./routes/registrationRoutes");
 
 const app = express();
 
@@ -94,6 +95,7 @@ app.use("/api/termine", termineRoutes);
 app.use("/api/einstellungen", einstellungenRoutes);
 app.use("/api/bonus", bonusRoutes);
 app.use("/api/oeffnungszeiten", oeffnungszeitenRoutes);
+app.use("/api/registrations", registrationRoutes);
 
 // 404 handler
 app.use("*", (req, res) => {

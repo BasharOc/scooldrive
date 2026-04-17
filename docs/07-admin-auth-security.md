@@ -35,6 +35,7 @@ sequenceDiagram
 | Preise | `/api/preise` | Preisfelder. |
 | Termine | `/api/termine` | Ein aktueller Termin. |
 | Oeffnungszeiten | `/api/oeffnungszeiten` | Tageszeiten und Aktivstatus. |
+| Registrierungen | `/api/registrations` | Gespeicherte Formular-Anmeldungen und Emailstatus. |
 
 ## Backend-Sicherheit
 
@@ -72,4 +73,3 @@ Frontend:
 ## Token-Speicher
 
 Das Admin-Frontend speichert den JWT in `localStorage`. Das ist einfach und passend zur aktuellen SPA-Struktur, bedeutet aber: XSS-Schutz im Frontend ist besonders wichtig, weil ein Script den Token auslesen koennte.
-

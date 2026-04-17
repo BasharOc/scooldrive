@@ -126,3 +126,23 @@ Defaults:
 - Montag bis Freitag: aktiv, `08:00` bis `18:00`.
 - Samstag und Sonntag: inaktiv, `09:00` bis `14:00`.
 
+## Registration
+
+Datei: `server/src/models/Registration.js`
+
+Speichert echte Anmeldungen aus dem Frontend, bevor EmailJS ausgefuehrt wird. Dadurch bleibt eine Anmeldung erhalten, selbst wenn der Emailversand scheitert.
+
+Wichtige Felder:
+
+- Formularfelder: `fahrzeugTyp`, `spezifischeKlasse`, `vorname`, `nachname`, `hatFuehrerschein`, `fuehrerscheinTyp`, `getriebe`, `pruefung`, `kursart`, `geburtsdatum`, `geburtsstadt`, `telefon`, `email`, `adresse`, `datenschutz`.
+- Rabattfelder: `isFriendDiscount`, `friendName`, `rabatt`, `freundeRabatt`, `nameVonFreund`.
+- Emailstatus: `pending`, `sent`, `failed`, `mocked`.
+- `emailError`: Fehlermeldung, falls EmailJS scheitert.
+- `clientUpdateToken`: nicht standardmaessig selektierter Token, mit dem nur der Emailstatus dieses einen Datensatzes aktualisiert werden kann.
+- `source`: aktuell `website`.
+
+Indizes:
+
+- `createdAt`
+- `emailStatus + createdAt`
+- `email + createdAt`

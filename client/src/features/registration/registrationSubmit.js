@@ -1,4 +1,8 @@
 import emailjs from "@emailjs/browser";
+import {
+  createRegistration,
+  updateRegistrationEmailStatus,
+} from "./registrationApi";
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -50,7 +54,50 @@ function buildRegistrationEmailPayload({
     rabatt: rabattText,
     freundeRabatt: freundeRabattText,
     nameVonFreund: nameVonFreundText,
+    isFriendDiscount,
+    friendName: isFriendDiscount ? friendName : "",
   };
+}
+
+function buildRegistrationStoragePayload({
+  formData,
+  bonusData,
+  activeBonus,
+  isFriendDiscount,
+  friendName,
+}) {
+  const emailPayload = buildRegistrationEmailPayload({
+    formData,
+    bonusData,
+    activeBonus,
+    isFriendDiscount,
+    friendName,
+  });
+
+  return {
+    ...emailPayload,
+    hatFuehrerschein: formData.hatFuehrerschein,
+    datenschutz: formData.datenschutz,
+    isFriendDiscount,
+    friendName: isFriendDiscount ? friendName : "",
+  };
+}
+
+async function syncEmailStatus({
+  savedRegistration,
+  emailStatus,
+  emailError = "",
+}) {
+  try {
+    await updateRegistrationEmailStatus({
+      registrationId: savedRegistration.registration.id,
+      clientUpdateToken: savedRegistration.clientUpdateToken,
+      emailStatus,
+      emailError,
+    });
+  } catch (error) {
+    console.warn("Registration email status sync failed:", error);
+  }
 }
 
 export async function submitRegistration({
@@ -60,21 +107,71 @@ export async function submitRegistration({
   isFriendDiscount,
   friendName,
 }) {
-  const payload = buildRegistrationEmailPayload({
+  const emailPayload = buildRegistrationEmailPayload({
     formData,
     bonusData,
     activeBonus,
     isFriendDiscount,
     friendName,
   });
+  const storagePayload = buildRegistrationStoragePayload({
+    formData,
+    bonusData,
+    activeBonus,
+    isFriendDiscount,
+    friendName,
+  });
+  const savedRegistration = await createRegistration(storagePayload);
 
   if (EMAIL_MODE === "mock") {
-    console.info("[registration email mock] EmailJS send skipped.", payload);
+    console.info(
+      "[registration email mock] EmailJS send skipped.",
+      emailPayload,
+    );
+    await syncEmailStatus({
+      savedRegistration,
+      emailStatus: "mocked",
+    });
+
     return {
       mocked: true,
-      payload,
+      saved: true,
+      payload: emailPayload,
+      registration: savedRegistration.registration,
     };
   }
 
-  return emailjs.send(SERVICE_ID, TEMPLATE_ID, payload, PUBLIC_KEY);
+  try {
+    const emailResult = await emailjs.send(
+      SERVICE_ID,
+      TEMPLATE_ID,
+      emailPayload,
+      PUBLIC_KEY
+    );
+
+    await syncEmailStatus({
+      savedRegistration,
+      emailStatus: "sent",
+    });
+
+    return {
+      saved: true,
+      emailStatus: "sent",
+      emailResult,
+      registration: savedRegistration.registration,
+    };
+  } catch (error) {
+    await syncEmailStatus({
+      savedRegistration,
+      emailStatus: "failed",
+      emailError: error?.message || "EmailJS Versand fehlgeschlagen",
+    });
+
+    return {
+      saved: true,
+      emailStatus: "failed",
+      emailError: error?.message || "EmailJS Versand fehlgeschlagen",
+      registration: savedRegistration.registration,
+    };
+  }
 }
