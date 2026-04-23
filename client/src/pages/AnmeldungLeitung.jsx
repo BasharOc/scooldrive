@@ -20,7 +20,7 @@ const AnmeldungLeitung = () => {
         setError("Fehler beim Laden der Einstellungen");
       }
     } catch (err) {
-      setError("Verbindungsfehler");
+      setError(err, "Verbindungsfehler");
     } finally {
       setLoading(false);
     }
