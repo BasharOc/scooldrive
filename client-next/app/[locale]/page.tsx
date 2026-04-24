@@ -9,6 +9,7 @@ import TrafficRulesSection from "@/components/Homepage/TrafficRulesSection";
 import { homeByLocale } from "@/messages/home";
 import { isLocale, type Locale, SUPPORTED_LOCALES } from "@/types/i18n";
 import { notFound } from "next/navigation";
+import { generatePageMetadata } from "@/lib/metadata";
 
 type LocalePageProps = {
   params: Promise<{ locale: string }>;
@@ -18,7 +19,9 @@ export function generateStaticParams() {
   return SUPPORTED_LOCALES.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: LocalePageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: LocalePageProps): Promise<Metadata> {
   const { locale } = await params;
 
   if (!isLocale(locale)) {
@@ -26,34 +29,11 @@ export async function generateMetadata({ params }: LocalePageProps): Promise<Met
   }
 
   const content = homeByLocale[locale];
-  const baseUrl = "https://fahrschule-lg.scooldrive.com";
-  const localePath = `/${locale}`;
+  const title = content.seo.title;
+  const description = content.seo.description;
+  const path = "";
 
-  return {
-    title: content.seo.title,
-    description: content.seo.description,
-    alternates: {
-      canonical: `${baseUrl}${localePath}`,
-      languages: {
-        de: `${baseUrl}/de`,
-        en: `${baseUrl}/en`,
-        ar: `${baseUrl}/ar`,
-      },
-    },
-    openGraph: {
-      title: content.seo.title,
-      description: content.seo.description,
-      url: `${baseUrl}${localePath}`,
-      type: "website",
-      images: [`${baseUrl}/logo-icon.png`],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: content.seo.title,
-      description: content.seo.description,
-      images: [`${baseUrl}/logo-icon.png`],
-    },
-  };
+  return generatePageMetadata({ locale, description, title, path });
 }
 
 export default async function LocaleHomePage({ params }: LocalePageProps) {
@@ -63,15 +43,22 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     notFound();
   }
 
-  const content = homeByLocale[locale as Locale];
+  const typedLocale: Locale = locale;
+  const content = homeByLocale[typedLocale];
 
   return (
     <>
-      <HomeHeroSection content={content.hero} locale={locale} />
-      <LicenseOptionsSection content={content.licenseOptions} locale={locale} />
-      <PersonalApproachSection content={content.personalApproach} locale={locale} />
-      <ReviewsSection content={content.reviews} locale={locale} />
-      <TrafficRulesSection content={content.trafficRules} locale={locale} />
+      <HomeHeroSection content={content.hero} locale={typedLocale} />
+      <LicenseOptionsSection
+        content={content.licenseOptions}
+        locale={typedLocale}
+      />
+      <PersonalApproachSection
+        content={content.personalApproach}
+        locale={typedLocale}
+      />
+      <ReviewsSection content={content.reviews} locale={typedLocale} />
+      <TrafficRulesSection content={content.trafficRules} locale={typedLocale} />
       <SchoolLocationSection content={content.schoolLocation} />
       <FaqAccordion content={content.faq} />
     </>

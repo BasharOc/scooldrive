@@ -45,10 +45,10 @@ export default function HomeHeroSection({
 
           {/* Titel */}
           <div className={`mb-4 flex flex-col items-start`}>
-            <span className="inline-block rounded-t-xl bg-black px-5 py-3 text-xl leading-tight font-bold text-white sm:text-5xl lg:text-4xl">
+            <span className="inline-block rounded-t-xl bg-black px-5 py-3 text-xl leading-tight font-bold text-white sm:text-4xl lg:text-4xl">
               {content.title1}
             </span>
-            <span className="inline-block rounded-b-xl rounded-tr-xl bg-black px-5 py-3 text-xl leading-tight font-bold text-white sm:text-5xl lg:text-4xl">
+            <span className="inline-block rounded-b-xl rounded-tr-xl bg-black px-5 py-3 text-xl leading-tight font-bold text-white sm:text-4xl lg:text-4xl">
               {content.title2}
             </span>
           </div>
