@@ -3,9 +3,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import { NAVBAR_AR } from "@/messages/ar/navbar";
 import { NAVBAR_DE } from "@/messages/de/navbar";
 import { NAVBAR_EN } from "@/messages/en/navbar";
-
-// "de" ist "de" kein STRING -> sie lassen sich nicht verändern
-const SUPPORTED_LOCALES = ["de", "en", "ar"] as const;
+import { isLocale, SUPPORTED_LOCALES } from "@/types/i18n";
 
 // Objekt mit den Inhalte für die drei Sprachen für das Navbar
 const navbarByLocale = {
@@ -13,11 +11,6 @@ const navbarByLocale = {
   en: NAVBAR_EN,
   ar: NAVBAR_AR,
 } as const;
-// as const -> { readonly de: NAVBAR_DE, readonly en: NAVBAR_EN, readonly ar: NAVBAR_AR }
-
-// keyof -> keys typof type von den keys vom objekt navbarByLocale
-type Locale = keyof typeof navbarByLocale;
-// Local "de" | "ar" | "en"
 
 // rein ["de", "en", "ar"] ->  raus [{locale: "de"} ...]
 export function generateStaticParams() {
@@ -33,16 +26,17 @@ export default async function LocaleLayout({
 }>) {
   const { locale } = await params;
 
-  if (!SUPPORTED_LOCALES.includes(locale as Locale)) {
+  if (!isLocale(locale)) {
     notFound();
   }
 
   return (
-    <div className="flex min-h-full flex-col">
-      <Navbar
-        content={navbarByLocale[locale as Locale]}
-        locale={locale as Locale}
-      />
+    <div
+      lang={locale}
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      className="flex min-h-full flex-col"
+    >
+      <Navbar content={navbarByLocale[locale]} locale={locale} />
       {children}
     </div>
   );
