@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import TheoriekursPageContent from "@/components/Theoriekurs/TheoriekursPageContent";
+import { getTermine } from "@/lib/api";
 import { generatePageMetadata } from "@/lib/metadata";
 import type { TermineApiResponse } from "@/lib/remote-data";
 import { theoriekursByLocale } from "@/messages/theoriekurs";
@@ -43,7 +44,15 @@ export default async function TheoriekursPage({
   }
 
   const content = theoriekursByLocale[locale];
-  const remoteData: { termine?: TermineApiResponse | null } | null = null;
+  let termine: TermineApiResponse | null = null;
+
+  try {
+    termine = await getTermine();
+  } catch (error) {
+    console.error("Failed to load termine for theoriekurs page:", error);
+  }
+
+  const remoteData: { termine?: TermineApiResponse | null } | null = { termine };
 
   return (
     <TheoriekursPageContent

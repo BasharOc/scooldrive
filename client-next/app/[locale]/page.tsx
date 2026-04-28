@@ -6,6 +6,8 @@ import PersonalApproachSection from "@/components/Homepage/PersonalApproachSecti
 import ReviewsSection from "@/components/Homepage/ReviewsSection";
 import SchoolLocationSection from "@/components/Homepage/SchoolLocationSection";
 import TrafficRulesSection from "@/components/Homepage/TrafficRulesSection";
+import { getEinstellungen } from "@/lib/api";
+import type { EinstellungenApiResponse } from "@/lib/remote-data";
 import { homeByLocale } from "@/messages/home";
 import { isLocale, type Locale, SUPPORTED_LOCALES } from "@/types/i18n";
 import { notFound } from "next/navigation";
@@ -45,10 +47,21 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
 
   const typedLocale: Locale = locale;
   const content = homeByLocale[typedLocale];
+  let remoteData: EinstellungenApiResponse | null = null;
+
+  try {
+    remoteData = await getEinstellungen();
+  } catch (error) {
+    console.error("Failed to load settings for home page:", error);
+  }
 
   return (
     <>
-      <HomeHeroSection content={content.hero} locale={typedLocale} />
+      <HomeHeroSection
+        content={content.hero}
+        locale={typedLocale}
+        warningEnabled={remoteData?.begrenztePlaetze ?? false}
+      />
       <LicenseOptionsSection
         content={content.licenseOptions}
         locale={typedLocale}

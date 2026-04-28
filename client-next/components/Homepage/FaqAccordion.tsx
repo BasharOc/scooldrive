@@ -16,7 +16,7 @@ export default function FaqAccordion({ content }: FaqAccordionProps) {
   };
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-12">
+    <section className=" bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-12">
       <div className="mx-auto w-[80%] max-w-[1320px]">
         {/* Header */}
         <div className="mb-12 text-center">

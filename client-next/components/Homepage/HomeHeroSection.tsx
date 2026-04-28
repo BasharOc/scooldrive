@@ -6,11 +6,13 @@ import type { Locale } from "@/types/i18n";
 type HomeHeroSectionProps = {
   content: HeroContent;
   locale: Locale;
+  warningEnabled?: boolean;
 };
 
 export default function HomeHeroSection({
   content,
   locale,
+  warningEnabled = false,
 }: HomeHeroSectionProps) {
   const isArabic = locale === "ar";
 
@@ -36,7 +38,7 @@ export default function HomeHeroSection({
             <span className="rounded-full bg-[#F5BB00] px-4 py-2 text-sm font-bold tracking-wide text-black">
               {content.badge}
             </span>
-            {content.warning && (
+            {warningEnabled && content.warning && (
               <span className="rounded-full bg-red-500 px-3 py-1 text-sm font-semibold text-white">
                 {content.warning}
               </span>

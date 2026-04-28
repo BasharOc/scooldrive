@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PreisePageContent from "@/components/Preise/PreisePageContent";
+import { getPreise } from "@/lib/api";
 import { generatePageMetadata } from "@/lib/metadata";
 import type { PreiseApiResponse } from "@/lib/remote-data";
 import { preiseByLocale } from "@/messages/preise";
@@ -41,7 +42,13 @@ export default async function PreisePage({ params }: PreisePageProps) {
   }
 
   const content = preiseByLocale[locale];
-  const remoteData: PreiseApiResponse | null = null;
+  let remoteData: PreiseApiResponse | null = null;
+
+  try {
+    remoteData = await getPreise();
+  } catch (error) {
+    console.error("Failed to load preise for preise page:", error);
+  }
 
   return <PreisePageContent content={content} locale={locale} remoteData={remoteData} />;
 }

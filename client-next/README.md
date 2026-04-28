@@ -1,5 +1,15 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment
+
+Create a `client-next/.env.local` file with the backend base URL:
+
+```bash
+API_BASE_URL=http://localhost:3001/api
+```
+
+`client-next` runs on `http://localhost:3000`, but the Express API is expected to run separately, typically on `http://localhost:3001`.
+
 ## Getting Started
 
 First, run the development server:

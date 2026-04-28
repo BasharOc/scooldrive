@@ -30,6 +30,14 @@ export type PreiseApiResponse = {
   intensivkursPreis?: number;
 };
 
+export type EinstellungenApiResponse = {
+  begrenztePlaetze?: boolean;
+  kontaktOptionen?: {
+    whatsapp?: boolean;
+    whatsappNummer?: string;
+  };
+};
+
 const getLocaleTag = (locale: Locale) => {
   if (locale === "de") {
     return "de-DE";

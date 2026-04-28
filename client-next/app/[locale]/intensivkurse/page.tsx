@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import IntensivkursePageContent from "@/components/Intensivkurse/IntensivkursePageContent";
+import { getPreise } from "@/lib/api";
 import { generatePageMetadata } from "@/lib/metadata";
 import type { PreiseApiResponse } from "@/lib/remote-data";
 import { intensivkurseByLocale } from "@/messages/intensivkurse";
@@ -43,7 +44,15 @@ export default async function IntensivkursePage({
   }
 
   const content = intensivkurseByLocale[locale];
-  const remoteData: { preise?: PreiseApiResponse | null } | null = null;
+  let preise: PreiseApiResponse | null = null;
+
+  try {
+    preise = await getPreise();
+  } catch (error) {
+    console.error("Failed to load preise for intensivkurse page:", error);
+  }
+
+  const remoteData: { preise?: PreiseApiResponse | null } | null = { preise };
 
   return (
     <IntensivkursePageContent

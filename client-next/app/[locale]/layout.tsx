@@ -1,10 +1,14 @@
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
+import WhatsAppButton from "@/components/WhatsAppButton/WhatsAppButton";
+import { getEinstellungen } from "@/lib/api";
+import type { EinstellungenApiResponse } from "@/lib/remote-data";
 import { NAVBAR_AR } from "@/messages/ar/navbar";
 import { NAVBAR_DE } from "@/messages/de/navbar";
 import { NAVBAR_EN } from "@/messages/en/navbar";
 import { footerByLocale } from "@/messages/footer";
+import { whatsappByLocale } from "@/messages/whatsapp";
 import { isLocale, SUPPORTED_LOCALES } from "@/types/i18n";
 
 // Objekt mit den Inhalte für die drei Sprachen für das Navbar
@@ -32,12 +36,28 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  let remoteData: EinstellungenApiResponse | null = null;
+
+  try {
+    remoteData = await getEinstellungen();
+  } catch (error) {
+    console.error("Failed to load settings for locale layout:", error);
+  }
+
+  const whatsappEnabled = remoteData?.kontaktOptionen?.whatsapp ?? true;
+  const whatsappNumber = remoteData?.kontaktOptionen?.whatsappNummer;
+
   return (
     <div
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
       className="flex min-h-full flex-col"
     >
+      <WhatsAppButton
+        content={whatsappByLocale[locale]}
+        enabled={whatsappEnabled}
+        phoneNumber={whatsappNumber}
+      />
       <Navbar content={navbarByLocale[locale]} locale={locale} />
       <main className="flex-1">{children}</main>
       <Footer content={footerByLocale[locale]} locale={locale} />
