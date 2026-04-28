@@ -76,15 +76,13 @@ export default function TheoriekursPageContent({
             <p className="mb-6 text-lg text-black opacity-90 md:text-xl">
               {content.nextCourse.subtitle}
             </p>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                href={`/${locale}/anmelden`}
-                className="inline-flex items-center rounded-full border-2 border-black bg-black px-8 py-3 text-lg font-bold text-[#F5BB00] shadow-lg transition-all duration-300 hover:border-[#F5BB00] hover:bg-[#F5BB00] hover:text-black"
-              >
-                <FaUserCheck className="mr-2" />
-                {content.nextCourse.buttonText}
-              </Link>
-            </motion.div>
+            <Link
+              href={`/${locale}/anmelden`}
+              className="inline-flex items-center rounded-full border-2 border-black bg-black px-8 py-3 text-lg font-bold text-[#F5BB00] shadow-lg transition-all duration-300 hover:border-[#F5BB00] hover:bg-[#F5BB00] hover:text-black"
+            >
+              <FaUserCheck className="mr-2" />
+              {content.nextCourse.buttonText}
+            </Link>
           </div>
         </motion.div>
 
@@ -167,9 +165,8 @@ export default function TheoriekursPageContent({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.6 + index * 0.08 }}
-                    whileHover={{ scale: 1.1 }}
                   >
-                    <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-[#F5BB00] text-black transition-all duration-300 hover:shadow-lg md:h-32 md:w-32">
+                    <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-[#F5BB00] text-black md:h-32 md:w-32">
                       <Icon className="text-3xl" />
                     </div>
                     <h3 className="max-w-24 text-sm font-bold leading-tight text-black md:max-w-32 md:text-base">
@@ -306,14 +303,12 @@ export default function TheoriekursPageContent({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.2 }}
         >
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link
-              href={`/${locale}/anmelden`}
-              className="inline-block rounded-full bg-[#F5BB00] px-10 py-4 text-lg font-bold text-black shadow-lg transition-all duration-300 hover:shadow-xl"
-            >
-              {content.cta}
-            </Link>
-          </motion.div>
+          <Link
+            href={`/${locale}/anmelden`}
+            className="inline-block rounded-full bg-[#F5BB00] px-10 py-4 text-lg font-bold text-black shadow-lg transition-all duration-300 hover:shadow-xl"
+          >
+            {content.cta}
+          </Link>
         </motion.div>
       </div>
     </div>

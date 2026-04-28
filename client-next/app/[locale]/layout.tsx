@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
+import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import { NAVBAR_AR } from "@/messages/ar/navbar";
 import { NAVBAR_DE } from "@/messages/de/navbar";
 import { NAVBAR_EN } from "@/messages/en/navbar";
+import { footerByLocale } from "@/messages/footer";
 import { isLocale, SUPPORTED_LOCALES } from "@/types/i18n";
 
 // Objekt mit den Inhalte für die drei Sprachen für das Navbar
@@ -37,7 +39,8 @@ export default async function LocaleLayout({
       className="flex min-h-full flex-col"
     >
       <Navbar content={navbarByLocale[locale]} locale={locale} />
-      {children}
+      <main className="flex-1">{children}</main>
+      <Footer content={footerByLocale[locale]} locale={locale} />
     </div>
   );
 }
