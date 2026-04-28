@@ -24,26 +24,29 @@ export default function LicenseOptionsSection({
     icon: LicenseOptionsContent["options"][number]["icon"],
   ) => {
     if (icon === "car") {
-      return <FaCar className="text-4xl text-[#F5BB00]" />;
+      return (
+        <FaCar
+          className="text-[#F5BB00]"
+          style={{ width: "4em", height: "4em" }}
+        />
+      );
     }
 
     if (icon === "motorcycle") {
-      return <FaMotorcycle className="text-4xl text-[#F5BB00]" />;
+      return (
+        <FaMotorcycle
+          className="text-[#F5BB00]"
+          style={{ width: "4em", height: "4em" }}
+        />
+      );
     }
 
     return (
       <span className="flex items-end gap-1 text-[#F5BB00]">
-        {isArabic ? (
-          <>
-            <FaTrailer className="text-[55px]" />
-            <FaCarSide className="text-[55px]" />
-          </>
-        ) : (
-          <>
-            <FaCarSide className="text-[55px]" />
-            <FaTrailer className="text-[55px]" />
-          </>
-        )}
+        <>
+          <FaCarSide className="text-[55px]" />
+          <FaTrailer className="text-[55px]" />
+        </>
       </span>
     );
   };
@@ -145,7 +148,9 @@ export default function LicenseOptionsSection({
               >
                 <div
                   className={`grid items-start gap-6 ${
-                    isArabic ? "md:grid-cols-[140px_1fr]" : "md:grid-cols-[1fr_140px]"
+                    isArabic
+                      ? "md:grid-cols-[140px_1fr]"
+                      : "md:grid-cols-[1fr_140px]"
                   }`}
                 >
                   <div
@@ -161,19 +166,8 @@ export default function LicenseOptionsSection({
                       {option.description}
                     </p>
 
-                  </div>
-
-                  <div
-                    className={`flex flex-col gap-3 ${
-                      isArabic ? "order-1 items-start" : "order-2 items-end"
-                    }`}
-                  >
-                    <div className="flex h-[72px] w-full items-center justify-center">
-                      {getOptionIcon(option.icon)}
-                    </div>
-
                     <div
-                      className={`inline-flex items-center gap-3 ${
+                      className={`mt-6 inline-flex items-center gap-4 ${
                         isArabic ? "flex-row-reverse" : ""
                       }`}
                     >
@@ -183,10 +177,22 @@ export default function LicenseOptionsSection({
                       <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#F5BB00] text-black">
                         <FaArrowRight
                           className={`text-lg transition-transform ${
-                            isArabic ? "rotate-180 group-hover:-translate-x-0.5" : "group-hover:translate-x-0.5"
+                            isArabic
+                              ? "rotate-180 group-hover:-translate-x-0.5"
+                              : "group-hover:translate-x-0.5"
                           }`}
                         />
                       </span>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`flex flex-col gap-3 ${
+                      isArabic ? "order-1 items-start" : "order-2 items-end"
+                    }`}
+                  >
+                    <div className="flex h-[72px] w-full mt-[25%] items-center justify-center">
+                      {getOptionIcon(option.icon)}
                     </div>
                   </div>
                 </div>
