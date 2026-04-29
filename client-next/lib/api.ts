@@ -1,5 +1,6 @@
 import type {
   EinstellungenApiResponse,
+  OeffnungszeitenApiResponse,
   PreiseApiResponse,
   TermineApiResponse,
 } from "@/lib/remote-data";
@@ -16,9 +17,12 @@ const normalizeApiPath = (path: string) => {
 
 export const getApiBaseUrl = () => {
   const apiBaseUrl = process.env.API_BASE_URL?.trim();
+  const publicApiUrl = process.env.NEXT_PUBLIC_API_URL?.trim();
 
   return apiBaseUrl && apiBaseUrl.length > 0
     ? apiBaseUrl.replace(/\/+$/, "")
+    : publicApiUrl && publicApiUrl.startsWith("http")
+      ? publicApiUrl.replace(/\/+$/, "")
     : DEFAULT_API_BASE_URL;
 };
 
@@ -59,5 +63,10 @@ export const getTermine = () =>
 
 export const getPreise = () =>
   fetchApi<PreiseApiResponse>("/preise", {
+    next: { revalidate: 60 },
+  });
+
+export const getOeffnungszeiten = () =>
+  fetchApi<OeffnungszeitenApiResponse>("/oeffnungszeiten", {
     next: { revalidate: 60 },
   });

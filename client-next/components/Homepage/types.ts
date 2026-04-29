@@ -100,6 +100,11 @@ export type SchoolLocationContent = {
   };
 };
 
+export type SchoolLocationRuntimeData = {
+  hours?: string;
+  phoneEnabled?: boolean;
+};
+
 export type FaqItem = {
   question: string;
   answer: string;

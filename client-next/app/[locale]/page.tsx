@@ -6,8 +6,12 @@ import PersonalApproachSection from "@/components/Homepage/PersonalApproachSecti
 import ReviewsSection from "@/components/Homepage/ReviewsSection";
 import SchoolLocationSection from "@/components/Homepage/SchoolLocationSection";
 import TrafficRulesSection from "@/components/Homepage/TrafficRulesSection";
-import { getEinstellungen } from "@/lib/api";
-import type { EinstellungenApiResponse } from "@/lib/remote-data";
+import { getEinstellungen, getOeffnungszeiten } from "@/lib/api";
+import {
+  formatOeffnungszeiten,
+  type EinstellungenApiResponse,
+  type OeffnungszeitenApiResponse,
+} from "@/lib/remote-data";
 import { homeByLocale } from "@/messages/home";
 import { isLocale, type Locale, SUPPORTED_LOCALES } from "@/types/i18n";
 import { notFound } from "next/navigation";
@@ -48,11 +52,18 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
   const typedLocale: Locale = locale;
   const content = homeByLocale[typedLocale];
   let remoteData: EinstellungenApiResponse | null = null;
+  let oeffnungszeiten: OeffnungszeitenApiResponse | null = null;
 
   try {
     remoteData = await getEinstellungen();
   } catch (error) {
     console.error("Failed to load settings for home page:", error);
+  }
+
+  try {
+    oeffnungszeiten = await getOeffnungszeiten();
+  } catch (error) {
+    console.error("Failed to load opening hours for home page:", error);
   }
 
   return (
@@ -72,7 +83,15 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       />
       <ReviewsSection content={content.reviews} locale={typedLocale} />
       <TrafficRulesSection content={content.trafficRules} locale={typedLocale} />
-      <SchoolLocationSection content={content.schoolLocation} />
+      <SchoolLocationSection
+        content={content.schoolLocation}
+        runtimeData={{
+          hours:
+            formatOeffnungszeiten(oeffnungszeiten) ||
+            content.schoolLocation.schoolInfo.hours,
+          phoneEnabled: remoteData?.kontaktOptionen?.telefon ?? true,
+        }}
+      />
       <FaqAccordion content={content.faq} />
     </>
   );

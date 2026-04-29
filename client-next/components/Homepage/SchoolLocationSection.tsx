@@ -1,14 +1,21 @@
 import { FaClock, FaDirections, FaEnvelope, FaPhone } from "react-icons/fa";
-import type { SchoolLocationContent } from "@/components/Homepage/types";
+import type {
+  SchoolLocationContent,
+  SchoolLocationRuntimeData,
+} from "@/components/Homepage/types";
 
 type SchoolLocationSectionProps = {
   content: SchoolLocationContent;
+  runtimeData?: SchoolLocationRuntimeData;
 };
 
 export default function SchoolLocationSection({
   content,
+  runtimeData,
 }: SchoolLocationSectionProps) {
   const info = content.schoolInfo;
+  const hoursText = runtimeData?.hours || info.hours;
+  const phoneEnabled = runtimeData?.phoneEnabled ?? true;
 
   return (
     <section className="bg-gray-50 py-10 md:py-14">
@@ -46,22 +53,24 @@ export default function SchoolLocationSection({
 
             {/* Contact Information */}
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F5BB00] text-sm text-black">
-                  <FaPhone />
-                </div>
-                <div>
-                  <div className="text-[clamp(0.85rem,0.9vw,1rem)] uppercase text-slate-400">
-                    {content.contactLabels.phone}
+              {phoneEnabled ? (
+                <div className="flex items-center gap-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F5BB00] text-sm text-black">
+                    <FaPhone />
                   </div>
-                  <a
-                    href={`tel:${info.phone}`}
-                    className="text-[clamp(0.95rem,1vw,1.2rem)] font-bold text-slate-700 hover:underline"
-                  >
-                    {info.phone}
-                  </a>
+                  <div>
+                    <div className="text-[clamp(0.85rem,0.9vw,1rem)] uppercase text-slate-400">
+                      {content.contactLabels.phone}
+                    </div>
+                    <a
+                      href={`tel:${info.phone}`}
+                      className="text-[clamp(0.95rem,1vw,1.2rem)] font-bold text-slate-700 hover:underline"
+                    >
+                      {info.phone}
+                    </a>
+                  </div>
                 </div>
-              </div>
+              ) : null}
 
               <div className="flex items-center gap-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F5BB00] text-sm text-black">
@@ -89,7 +98,7 @@ export default function SchoolLocationSection({
                     {content.contactLabels.hours}
                   </div>
                   <div className="text-[clamp(0.95rem,1vw,1.2rem)] font-bold text-slate-700">
-                    {info.hours}
+                    {hoursText}
                   </div>
                 </div>
               </div>

@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
-import Footer from "@/components/Footer/Footer";
-import Navbar from "@/components/Navbar/Navbar";
+import LocaleChrome from "@/components/Layout/LocaleChrome";
 import WhatsAppButton from "@/components/WhatsAppButton/WhatsAppButton";
 import { getEinstellungen } from "@/lib/api";
 import type { EinstellungenApiResponse } from "@/lib/remote-data";
@@ -58,9 +57,13 @@ export default async function LocaleLayout({
         enabled={whatsappEnabled}
         phoneNumber={whatsappNumber}
       />
-      <Navbar content={navbarByLocale[locale]} locale={locale} />
-      <main className="flex-1">{children}</main>
-      <Footer content={footerByLocale[locale]} locale={locale} />
+      <LocaleChrome
+        locale={locale}
+        navbarContent={navbarByLocale[locale]}
+        footerContent={footerByLocale[locale]}
+      >
+        {children}
+      </LocaleChrome>
     </div>
   );
 }
