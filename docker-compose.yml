@@ -10,6 +10,19 @@ services:
     networks:
       - app-network
 
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.next
+    restart: unless-stopped
+    env_file: ./client-next/.env.production
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
   nginx:
     build:
       context: .
@@ -19,6 +32,7 @@ services:
       - "80:80"
       - "443:443"
     depends_on:
+      - frontend
       - backend
     networks:
       - app-network
