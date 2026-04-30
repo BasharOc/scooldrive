@@ -25,31 +25,27 @@ export default function TrailerLicenseFactsSection({
   content,
 }: TrailerLicenseFactsSectionProps) {
   return (
-    <div className="mt-24 bg-gray-50 px-4 py-6">
-      <div className="mx-auto max-w-7xl">
-        <h1 className="mb-6 text-center text-2xl font-bold text-black">
+    <section className="bg-gray-50 py-12">
+      <div className="mx-auto w-[95%] md:w-[80%] max-w-7xl">
+        <h2 className="mb-8 text-center text-2xl font-bold text-black md:text-3xl">
           {content.title}
-        </h1>
+        </h2>
 
-        <div className="overflow-x-auto py-4">
-          <div className="flex min-w-max gap-6 pb-4">
+        {/* Scrollbar auf Mobile, Grid auf Desktop */}
+        <div className="overflow-x-auto pb-4">
+          <div className="flex gap-4 md:grid md:grid-cols-3 md:gap-6 lg:grid-cols-5">
             {content.items.map((fact) => {
               const Icon = icons[fact.icon];
-
               return (
                 <div
                   key={fact.title}
-                  className="flex h-48 w-64 flex-shrink-0 flex-col items-center rounded-2xl border-t-4 border-[#F5BB00] bg-white p-4 text-center shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  className="flex w-56 flex-shrink-0 flex-col items-center rounded-2xl border-t-4 border-[#F5BB00] bg-white p-5 text-center shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl md:w-auto"
                 >
-                  <div className="mb-3">
-                    <Icon className="text-4xl text-[#F5BB00]" />
-                  </div>
-
-                  <h3 className="mb-2 text-lg font-bold uppercase tracking-wide text-[#F5BB00]">
+                  <Icon className="mb-3 text-4xl text-[#F5BB00]" />
+                  <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-[#F5BB00]">
                     {fact.title}
                   </h3>
-
-                  <p className="text-lg font-bold leading-relaxed text-black">
+                  <p className="text-base font-bold text-black">
                     {fact.content}
                   </p>
                 </div>
@@ -58,6 +54,6 @@ export default function TrailerLicenseFactsSection({
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

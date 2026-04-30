@@ -21,54 +21,53 @@ export default function BlogOverviewPage({
   ui,
 }: BlogOverviewPageProps) {
   return (
-    <section className="min-h-screen bg-white px-4 pb-16 pt-[150px]">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-black sm:text-5xl">Blog</h1>
+    <section className="min-h-screen bg-white pb-16 pt-[150px]">
+      <div className="mx-auto w-[95%] max-w-3xl md:w-[80%]">
+        {/* Header */}
+        <div className="mb-10 text-center">
+          <h1 className="mb-4 text-4xl font-bold text-black sm:text-5xl">
+            Blog
+          </h1>
           <div className="mx-auto h-1 w-24 rounded-full bg-[#F5BB00]" />
         </div>
 
-        <div className="grid gap-6 md:gap-8">
+        {/* Articles */}
+        <div className="flex flex-col gap-6">
           {items.map((article) => (
             <article
               key={article.slug}
-              className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md"
+              className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-md transition-shadow duration-300 hover:shadow-xl"
             >
-              <Link
-                href={`/${locale}/blogs/${article.slug}`}
-                className="block overflow-hidden transition-colors duration-200 hover:bg-gray-50"
-              >
-                <div className="flex">
-                  <div className="relative h-24 w-32 flex-shrink-0 overflow-hidden bg-gray-100 sm:h-32 sm:w-40">
+              <Link href={`/${locale}/blogs/${article.slug}`} className="block">
+                {/* Mobile: Bild oben, Text unten. Desktop: nebeneinander */}
+                <div className="flex flex-col sm:flex-row">
+                  {/* Bild */}
+                  <div className="relative h-52 w-full flex-shrink-0 overflow-hidden sm:h-auto sm:w-52">
                     <Image
                       src={article.coverImage}
                       alt={article.translation.title}
-                      width={160}
-                      height={128}
-                      className="h-full w-full object-cover"
+                      fill
+                      className="object-cover transition-transform duration-300 hover:scale-105"
                     />
                   </div>
 
-                  <div className="flex-1 p-6 sm:p-8">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <h2 className="mb-3 text-xl font-semibold text-black transition-colors duration-200 hover:text-[#F5BB00] sm:text-2xl">
-                          {article.translation.title}
-                        </h2>
+                  {/* Text */}
+                  <div className="flex flex-1 flex-col justify-between p-5 sm:p-6">
+                    <div>
+                      <h2 className="mb-2 text-lg font-bold leading-snug text-black sm:text-xl">
+                        {article.translation.title}
+                      </h2>
 
-                        {article.translation.teaser ? (
-                          <p className="mb-4 text-sm leading-relaxed text-gray-600 sm:text-base">
-                            {article.translation.teaser}
-                          </p>
-                        ) : null}
-
-                        <div className="flex items-center">
-                          <span className="text-sm font-medium text-[#F5BB00] transition-colors duration-200 hover:text-black">
-                            {ui.readMore}
-                          </span>
-                        </div>
-                      </div>
+                      {article.translation.teaser && (
+                        <p className="mb-4 text-sm leading-relaxed text-gray-500 sm:text-base">
+                          {article.translation.teaser}
+                        </p>
+                      )}
                     </div>
+
+                    <span className="inline-flex items-center gap-1 text-sm font-bold text-[#F5BB00]">
+                      {ui.readMore} →
+                    </span>
                   </div>
                 </div>
               </Link>
@@ -76,7 +75,8 @@ export default function BlogOverviewPage({
           ))}
         </div>
 
-        {items.length === 0 ? (
+        {/* Empty state */}
+        {items.length === 0 && (
           <div className="py-16 text-center">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100">
               <svg
@@ -95,7 +95,7 @@ export default function BlogOverviewPage({
             </div>
             <p className="text-lg text-gray-500">{ui.empty}</p>
           </div>
-        ) : null}
+        )}
       </div>
     </section>
   );

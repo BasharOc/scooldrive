@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaPlus, FaMinus } from "react-icons/fa";
 import type { FaqContent } from "@/components/Homepage/types";
 
 type FaqAccordionProps = {
@@ -16,46 +16,54 @@ export default function FaqAccordion({ content }: FaqAccordionProps) {
   };
 
   return (
-    <section className=" bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-12">
-      <div className="mx-auto w-[80%] max-w-[1320px]">
+    <section className="bg-black px-4 py-16 md:py-24">
+      <div className="mx-auto w-[95%] md:w-[80%] max-w-[1320px]">
         {/* Header */}
-        <div className="mb-12 text-center">
-          <h2 className="text-4xl font-bold italic uppercase leading-none text-[#1F2C3F]">
+        <div className="mb-12 flex flex-col items-start gap-2">
+          <span className="rounded-full border border-[#F5BB00]/40 bg-[#F5BB00]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#F5BB00]">
+            FAQ
+          </span>
+          <h2 className="text-[clamp(2rem,3vw,3rem)] font-bold italic uppercase leading-none text-white">
             {content.title}
           </h2>
+          {/* Gelbe Linie als Akzent */}
+          <div className="mt-1 h-1 w-16 rounded-full bg-[#F5BB00]" />
         </div>
 
-        {/* FAQ List - Single Column */}
-        <div className="space-y-6">
+        {/* FAQ List */}
+        <div className="divide-y divide-white/10">
           {content.items.map((item, index) => {
             const isOpen = openIndex === index;
 
             return (
-              <div
-                key={item.question}
-                className=" mb-4 overflow-hidden rounded-[1.7rem] border border-gray-200 bg-white shadow-[0_12px_28px_rgba(15,23,42,0.1)]"
-              >
-                {/* Question Header */}
+              <div key={item.question} className="group">
                 <button
-                  className="flex w-full items-center justify-between gap-4 px-6 py-4  text-left"
+                  className="flex w-full items-center justify-between gap-6 py-6 text-left"
                   onClick={() => toggleFaq(index)}
                 >
-                  <span className="pr-4 text-[clamp(1.05rem,1.2vw,1.45rem)] font-bold leading-tight text-[#1F2C3F]">
+                  <span
+                    className={`text-[clamp(1rem,1.2vw,1.35rem)] font-bold leading-tight transition-colors duration-200 ${isOpen ? "text-[#F5BB00]" : "text-white group-hover:text-[#F5BB00]"}`}
+                  >
                     {item.question}
                   </span>
-                  <span className="flex-shrink-0 text-[28px] text-[#E9AF00]">
-                    {isOpen ? <FaChevronUp /> : <FaChevronDown />}
+
+                  <span
+                    className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border transition-all duration-200 ${isOpen ? "border-[#F5BB00] bg-[#F5BB00] text-black" : "border-white/20 bg-white/5 text-white group-hover:border-[#F5BB00] group-hover:text-[#F5BB00]"}`}
+                  >
+                    {isOpen ? (
+                      <FaMinus className="text-xs" />
+                    ) : (
+                      <FaPlus className="text-xs" />
+                    )}
                   </span>
                 </button>
 
-                {/* Answer Content */}
+                {/* Answer */}
                 <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                  }`}
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
                 >
-                  <div className="border-t border-gray-100 px-9 pb-8 pt-5">
-                    <p className="text-[clamp(0.92rem,0.95vw,1.08rem)] leading-relaxed text-slate-600">
+                  <div className="pb-6 pr-16">
+                    <p className="text-[clamp(0.9rem,0.95vw,1.08rem)] leading-relaxed text-white/60">
                       {item.answer}
                     </p>
                   </div>

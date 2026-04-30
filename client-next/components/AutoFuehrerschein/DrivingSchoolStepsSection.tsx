@@ -39,31 +39,24 @@ type LicenseType = "automatic" | "automaticManual";
 
 function StepCard({ step }: { step: AutoFuehrerscheinStep }) {
   const Icon = icons[step.icon];
-
   return (
     <motion.div
-      className="flex-1 ml-8 md:ml-20"
-      whileHover={{
-        scale: 1.02,
-        transition: { duration: 0.2 },
-      }}
+      className="flex-1 ml-4 md:ml-8"
+      whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
     >
-      <div className="group rounded-2xl border-2 border-gray-100 bg-white p-4 shadow-lg transition-all duration-300 hover:shadow-xl md:p-6 lg:p-8">
-        <div className="flex flex-col space-y-4 md:flex-row md:items-start md:space-x-6 md:space-y-0">
-          <div className="flex flex-shrink-0 items-center space-x-4 md:flex-col md:items-start md:space-x-0">
-            <div className="mb-0 flex h-12 w-12 items-center justify-center rounded-full bg-[#F5BB00] text-lg font-bold text-black transition-transform duration-300 group-hover:scale-110 md:mb-4 md:h-16 md:w-16 md:text-xl">
+      <div className="group rounded-2xl border border-gray-100 bg-white p-4 shadow-md transition-all duration-300 hover:shadow-xl md:p-6">
+        <div className="flex items-start gap-4">
+          <div className="flex flex-shrink-0 flex-col items-center gap-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F5BB00] text-sm font-bold text-black group-hover:scale-110 md:h-14 md:w-14 md:text-base transition-transform duration-300">
               {step.id}
             </div>
-            <div className="flex justify-center text-[#F5BB00] transition-transform duration-300 group-hover:scale-110">
-              <Icon className="text-xl md:text-3xl" />
-            </div>
+            <Icon className="text-lg text-[#F5BB00] group-hover:scale-110 md:text-2xl transition-transform duration-300" />
           </div>
-
-          <div className="flex-1">
-            <h3 className="mb-2 text-lg font-bold text-black transition-colors duration-300 group-hover:text-[#F5BB00] md:mb-3 md:text-xl lg:text-2xl">
+          <div className="flex-1 min-w-0">
+            <h3 className="mb-1 text-base font-bold text-black group-hover:text-[#F5BB00] md:text-xl transition-colors duration-300">
               {step.title}
             </h3>
-            <p className="text-sm leading-relaxed text-gray-600 md:text-base lg:text-lg">
+            <p className="text-sm leading-relaxed text-gray-600 md:text-base">
               {step.description}
             </p>
           </div>
@@ -81,146 +74,96 @@ export default function DrivingSchoolStepsSection({
   const currentSteps = content.items[licenseType];
 
   return (
-    <div className="min-h-screen bg-white px-4 py-8 md:py-16">
-      <div className="mx-auto max-w-6xl">
-        <motion.div
-          className="mb-8 text-center md:mb-12"
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h1 className="mb-4 text-3xl font-bold text-black md:text-4xl lg:text-5xl">
+    <section className="bg-white py-12 md:py-16">
+      <div className="mx-auto w-[95%] md:w-[80%] max-w-5xl">
+        {/* Header */}
+        <div className="mb-8 text-center">
+          <h2 className="mb-3 text-2xl font-bold text-black md:text-4xl">
             {content.title}
-          </h1>
-          <p className="mx-auto mb-6 max-w-2xl text-base text-gray-600 md:mb-8 md:text-lg lg:text-xl">
+          </h2>
+          <p className="mx-auto max-w-2xl text-base text-gray-600 md:text-lg">
             {content.subtitle}
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mb-12 flex justify-center md:mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <div className="relative w-full max-w-md">
-            <div className="flex rounded-xl bg-gray-100 p-1 shadow-lg">
+        {/* Toggle – relative auf dem äußeren UND inneren div */}
+        <div className="mb-12 flex justify-center">
+          <div className="w-full max-w-sm">
+            <div className="relative flex rounded-xl bg-gray-100 p-1 shadow">
               <motion.div
-                className="absolute top-1 bottom-1 rounded-lg bg-[#F5BB00] shadow-md"
+                className="absolute top-1 bottom-1 rounded-lg bg-[#F5BB00] shadow"
                 animate={{
                   left: licenseType === "automatic" ? "4px" : "50%",
                   width: "calc(50% - 4px)",
                 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 30,
-                }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
               />
-
-              <motion.button
-                onClick={() => setLicenseType("automatic")}
-                className={`relative z-10 flex-1 rounded-lg px-4 py-3 text-sm font-bold transition-all duration-300 md:px-6 md:text-base ${
-                  licenseType === "automatic"
-                    ? "text-black"
-                    : "text-gray-600 hover:text-gray-800"
-                }`}
-                whileTap={{ scale: 0.95 }}
-              >
-                {content.options.automatic}
-              </motion.button>
-
-              <motion.button
-                onClick={() => setLicenseType("automaticManual")}
-                className={`relative z-10 flex-1 rounded-lg px-4 py-3 text-sm font-bold transition-all duration-300 md:px-6 md:text-base ${
-                  licenseType === "automaticManual"
-                    ? "text-black"
-                    : "text-gray-600 hover:text-gray-800"
-                }`}
-                whileTap={{ scale: 0.95 }}
-              >
-                {content.options.automaticManual}
-              </motion.button>
+              {(["automatic", "automaticManual"] as LicenseType[]).map(
+                (type) => (
+                  <button
+                    key={type}
+                    onClick={() => setLicenseType(type)}
+                    className={`relative z-10 flex-1 rounded-lg px-3 py-2.5 text-sm font-bold transition-colors ${
+                      licenseType === type ? "text-black" : "text-gray-500"
+                    }`}
+                  >
+                    {content.options[type]}
+                  </button>
+                ),
+              )}
             </div>
-
-            <motion.div
-              className="absolute top-full left-1/2 mt-3 -translate-x-1/2 transform text-center"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <p className="text-sm font-semibold text-[#F5BB00] md:text-base">
-                {licenseType === "automatic"
-                  ? content.hints.automatic
-                  : content.hints.automaticManual}
-              </p>
-            </motion.div>
+            <p className="mt-3 text-center text-sm font-semibold text-[#F5BB00]">
+              {licenseType === "automatic"
+                ? content.hints.automatic
+                : content.hints.automaticManual}
+            </p>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="relative"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="absolute top-0 bottom-0 left-4 z-0 w-0.5 bg-gray-200 md:left-8" />
+        {/* Timeline */}
+        <div className="relative">
+          {/* Vertikale Linie – zentriert auf den Dots (die 20px breit sind → left: 10px) */}
+          <div className="absolute left-[10px] top-0 bottom-0 z-0 w-0.5 bg-gray-200 md:left-[14px]" />
 
-          <motion.div
-            className="relative mb-6 flex items-center md:mb-8"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="z-10 flex h-12 w-12 items-center justify-center rounded-full bg-[#F5BB00] shadow-lg md:h-16 md:w-16">
-              <span className="text-xs font-bold text-black md:text-sm">
+          {/* START-Kreis – normales Flex-Element, kein absolute */}
+          <div className="relative mb-6 flex items-center gap-4">
+            <div className="z-10 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#F5BB00] shadow md:h-7 md:w-7">
+              <span className="text-[8px] font-black text-black md:text-[10px]">
                 {content.startLabel}
               </span>
             </div>
-          </motion.div>
+          </div>
 
+          {/* Steps */}
           {currentSteps.map((step, index) => (
             <div
               key={step.id}
-              className="relative mb-6 flex items-center last:mb-0 md:mb-8"
+              className="relative mb-5 flex items-center last:mb-0"
             >
+              {/* Dot – auch normales Flex-Element, kein absolute */}
               <motion.div
-                className="absolute left-4 z-10 h-4 w-4 -translate-x-1/2 transform rounded-full border-2 border-white bg-[#F5BB00] shadow-lg md:left-8 md:h-6 md:w-6 md:border-4"
+                className="z-10 flex h-5 w-5 shrink-0 rounded-full border-2 border-white bg-[#F5BB00] shadow md:h-7 md:w-7"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.2 + 0.3 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
               />
-
               <StepCard step={step} />
             </div>
           ))}
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mt-12 text-center md:mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          <motion.div
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 20px 40px rgba(245, 187, 0, 0.3)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-block"
+        {/* CTA */}
+        <div className="mt-10 text-center">
+          <Link
+            href={`/${locale}/anmelden`}
+            className="inline-flex items-center gap-2 rounded-full bg-[#F5BB00] px-8 py-3 text-base font-bold text-black shadow-lg transition-all hover:bg-yellow-400 hover:shadow-xl"
           >
-            <Link
-              href={`/${locale}/anmelden`}
-              className="inline-block rounded-full bg-[#F5BB00] px-8 py-3 text-base font-bold text-black shadow-lg transition-all duration-300 hover:shadow-xl md:px-10 md:py-4 md:text-lg"
-            >
-              {licenseType === "automatic"
-                ? content.cta.automatic
-                : content.cta.automaticManual}
-            </Link>
-          </motion.div>
-        </motion.div>
+            {licenseType === "automatic"
+              ? content.cta.automatic
+              : content.cta.automaticManual}
+          </Link>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

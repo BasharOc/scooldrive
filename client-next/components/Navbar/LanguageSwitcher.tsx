@@ -18,7 +18,8 @@ export default function LanguageSwitcher({
   align = "right",
 }: LanguageSwitcherProps) {
   const selectedLanguage =
-    LANGUAGE_OPTIONS.find((language) => language.locale === locale) ?? LANGUAGE_OPTIONS[0];
+    LANGUAGE_OPTIONS.find((language) => language.locale === locale) ??
+    LANGUAGE_OPTIONS[0];
 
   return (
     <div className="relative">
@@ -26,7 +27,6 @@ export default function LanguageSwitcher({
         onClick={onToggle}
         className="flex cursor-pointer items-center space-x-2 rounded-lg border border-gray-600 bg-gray-800/50 px-3 py-2 text-white transition-colors hover:border-[#F5BB00] hover:text-[#F5BB00]"
       >
-        <FaGlobe className="text-sm" />
         <span className="text-sm font-medium">
           {selectedLanguage.flag} {selectedLanguage.code}
         </span>

@@ -14,7 +14,7 @@ export default function Footer({ content, locale }: FooterProps) {
     <footer className="bg-gray-100 px-4 py-16">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex flex-col items-start justify-between gap-6 rounded-3xl bg-white p-8 md:flex-row md:items-center">
-          <h2 className="max-w-3xl text-base font-bold italic text-black sm:text-2xl lg:text-4xl">
+          <h2 className="max-w-3xl text-base font-bold italic text-black sm:text-1xl lg:text-3xl">
             {content.callToAction}
           </h2>
 
@@ -65,7 +65,9 @@ export default function Footer({ content, locale }: FooterProps) {
 
         <div className="border-t border-gray-300 pt-8">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="text-sm text-gray-600">{content.bottom.copyright}</div>
+            <div className="text-sm text-gray-600">
+              {content.bottom.copyright}
+            </div>
 
             <div
               className={`flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600 ${

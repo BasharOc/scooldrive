@@ -17,7 +17,7 @@ export default function HomeHeroSection({
   const isArabic = locale === "ar";
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative h-[100dvh] overflow-hidden">
       <video
         src="/hero-video.mp4"
         autoPlay
@@ -27,15 +27,14 @@ export default function HomeHeroSection({
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-black/55" />
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-16 pt-36 md:px-8">
+
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-4 pb-10 pt-28 md:px-8 md:pb-16 md:pt-36">
         <div
-          className={`w-full max-w-4xl ${isArabic ? "ml-auto text-right" : ""}`}
+          className={`w-full max-w-4xl mt-[30px] ${isArabic ? "ml-auto text-right" : ""}`}
         >
-          {/* Badges */}
-          <div
-            className={`mb-6 flex flex-wrap items-center gap-3 justify-start`}
-          >
-            <span className="rounded-full bg-[#F5BB00] px-4 py-2 text-sm font-bold tracking-wide text-black">
+          {/* Badge */}
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <span className="rounded-full bg-[#F5BB00] px-4 py-1.5 text-sm font-bold tracking-wide text-black">
               {content.badge}
             </span>
             {warningEnabled && content.warning && (
@@ -45,24 +44,31 @@ export default function HomeHeroSection({
             )}
           </div>
 
-          {/* Titel */}
-          <div className={`mb-4 flex flex-col items-start`}>
-            <span className="inline-block rounded-t-xl bg-black px-5 py-3 text-xl leading-tight font-bold text-white sm:text-4xl lg:text-4xl">
-              {content.title1}
-            </span>
-            <span className="inline-block rounded-b-xl rounded-tr-xl bg-black px-5 py-3 text-xl leading-tight font-bold text-white sm:text-4xl lg:text-4xl">
-              {content.title2}
+          {/* Titel – ein inline-Block, Hintergrund läuft nahtlos durch alle Zeilen */}
+          <div className="mb-5">
+            <span
+              className="inline font-bold text-white text-2xl sm:text-4xl lg:text-4xl"
+              style={{
+                backgroundColor: "black",
+                borderRadius: "8px",
+                WebkitBoxDecorationBreak: "clone",
+                boxDecorationBreak: "clone",
+                padding: "4px 10px",
+                lineHeight: "1.65",
+              }}
+            >
+              {content.title1} {content.title2}
             </span>
           </div>
 
           {/* Features */}
-          <div className="mb-6 space-y-3">
+          <div className="mb-6 space-y-2">
             {content.features.map((feature) => (
-              <div key={feature} className={`flex items-center gap-3`}>
-                <div className="rounded-full bg-[#F5BB00] p-2 shrink-0">
-                  <FaCheck className="text-sm text-black" />
+              <div key={feature} className="flex items-center gap-3">
+                <div className="rounded-full bg-[#F5BB00] p-1.5 shrink-0">
+                  <FaCheck className="text-xs text-black" />
                 </div>
-                <span className="text-lg font-bold italic text-white sm:text-xl">
+                <span className="text-base font-bold italic text-white">
                   {feature}
                 </span>
               </div>
@@ -70,17 +76,18 @@ export default function HomeHeroSection({
           </div>
 
           {/* CTA */}
-          <div className={`flex `}>
-            <Link
-              href={`/${locale}/anmelden`}
-              className="inline-flex items-center gap-3 rounded-xl bg-[#F5BB00] px-8 py-4 text-lg font-bold text-black transition-all hover:bg-yellow-400"
-            >
-              {isArabic && <span className="text-xl">←</span>}
-              <span>{content.cta}</span>
-              {!isArabic && <span className="text-xl">→</span>}
-            </Link>
-          </div>
+          <Link
+            href={`/${locale}/anmelden`}
+            className="inline-flex items-center gap-2 rounded-xl bg-[#F5BB00] px-6 py-3 text-base font-bold text-black transition-all hover:bg-yellow-400"
+          >
+            {isArabic && <span>←</span>}
+            <span>{content.cta}</span>
+            {!isArabic && <span>→</span>}
+          </Link>
         </div>
+
+        {/* Spacer damit Inhalt nicht am Boden klebt */}
+        <div />
       </div>
     </section>
   );

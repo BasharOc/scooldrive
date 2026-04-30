@@ -66,7 +66,7 @@ const getIcon = (icon: "car" | "motorcycle" | "trailer") => {
 
 const buildPriceStructure = (
   content: PreiseContent,
-  remoteData?: PreiseApiResponse | null
+  remoteData?: PreiseApiResponse | null,
 ): Record<LicenseKey, VariablePriceConfig | FixedPriceConfig> => ({
   pkw: {
     name: content.licenses.pkw,
@@ -140,7 +140,7 @@ const buildPriceStructure = (
 });
 
 const isFixedConfig = (
-  config: VariablePriceConfig | FixedPriceConfig
+  config: VariablePriceConfig | FixedPriceConfig,
 ): config is FixedPriceConfig => "fixedPrice" in config;
 
 export default function PreisePageContent({
@@ -151,7 +151,7 @@ export default function PreisePageContent({
   const [selectedLicense, setSelectedLicense] = useState<LicenseKey>("pkw");
   const structure = useMemo(
     () => buildPriceStructure(content, remoteData),
-    [content, remoteData]
+    [content, remoteData],
   );
 
   const currentConfig = structure[selectedLicense];
@@ -183,7 +183,10 @@ export default function PreisePageContent({
       specialDriveDetails.highway +
       specialDriveDetails.nightDrive;
 
-    const extraCostsTotal = extraCosts.reduce((sum, item) => sum + item.value, 0);
+    const extraCostsTotal = extraCosts.reduce(
+      (sum, item) => sum + item.value,
+      0,
+    );
     const schoolTotal =
       currentConfig.baseFee +
       currentConfig.learningApp +
@@ -204,7 +207,7 @@ export default function PreisePageContent({
     <div className="mt-[80px] min-h-screen bg-gray-50 px-4 py-8 md:py-16">
       <div className="mx-auto max-w-7xl">
         <motion.div
-          className="mb-12 text-center"
+          className="pt-[40px] mb-12 text-center"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -226,28 +229,32 @@ export default function PreisePageContent({
         >
           <div className="rounded-2xl bg-white p-2 shadow-lg">
             <div className="grid grid-cols-5 gap-2">
-              {(Object.entries(structure) as [LicenseKey, typeof currentConfig][])
-                .map(([key, value]) => (
-                  <motion.button
-                    key={key}
-                    onClick={() => setSelectedLicense(key)}
-                    className={`rounded-xl px-3 py-3 text-xs font-bold transition-all duration-300 ${
-                      selectedLicense === key
-                        ? "bg-[#F5BB00] text-black shadow-lg"
-                        : "text-gray-600 hover:bg-gray-100 hover:text-black"
-                    }`}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <div className="flex flex-col items-center space-y-1">
-                      {getIcon(value.icon)}
-                      <span className="hidden text-center leading-tight md:block">
-                        {value.name}
-                      </span>
-                      <span className="md:hidden">{key.toUpperCase()}</span>
-                    </div>
-                  </motion.button>
-                ))}
+              {(
+                Object.entries(structure) as [
+                  LicenseKey,
+                  typeof currentConfig,
+                ][]
+              ).map(([key, value]) => (
+                <motion.button
+                  key={key}
+                  onClick={() => setSelectedLicense(key)}
+                  className={`rounded-xl px-3 py-3 text-xs font-bold transition-all duration-300 ${
+                    selectedLicense === key
+                      ? "bg-[#F5BB00] text-black shadow-lg"
+                      : "text-gray-600 hover:bg-gray-100 hover:text-black"
+                  }`}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <div className="flex flex-col items-center space-y-1">
+                    {getIcon(value.icon)}
+                    <span className="hidden text-center leading-tight md:block">
+                      {value.name}
+                    </span>
+                    <span className="md:hidden">{key.toUpperCase()}</span>
+                  </div>
+                </motion.button>
+              ))}
             </div>
           </div>
         </motion.div>
@@ -278,7 +285,9 @@ export default function PreisePageContent({
                 <div className="mr-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#F5BB00]">
                   {getIcon(currentConfig.icon)}
                 </div>
-                <h2 className="text-3xl font-bold text-black">{currentConfig.name}</h2>
+                <h2 className="text-3xl font-bold text-black">
+                  {currentConfig.name}
+                </h2>
               </div>
 
               <div className="mb-6 text-6xl font-bold text-[#F5BB00]">
@@ -289,7 +298,10 @@ export default function PreisePageContent({
                 {content.finalSection.description}
               </p>
 
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Link
                   href={`/${locale}/anmelden`}
                   className="inline-block rounded-full border-2 border-[#F5BB00] bg-black px-8 py-3 text-lg font-bold text-[#F5BB00] transition-all duration-300 hover:bg-[#F5BB00] hover:text-black"
@@ -349,7 +361,10 @@ export default function PreisePageContent({
                     ]
                       .filter((item) => !item.hidden)
                       .map((item) => (
-                        <div key={item.label} className="rounded-xl bg-gray-50 p-4">
+                        <div
+                          key={item.label}
+                          className="rounded-xl bg-gray-50 p-4"
+                        >
                           <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-2">
                               {item.icon}
@@ -370,7 +385,8 @@ export default function PreisePageContent({
                           <FaRoad className="text-black" />
                           <span className="font-semibold text-gray-700">
                             {content.sections.specialDrives} (
-                            {currentConfig.specialDrives.total} {content.calculations.lessons})
+                            {currentConfig.specialDrives.total}{" "}
+                            {content.calculations.lessons})
                           </span>
                         </div>
                         <span className="text-xl font-bold text-black">
@@ -378,9 +394,12 @@ export default function PreisePageContent({
                         </span>
                       </div>
                       <div className="mt-1 text-xs text-gray-600">
-                        {currentConfig.specialDrives.ruralRoad.count} {content.sections.ruralRoad} +{" "}
-                        {currentConfig.specialDrives.highway.count} {content.sections.highway} +{" "}
-                        {currentConfig.specialDrives.nightDrive.count} {content.sections.nightDrive}
+                        {currentConfig.specialDrives.ruralRoad.count}{" "}
+                        {content.sections.ruralRoad} +{" "}
+                        {currentConfig.specialDrives.highway.count}{" "}
+                        {content.sections.highway} +{" "}
+                        {currentConfig.specialDrives.nightDrive.count}{" "}
+                        {content.sections.nightDrive}
                       </div>
                     </div>
                   </div>
@@ -400,12 +419,20 @@ export default function PreisePageContent({
 
                   <div className="space-y-4">
                     <div className="flex items-center justify-between py-2">
-                      <span className="text-gray-700">{content.sections.baseFee}</span>
-                      <span className="font-semibold">{currentConfig.baseFee}€</span>
+                      <span className="text-gray-700">
+                        {content.sections.baseFee}
+                      </span>
+                      <span className="font-semibold">
+                        {currentConfig.baseFee}€
+                      </span>
                     </div>
                     <div className="flex items-center justify-between py-2">
-                      <span className="text-gray-700">{content.sections.learningApp}</span>
-                      <span className="font-semibold">{currentConfig.learningApp}€</span>
+                      <span className="text-gray-700">
+                        {content.sections.learningApp}
+                      </span>
+                      <span className="font-semibold">
+                        {currentConfig.learningApp}€
+                      </span>
                     </div>
 
                     <div className="rounded-xl bg-gray-50 p-6">
@@ -439,18 +466,24 @@ export default function PreisePageContent({
                         <div
                           key={item.label}
                           className={`flex items-center justify-between ${
-                            index < 2 ? "mb-3 border-b border-gray-200 pb-2" : "mb-3"
+                            index < 2
+                              ? "mb-3 border-b border-gray-200 pb-2"
+                              : "mb-3"
                           }`}
                         >
                           <div className="flex items-center space-x-2">
                             {item.icon}
-                            <span className="text-sm text-gray-700">{item.label}</span>
+                            <span className="text-sm text-gray-700">
+                              {item.label}
+                            </span>
                           </div>
                           <div className="text-right">
                             <span className="text-sm text-gray-600">
                               {item.count}x {item.price}€
                             </span>
-                            <div className="font-semibold text-black">{item.total}€</div>
+                            <div className="font-semibold text-black">
+                              {item.total}€
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -458,7 +491,8 @@ export default function PreisePageContent({
                       <div className="mt-3 border-t border-gray-300 pt-3">
                         <div className="flex items-center justify-between">
                           <span className="font-bold text-gray-800">
-                            {content.sections.specialDrives} {content.calculations.total}
+                            {content.sections.specialDrives}{" "}
+                            {content.calculations.total}
                           </span>
                           <span className="text-xl font-bold text-black">
                             {totals?.specialDrivesTotal ?? 0}€
@@ -469,14 +503,22 @@ export default function PreisePageContent({
 
                     {currentConfig.theoryExam > 0 && (
                       <div className="flex items-center justify-between py-2">
-                        <span className="text-gray-700">{content.sections.theoryExam}</span>
-                        <span className="font-semibold">{currentConfig.theoryExam}€</span>
+                        <span className="text-gray-700">
+                          {content.sections.theoryExam}
+                        </span>
+                        <span className="font-semibold">
+                          {currentConfig.theoryExam}€
+                        </span>
                       </div>
                     )}
 
                     <div className="flex items-center justify-between py-2">
-                      <span className="text-gray-700">{content.sections.practicalExam}</span>
-                      <span className="font-semibold">{currentConfig.practicalExam}€</span>
+                      <span className="text-gray-700">
+                        {content.sections.practicalExam}
+                      </span>
+                      <span className="font-semibold">
+                        {currentConfig.practicalExam}€
+                      </span>
                     </div>
 
                     <div className="border-t-2 border-gray-200 pt-4">
@@ -495,7 +537,9 @@ export default function PreisePageContent({
                     <div className="flex items-start">
                       <FaExclamationTriangle className="mt-0.5 mr-3 flex-shrink-0 text-orange-400" />
                       <div className="text-sm text-orange-800">
-                        <p className="mb-2 font-semibold">{content.warning.title}</p>
+                        <p className="mb-2 font-semibold">
+                          {content.warning.title}
+                        </p>
                         <ul className="space-y-1 text-xs">
                           {content.warning.points.map((point) => (
                             <li key={point.label}>
@@ -524,7 +568,9 @@ export default function PreisePageContent({
                   {extraCosts.map((item) => (
                     <div key={item.key} className="rounded-xl bg-gray-50 p-4">
                       <div className="flex items-center justify-between">
-                        <span className="font-medium text-gray-700">{item.name}</span>
+                        <span className="font-medium text-gray-700">
+                          {item.name}
+                        </span>
                         <span className="font-bold text-gray-800">
                           {item.value}€
                         </span>
@@ -568,7 +614,10 @@ export default function PreisePageContent({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Link
                   href={`/${locale}/anmelden`}
                   className="inline-block rounded-full border-2 border-[#F5BB00] bg-black px-10 py-4 text-lg font-bold text-[#F5BB00] transition-all duration-300 hover:bg-[#F5BB00] hover:text-black"

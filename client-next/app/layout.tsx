@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className="h-full antialiased">
-      <body className="min-h-full">
+      <body className=" min-h-full">
         {children}
         <CookieBanner />
       </body>

@@ -53,8 +53,8 @@ export const HOME_DE: HomeContent = {
   },
   personalApproach: {
     header1: "Du bist nicht irgendwer",
-    header2: "also bekommst du bei uns auch kein 08/15",
-    header2Highlight: "kein 08/15",
+    header2: "also bekommst du bei uns auch kein Standard",
+    header2Highlight: "kein Standard",
     description:
       "Denn wie du Unabhängigkeit lebst, ist so individuell wie dein Alltag. Genau deshalb starten wir nicht einfach mit der ersten Fahrstunde, sondern mit dir.",
     features: [
@@ -173,7 +173,12 @@ export const HOME_DE: HomeContent = {
       { id: 3, label: "WECHSEL GARANTIE", icon: "circle", accent: true },
       { id: 4, label: "45-MINUTEN GARANTIE", icon: "timer", accent: false },
       { id: 5, label: "DURCHBLICK GARANTIE", icon: "eye", accent: true },
-      { id: 6, label: "KEINE-STUNDE-ZU-VIEL GARANTIE", icon: "bars", accent: true },
+      {
+        id: 6,
+        label: "KEINE-STUNDE-ZU-VIEL GARANTIE",
+        icon: "bars",
+        accent: true,
+      },
       { id: 7, label: "KENNENLERN GARANTIE", icon: "smile", accent: false },
     ],
   },
@@ -232,7 +237,8 @@ export const HOME_DE: HomeContent = {
           "Ja, wir bieten sowohl Schaltgetriebe als auch Automatikgetriebe an. Viele unserer Fahrschüler entscheiden sich heute für Automatik, da es einfacher zu erlernen ist. Beachte jedoch, dass bei einer Automatikprüfung die Fahrerlaubnis auf Automatikfahrzeuge beschränkt ist.",
       },
       {
-        question: "WELCHE DOKUMENTE BENÖTIGE ICH FÜR DIE ANMELDUNG ZUM FÜHRERSCHEIN?",
+        question:
+          "WELCHE DOKUMENTE BENÖTIGE ICH FÜR DIE ANMELDUNG ZUM FÜHRERSCHEIN?",
         answer:
           "Du benötigst: Personalausweis oder Reisepass, biometrisches Passfoto, Sehtest (nicht älter als 2 Jahre), Erste-Hilfe-Kurs-Bescheinigung, bei Minderjährigen eine Einverständniserklärung der Erziehungsberechtigten. Wir helfen dir gerne bei der Beschaffung aller Dokumente.",
       },
