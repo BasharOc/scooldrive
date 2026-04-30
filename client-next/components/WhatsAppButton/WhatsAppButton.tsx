@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import type { WhatsAppButtonContent } from "@/components/WhatsAppButton/types";
 
@@ -17,6 +18,7 @@ export default function WhatsAppButton({
   enabled = true,
   phoneNumber = DEFAULT_PHONE_NUMBER,
 }: WhatsAppButtonProps) {
+  const pathname = usePathname();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -55,7 +57,7 @@ export default function WhatsAppButton({
     };
   }, [isMobile]);
 
-  if (!enabled) {
+  if (!enabled || pathname?.split("/")[2] === "anmelden") {
     return null;
   }
 
