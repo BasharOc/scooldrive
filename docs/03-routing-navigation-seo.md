@@ -1,59 +1,64 @@
 # Routing, Navigation und SEO
 
-## Routen in `client/src/App.jsx`
+## Routing
 
-| Route | Komponente | Layout |
-| --- | --- | --- |
-| `/` | `HomePage` | `MainLayout` |
-| `/fuehrerschein` | `AutoFuhrerscheinPage` | `MainLayout` |
-| `/auto-fuehrerschein` | `AutoPage` | `MainLayout` |
-| `/auto-anhaenger` | `AutoAnhangerPage` | `MainLayout` |
-| `/motorrad-fuehrerschein` | `MotorradPage` | `MainLayout` |
-| `/theoriekurs` | `TheorieKursPage` | `MainLayout` |
-| `/intensivkurse` | `IntensivKursPage` | `MainLayout` |
-| `/preise` | `PreisePage` | `MainLayout` |
-| `/punkte-abbauen` | `PunkteAbbauenPage` | `MainLayout` |
-| `/impressum` | `Impressum` | `MainLayout` |
-| `/AGB` | `AGB` | `MainLayout` |
-| `/datenschutz` | `Datenschutz` | `MainLayout` |
-| `/anmelden` | `AnmeldungLeitung` | eigenes Layout |
-| `/maximal-capacity` | `MaximalCapacity` | eigenes Layout |
-| `/blogs` | `BlogOverview` | `MainLayout` |
-| `/blogs/:slug` | `BlogArticlePage` | `MainLayout` |
-| `/login` | `Login` | eigenes Layout |
-| `/admin` | `ProtectedRoute(AdminApp)` | eigenes Layout |
+Das Frontend nutzt den Next.js App Router.
+
+| Route | Datei |
+| --- | --- |
+| `/` | `client-next/app/page.tsx` |
+| `/{locale}` | `client-next/app/[locale]/page.tsx` |
+| `/{locale}/auto-fuehrerschein` | `client-next/app/[locale]/auto-fuehrerschein/page.tsx` |
+| `/{locale}/auto-anhaenger` | `client-next/app/[locale]/auto-anhaenger/page.tsx` |
+| `/{locale}/motorrad-fuehrerschein` | `client-next/app/[locale]/motorrad-fuehrerschein/page.tsx` |
+| `/{locale}/theoriekurs` | `client-next/app/[locale]/theoriekurs/page.tsx` |
+| `/{locale}/intensivkurse` | `client-next/app/[locale]/intensivkurse/page.tsx` |
+| `/{locale}/preise` | `client-next/app/[locale]/preise/page.tsx` |
+| `/{locale}/punkte-abbauen` | `client-next/app/[locale]/punkte-abbauen/page.tsx` |
+| `/{locale}/anmelden` | `client-next/app/[locale]/anmelden/page.tsx` |
+| `/{locale}/maximal-capacity` | `client-next/app/[locale]/maximal-capacity/page.tsx` |
+| `/{locale}/blogs` | `client-next/app/[locale]/blogs/page.tsx` |
+| `/{locale}/blogs/[slug]` | `client-next/app/[locale]/blogs/[slug]/page.tsx` |
+| `/{locale}/impressum` | `client-next/app/[locale]/impressum/page.tsx` |
+| `/{locale}/datenschutz` | `client-next/app/[locale]/datenschutz/page.tsx` |
+| `/{locale}/agb` | `client-next/app/[locale]/agb/page.tsx` |
+| `/login` | `client-next/app/login/page.tsx` |
+| `/admin` | `client-next/app/admin/page.tsx` |
+
+`generateStaticParams()` erzeugt die drei Locales `de`, `en`, `ar` fuer die oeffentlichen Seiten. Ungueltige Locales werden mit `notFound()` beendet.
 
 ## Navigation
 
-`client/src/components/Navbar.jsx` ist die zentrale Navigation:
+Die zentrale Navigation liegt unter `client-next/components/Navbar/`.
 
-- Desktop: fixed Navbar, Hover-Megamenu, Sprachwahl, CTA zur Anmeldung.
-- Mobile: Slide-in-Menue mit Untermenues.
-- Sprache wird aus `LanguageContext` gelesen und in `localStorage.selectedLanguage` gespeichert.
-- Navigationsziele werden teils ueber Titeltexte gemappt. Dadurch sind Titeltexte fachlich relevant fuer Routing.
+- `Navbar.tsx`: Hauptkomponente.
+- `DesktopMegaMenu.tsx`: Desktop-Menues.
+- `MobileMenu.tsx`: Mobile Navigation.
+- `LanguageSwitcher.tsx`: Wechsel zwischen `de`, `en`, `ar`.
+- `constants.ts`: Navigationsdaten.
+- `helpers.tsx`: Hilfsfunktionen fuer Links/Labels.
 
-Wichtige Navigationsziele:
-
-- Fuehrerschein-Menue: Auto, Anhaenger, Motorrad.
-- Termine/Info-Menue: Theoriekurs, Intensivkurse, Preise, Punkte abbauen, Blog.
-- CTA: `/anmelden`.
-
-`client/src/components/Footer.jsx` enthaelt weitere Navigationslinks, inklusive rechtlicher Seiten.
+`LocaleChrome` bindet Navbar und Footer in das Locale-Layout ein. Links muessen locale-aware sein, also z. B. `/de/preise`, `/en/preise`, `/ar/preise`.
 
 ## SEO
 
-SEO wird ueber `react-helmet-async` umgesetzt:
+SEO wird ueber Next.js `generateMetadata()` umgesetzt.
 
-- `title`
-- `description`
-- Open Graph Tags
-- Twitter Card Tags
-- Canonical Links
+Gemeinsamer Helfer:
 
-Die meisten oeffentlichen Seiten enthalten eigene Helmet-Bloecke. Blogartikel ziehen Metadaten aus `blogArticles`.
+- `client-next/lib/metadata.ts`
+- Basisdomain: `https://fahrschule-lg.scooldrive.com`
+- erzeugt Canonical, Sprach-Alternates, Open Graph und Twitter Card.
+
+Die meisten oeffentlichen Seiten lesen ihre SEO-Texte aus `client-next/messages/*` und rufen `generatePageMetadata()` auf. Blogartikel erzeugen eigene Article-Metadaten inklusive Coverbild und Alternates in `client-next/app/[locale]/blogs/[slug]/page.tsx`.
+
+## Sitemap und Robots
+
+- Sitemap: `client-next/app/sitemap.ts`
+- Robots-Datei: `client-next/public/robots.txt`
 
 ## Bekannte Routing-Auffaelligkeiten
 
-- `App.jsx` definiert `/AGB` gross geschrieben, `Footer.jsx` navigiert aber nach `/agb` klein geschrieben. Das ist bei Browser-Routing relevant, weil Pfade case-sensitive sein koennen.
-- In `Navbar.jsx` wird bei einem `termineItems` Mapping fuer Blog intern einmal `/blog` berechnet, die Klicklogik navigiert spaeter aber nach `/blogs`. Aktiv genutzt wird die Klicklogik.
-- `Footer.jsx` navigiert nach `/cookie-settings`; dafuer existiert aktuell keine Route in `App.jsx`.
+- Root `/` leitet immer auf `/de`. Eine automatische Locale-Erkennung gibt es aktuell nicht.
+- Admin-Routen sind nicht locale-basiert: `/login` und `/admin`.
+- Nginx routet `/api/admin/*` an Next und `/api/*` direkt an Express.

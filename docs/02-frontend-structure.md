@@ -2,89 +2,89 @@
 
 ## Stack
 
-- React 19
-- Vite 6 mit `@vitejs/plugin-react-swc`
-- React Router 7
-- Tailwind CSS 4 ueber `@tailwindcss/vite`
-- Framer Motion fuer Animationen
-- React Icons
-- React Helmet Async fuer SEO
-- EmailJS fuer Anmeldungsmails
+- Next.js 16 mit App Router und `output: "standalone"`.
+- React 19.
+- TypeScript.
+- Tailwind CSS 4 ueber PostCSS.
+- Framer Motion fuer einzelne Animationen.
+- React Icons.
+- EmailJS fuer den Live-Versand der Anmeldung.
 
 ## App-Aufbau
 
-`client/src/main.jsx` rendert `App` in `#root`.
+`client-next/app/layout.tsx` ist das Root-Layout. Es setzt globale Metadaten, importiert `globals.css` und rendert den `CookieBanner`.
 
-`client/src/App.jsx` legt die globalen Provider und Routen an:
+`client-next/app/page.tsx` leitet `/` auf `/de` weiter.
 
-- `LanguageProvider`
-- `HelmetProvider`
-- `BrowserRouter`
-- globales Scroll-Verhalten ueber `ScrollToTop`
-- Cookie-Banner ausserhalb der Routenelemente
+`client-next/app/[locale]/layout.tsx`:
 
-Oeffentliche Seiten werden meist in `MainLayout` gerendert. Admin und Anmeldung haben eigene Layouts.
-
-## Layout-Schicht
-
-`client/src/layouts/MainLayout.jsx`:
-
-- laedt `/api/einstellungen`
-- blendet `WhatsAppButton` nur ein, wenn `kontaktOptionen.whatsapp` aktiv ist
-- rendert `BonusNavbar`, `Navbar`, `main`, `Footer`
-- zeigt einen Fehlertext, wenn Einstellungen nicht geladen werden koennen
+- erlaubt die Locales `de`, `en`, `ar`.
+- setzt `lang` und fuer Arabisch `dir="rtl"`.
+- laedt `/api/einstellungen` serverseitig ueber `getEinstellungen()`.
+- steuert Sichtbarkeit und Nummer des `WhatsAppButton`.
+- rendert `LocaleChrome` mit Navbar, Footer und Seiteninhalt.
 
 ## Komponentenfamilien
 
 | Familie | Pfad | Inhalt |
 | --- | --- | --- |
-| Global | `client/src/components/` | Navbar, Footer, BonusTicker, WhatsAppButton, ScrollToTop. |
-| Homepage | `client/src/components/Homepage/` | Hero, Fahrschul-Angebote, Reviews, Verkehrsregeln, Standort, FAQ, Kontaktformular. |
-| Auto | `client/src/components/AutoPage/` | Klasse-B-Hero, Fakten, Ausbildungsschritte. |
-| Fuehrerschein-Uebersicht | `client/src/components/auto-führerschein/` | Hero, Scheinwahl, Bild/Text, Drei-Schritte-Abschnitt. |
-| Anhaenger | `client/src/components/AutoAnhanger/` | Hero, Anforderungen, Schritte, weitere Voraussetzungen. |
-| Motorrad | `client/src/components/Motorrad/` | Hero, Anforderungen, Fakten, Infos, Lizenzschritte. |
-| Anmeldung | `client/src/components/AnmeldeSteps/` | Step1 bis Step9 plus Step3_5. |
-| Anmeldung Feature | `client/src/features/registration/` | Page, Reducer, Content, Validierung, Submit und UI-Bausteine fuer den Wizard. |
-| Admin | `client/src/pages/Admin/components/` | Formulare fuer Backend-Ressourcen. |
+| Layout | `client-next/components/Layout/` | Locale-Chrome mit Navbar/Footer-Rahmen. |
+| Navbar | `client-next/components/Navbar/` | Desktop-Megamenu, Mobile-Menue, Sprachwechsel. |
+| Footer | `client-next/components/Footer/` | Footer-Komponente und Typen. |
+| Homepage | `client-next/components/Homepage/` | Hero, Angebote, Reviews, Verkehrsregeln, Standort, FAQ. |
+| Auto-Fuehrerschein | `client-next/components/AutoFuehrerschein/` | Auto-Seite und Facts/Steps. |
+| Auto-Anhaenger | `client-next/components/AutoAnhaenger/` | Hero, Anforderungen, Schritte, Checkliste. |
+| Motorrad | `client-next/components/Motorrad/` | Hero, Checkliste, Fakten, Infos, Lizenzschritte. |
+| Theoriekurs | `client-next/components/Theoriekurs/` | Kursseite mit Termin-Daten. |
+| Intensivkurse | `client-next/components/Intensivkurse/` | Kursseite mit Preis-Daten. |
+| Preise | `client-next/components/Preise/` | Preisuebersicht und Preiswidget. |
+| Punkte abbauen | `client-next/components/PunkteAbbauen/` | ASF/FES/Punkteabbau-Seite. |
+| Anmeldung | `client-next/components/Registration/` | Wizard, State, Submit, Navigation, Kapazitaetsseite. |
+| Admin | `client-next/components/Admin/` | Login, Dashboard, Admin-API-Helfer. |
+| Blog | `client-next/components/Blog/` | Uebersicht und Artikelansicht. |
+| Rechtliches | `client-next/components/LegalPage/` | Impressum, Datenschutz, AGB. |
 
 ## Seiten
 
-| Seite | Datei | Rolle |
+| Route | Datei | Rolle |
 | --- | --- | --- |
-| Homepage | `client/src/pages/HomePage.jsx` | Startseite mit Hero, Angeboten, Reviews, Standort und FAQ. |
-| Fuehrerschein | `client/src/pages/AutoFuhrerscheinPage.jsx` | Uebersichtsseite fuer Fuehrerscheinwahl. |
-| Auto | `client/src/pages/AutoPage.jsx` | Klasse-B-Unterseite. |
-| Anhaenger | `client/src/pages/AutoAnhangerPage.jsx` | BE/B96-Unterseite. |
-| Motorrad | `client/src/pages/MotorradPage.jsx` | Motorradklassen-Unterseite. |
-| Theoriekurs | `client/src/pages/TheorieKursPage.jsx` | Kursinfo mit Termin-Daten aus API. |
-| Intensivkurs | `client/src/pages/IntensivKursPage.jsx` | Intensivkursinfo mit Preis-Daten aus API. |
-| Preise | `client/src/pages/PreisePage.jsx` | Preisuebersicht mit API-Daten. |
-| Punkte abbauen | `client/src/pages/PunkteAbbauenPage.jsx` | ASF/FES/Punkteabbau-Landingpage. |
-| Anmeldung | `client/src/pages/AnmeldungPage.jsx` | Kompatibler Wrapper auf `features/registration/RegistrationPage.jsx`. |
-| Anmeldung-Leitung | `client/src/pages/AnmeldungLeitung.jsx` | Gate vor Anmeldung, prueft `anmeldungStopp`. |
-| Kapazitaet | `client/src/pages/MaximalCapacity.jsx` | Zielseite bei aktivem Anmeldung-Stopp. |
-| Blog | `client/src/pages/Blog/BlogOverview.jsx` | Liste statischer Blogartikel. |
-| Blogartikel | `client/src/pages/Blog/BlogArticlePage.jsx` | Einzelartikel anhand `slug`. |
-| Rechtliches | `client/src/pages/LegalNotice.jsx` | Impressum, Datenschutz und AGB. |
-| Login | `client/src/pages/Admin/Login.jsx` | Admin-Login. |
-| Admin | `client/src/pages/Admin/AdminApp.jsx` | Admin-Dashboard. |
-
-Im Admin-Dashboard ist `Registrierungen` eingebunden. Diese Komponente liest `/api/registrations` mit Admin-JWT und zeigt gespeicherte Anmeldungen inklusive Emailstatus.
+| `/` | `client-next/app/page.tsx` | Redirect nach `/de`. |
+| `/{locale}` | `client-next/app/[locale]/page.tsx` | Homepage. |
+| `/{locale}/auto-fuehrerschein` | `client-next/app/[locale]/auto-fuehrerschein/page.tsx` | Klasse-B/Auto-Fuehrerschein. |
+| `/{locale}/auto-anhaenger` | `client-next/app/[locale]/auto-anhaenger/page.tsx` | BE/B96. |
+| `/{locale}/motorrad-fuehrerschein` | `client-next/app/[locale]/motorrad-fuehrerschein/page.tsx` | Motorradklassen. |
+| `/{locale}/theoriekurs` | `client-next/app/[locale]/theoriekurs/page.tsx` | Theoriekurs mit Termindaten. |
+| `/{locale}/intensivkurse` | `client-next/app/[locale]/intensivkurse/page.tsx` | Intensivkurs mit Preis. |
+| `/{locale}/preise` | `client-next/app/[locale]/preise/page.tsx` | Preisuebersicht. |
+| `/{locale}/punkte-abbauen` | `client-next/app/[locale]/punkte-abbauen/page.tsx` | Punkteabbau. |
+| `/{locale}/anmelden` | `client-next/app/[locale]/anmelden/page.tsx` | Anmeldung mit Stop-Pruefung. |
+| `/{locale}/maximal-capacity` | `client-next/app/[locale]/maximal-capacity/page.tsx` | Zielseite bei Anmeldung-Stopp. |
+| `/{locale}/blogs` | `client-next/app/[locale]/blogs/page.tsx` | Bloguebersicht. |
+| `/{locale}/blogs/[slug]` | `client-next/app/[locale]/blogs/[slug]/page.tsx` | Blogartikel. |
+| `/{locale}/impressum` | `client-next/app/[locale]/impressum/page.tsx` | Impressum. |
+| `/{locale}/datenschutz` | `client-next/app/[locale]/datenschutz/page.tsx` | Datenschutz. |
+| `/{locale}/agb` | `client-next/app/[locale]/agb/page.tsx` | AGB. |
+| `/login` | `client-next/app/login/page.tsx` | Admin-Login. |
+| `/admin` | `client-next/app/admin/page.tsx` | Admin-Dashboard. |
 
 ## Datenzugriff im Frontend
 
-`client/src/utils/api.js` definiert:
+Serverseitige oeffentliche Daten:
 
-```js
-const API_BASE =
-  import.meta.env.VITE_API_URL || "https://server.scooldrive.com/api";
-```
+- `client-next/lib/api.ts`
+- `API_BASE_URL`
+- fallback auf `NEXT_PUBLIC_API_URL`, falls absolute URL gesetzt.
+- letzter Default: `http://localhost:3001/api`.
+- `fetchApi()` nutzt Next-Revalidation von 60 Sekunden fuer Einstellungen, Termine, Preise und Oeffnungszeiten.
 
-`client/hooks/useAPIData.jsx` kapselt einfache GET-Abfragen:
+Clientseitige Anmeldung:
 
-- State: `data`, `loading`, `error`
-- initialer Fetch bei `endpoint`
-- `refetch()` fuer erneutes Laden
+- `client-next/lib/registration-api.ts`
+- nutzt `NEXT_PUBLIC_API_URL`.
+- Default: `http://localhost:3001/api`.
+- speichert Registrierungen und aktualisiert den Emailstatus.
 
-Einige Komponenten nutzen weiterhin direkte `fetch()`-Aufrufe mit `API_BASE`, besonders Admin-Komponenten und Layout-Gates.
+Admin:
+
+- `client-next/app/api/admin/*` proxyt zum Express-Backend.
+- `client-next/components/Admin/api.ts` ruft diese Proxy-Routen mit `credentials: "same-origin"` auf.

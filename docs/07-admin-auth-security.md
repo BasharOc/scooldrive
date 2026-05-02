@@ -4,38 +4,60 @@
 
 ```mermaid
 sequenceDiagram
-  participant Admin as Admin UI
-  participant API as Express API
+  participant Admin as Next Admin UI
+  participant NextAPI as /api/admin/*
+  participant Express as Express API
   participant DB as MongoDB
-  Admin->>API: POST /api/auth/login
-  API->>DB: Admin nach username suchen
-  API->>API: Passwort vergleichen, JWT erstellen
-  API-->>Admin: token
-  Admin->>Admin: token in localStorage speichern
-  Admin->>API: GET /api/auth/verify mit Bearer Token
-  API-->>Admin: gueltig / ungueltig
-  Admin->>API: PUT /api/* mit Bearer Token
+  Admin->>NextAPI: POST /api/admin/login
+  NextAPI->>Express: POST /api/auth/login
+  Express->>DB: Admin nach username suchen
+  Express->>Express: Passwort vergleichen, JWT erstellen
+  Express-->>NextAPI: token
+  NextAPI-->>Admin: HTTP-only Cookie scooldrive_admin_token
+  Admin->>NextAPI: GET/PUT /api/admin/*
+  NextAPI->>Express: /api/* mit Authorization Bearer Token
+  Express-->>NextAPI: Daten oder Fehler
 ```
 
 ## Frontend-Dateien
 
 | Datei | Rolle |
 | --- | --- |
-| `client/src/pages/Admin/Login.jsx` | Loginformular, speichert JWT in `localStorage.token`. |
-| `client/src/pages/Admin/ProtectedRoute.jsx` | Prueft Token ueber `/api/auth/verify`, leitet sonst zu `/login`. |
-| `client/src/pages/Admin/AdminApp.jsx` | Rendert alle Admin-Module untereinander. |
-| `client/src/pages/Admin/components/*.jsx` | GET/PUT-Formulare fuer einzelne Backend-Ressourcen. |
+| `client-next/app/login/page.tsx` | Redirect zu `/admin`, wenn bereits eingeloggt; sonst Loginformular. |
+| `client-next/components/Admin/LoginForm.tsx` | Loginformular gegen `/api/admin/login`. |
+| `client-next/app/admin/page.tsx` | `requireAdminSession()` und Dashboard. |
+| `client-next/components/Admin/AdminDashboard.tsx` | Admin-UI fuer alle Ressourcen. |
+| `client-next/components/Admin/api.ts` | `adminFetch()` mit Same-Origin-Credentials. |
+| `client-next/lib/admin-auth.ts` | Cookie lesen, Express-Session verifizieren, Admin erzwingen. |
+| `client-next/app/api/admin/_lib.ts` | Gemeinsamer Proxy zum Express-Backend. |
 
 ## Admin-Module
 
-| Modul | Ressource | Zweck |
-| --- | --- | --- |
-| Einstellungen | `/api/einstellungen` | Anmeldung-Stopp, begrenzte Plaetze, Kontaktoptionen. |
-| Bonus | `/api/bonus` | Allgemeiner Bonus und Freunde-Bonus. |
-| Preise | `/api/preise` | Preisfelder. |
-| Termine | `/api/termine` | Ein aktueller Termin. |
-| Oeffnungszeiten | `/api/oeffnungszeiten` | Tageszeiten und Aktivstatus. |
-| Registrierungen | `/api/registrations` | Gespeicherte Formular-Anmeldungen und Emailstatus. |
+| Modul | Next-Route | Express-Ressource | Zweck |
+| --- | --- | --- | --- |
+| Einstellungen | `/api/admin/einstellungen` | `/api/einstellungen` | Anmeldung-Stopp, begrenzte Plaetze, Kontaktoptionen. |
+| Bonus | `/api/admin/bonus` | `/api/bonus` | Allgemeiner Bonus und Freunde-Bonus. |
+| Preise | `/api/admin/preise` | `/api/preise` | Preisfelder. |
+| Termine | `/api/admin/termine` | `/api/termine` | Ein aktueller Termin. |
+| Oeffnungszeiten | `/api/admin/oeffnungszeiten` | `/api/oeffnungszeiten` | Tageszeiten und Aktivstatus. |
+| Registrierungen | `/api/admin/registrations` | `/api/registrations` | Gespeicherte Formular-Anmeldungen und Emailstatus. |
+
+## Token-Speicher
+
+Das Express-Backend erstellt weiterhin ein JWT. Die Next-App speichert dieses JWT aber nicht mehr in `localStorage`, sondern in einem HTTP-only Cookie:
+
+```text
+scooldrive_admin_token
+```
+
+Cookie-Optionen:
+
+- `httpOnly: true`
+- `secure: true` in Production
+- `sameSite: "lax"`
+- `path: "/"`
+
+Die Client-Komponenten sprechen nur `/api/admin/*` an. Der Bearer Token wird serverseitig im Next Route Handler an Express weitergereicht.
 
 ## Backend-Sicherheit
 
@@ -45,7 +67,7 @@ sequenceDiagram
 - Account-Sperre nach 5 falschen Passwortversuchen fuer 30 Minuten.
 - CORS erlaubt nur definierte Origins.
 - Globales Rate Limiting ist aktiv.
-- Ein strenger Auth-Limiter ist definiert, aber aktuell in `app.js` auskommentiert.
+- Ein strenger Auth-Limiter ist definiert, aber aktuell in `server/src/app.js` auskommentiert.
 
 ## Environment-Abhaengigkeiten
 
@@ -62,14 +84,12 @@ Backend:
 - `PORT`
 - `NODE_ENV`
 
-Frontend:
+Frontend/Next:
 
-- `VITE_API_URL`
-- `VITE_EMAILJS_SERVICE_ID`
-- `VITE_EMAILJS_TEMPLATE_ID`
-- `VITE_EMAILJS_PUBLIC_KEY`
-- `VITE_GA_MEASUREMENT_ID`
-
-## Token-Speicher
-
-Das Admin-Frontend speichert den JWT in `localStorage`. Das ist einfach und passend zur aktuellen SPA-Struktur, bedeutet aber: XSS-Schutz im Frontend ist besonders wichtig, weil ein Script den Token auslesen koennte.
+- `API_BASE_URL`
+- `NEXT_PUBLIC_API_URL`
+- `NEXT_PUBLIC_EMAIL_MODE`
+- `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
+- `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
+- `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID`

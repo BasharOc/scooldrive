@@ -1,24 +1,31 @@
 # API-Referenz
 
-Basis im Produktiv-Fallback:
+## Basis-URLs
+
+Lokal:
+
+```text
+http://localhost:3001/api
+```
+
+Produktion:
 
 ```text
 https://server.scooldrive.com/api
 ```
 
-Im Frontend ueberschreibbar mit:
+Auf der Hauptdomain proxyt Nginx:
 
-```text
-VITE_API_URL
-```
+- `/api/admin/*` an Next.js.
+- `/api/*` an Express.
 
-## Health
+## Express Health
 
 | Methode | Pfad | Auth | Zweck |
 | --- | --- | --- | --- |
 | GET | `/health` | nein | Serverstatus, Timestamp, Uptime. |
 
-## Auth
+## Express Auth
 
 | Methode | Pfad | Auth | Body | Antwort |
 | --- | --- | --- | --- | --- |
@@ -59,8 +66,6 @@ Erlaubte Preisfelder:
 - `motorradKlasseAGrundgebuehr`
 - `intensivkursPreis`
 
-Alle Preisfelder werden als nicht-negative Zahl validiert, sofern sie im Request enthalten sind.
-
 ## Termine
 
 | Methode | Pfad | Auth | Zweck |
@@ -77,8 +82,6 @@ Body fuer PUT:
   "aktiv": true
 }
 ```
-
-Wichtig: Der Controller leert das Array `termine` und fuegt hoechstens ein Terminobjekt ein. Mehrere Termine werden aktuell nicht als Batch gespeichert.
 
 ## Einstellungen
 
@@ -99,6 +102,8 @@ Body-Struktur:
   }
 }
 ```
+
+Hinweis: Der Frontend-Typ kennt zusaetzlich `kontaktOptionen.whatsappNummer`, das aktuelle Mongoose-Schema speichert dieses Feld nicht explizit.
 
 ## Bonus
 
@@ -124,8 +129,6 @@ Body-Struktur:
 }
 ```
 
-`expiresAt` wird vom Mongoose `pre("save")` Hook aus `zeitlimit` berechnet.
-
 ## Oeffnungszeiten
 
 | Methode | Pfad | Auth | Zweck |
@@ -143,50 +146,29 @@ Jeder Wochentag hat:
 }
 ```
 
-Zeitfelder werden im Format `HH:MM` validiert.
-
 ## Registrierungen
 
 | Methode | Pfad | Auth | Zweck |
 | --- | --- | --- | --- |
 | POST | `/api/registrations` | nein | Anmeldung vor EmailJS sicher in MongoDB speichern. |
-| PATCH | `/api/registrations/:id/email-status` | `clientUpdateToken` | EmailJS-Status fuer genau diese Anmeldung nachtragen. |
+| PATCH | `/api/registrations/:id/email-status` | `clientUpdateToken` im Body | EmailJS-Status fuer genau diese Anmeldung nachtragen. |
 | GET | `/api/registrations` | Bearer Token | Alle Registrierungen fuer Admin abrufen. |
 | GET | `/api/registrations/:id` | Bearer Token | Einzelne Registrierung fuer Admin abrufen. |
 
-POST-Body entspricht der Formular-/Email-Payload, inklusive:
+Der Server setzt initial `emailStatus: "pending"` und gibt `registration.id` sowie `clientUpdateToken` zurueck. Erlaubte Werte fuer den spaeteren Emailstatus sind `sent`, `failed`, `mocked`.
 
-- `fahrzeugTyp`
-- `spezifischeKlasse`
-- `vorname`
-- `nachname`
-- `hatFuehrerschein`
-- `fuehrerscheinTyp`
-- `getriebe`
-- `pruefung`
-- `kursart`
-- `geburtsdatum`
-- `geburtsstadt`
-- `telefon`
-- `email`
-- `adresse`
-- `datenschutz`
-- `isFriendDiscount`
-- `friendName`
-- `rabatt`
-- `freundeRabatt`
-- `nameVonFreund`
+## Next Admin-Proxy
 
-Der Server setzt initial `emailStatus: "pending"` und gibt `registration.id` sowie einen `clientUpdateToken` zurueck. Dieser Token darf nur den Emailstatus derselben Anmeldung aktualisieren, aber keine Daten lesen.
+Diese Routen laufen in `client-next/app/api/admin/*` und sprechen intern Express an.
 
-PATCH-Body fuer Emailstatus:
-
-```json
-{
-  "clientUpdateToken": "token-aus-post-response",
-  "emailStatus": "mocked",
-  "emailError": ""
-}
-```
-
-Erlaubte Werte fuer `emailStatus`: `sent`, `failed`, `mocked`.
+| Methode | Pfad | Zweck |
+| --- | --- | --- |
+| POST | `/api/admin/login` | Login, setzt HTTP-only Cookie `scooldrive_admin_token`. |
+| POST | `/api/admin/logout` | Logout im Express-Backend und Cookie loeschen. |
+| GET | `/api/admin/verify` | Admin-Session pruefen. |
+| GET/PUT | `/api/admin/preise` | Preise lesen/speichern. |
+| GET/PUT | `/api/admin/termine` | Termin lesen/speichern. |
+| GET/PUT | `/api/admin/einstellungen` | Einstellungen lesen/speichern. |
+| GET/PUT | `/api/admin/bonus` | Bonus lesen/speichern. |
+| GET/PUT | `/api/admin/oeffnungszeiten` | Oeffnungszeiten lesen/speichern. |
+| GET | `/api/admin/registrations` | Registrierungen lesen. |

@@ -29,14 +29,26 @@ Datei: `server/src/models/Preise.js`
 
 Single-Document-Konfiguration fuer Preiswerte. Alle Felder sind `Number`, required, `min: 0`, mit Defaults.
 
-Default-Beispiele:
+Wichtige Felder:
 
-- `grundgebuehrTheoriekurs`: 400
-- `lernapp`: 85
-- `uebungsstundePKW`: 70
-- `sonderfahrtenPKW`: 80
-- `praxispruefung`: 200
-- `intensivkursPreis`: 2499
+- `grundgebuehrTheoriekurs`
+- `lernapp`
+- `uebungsstundePKW`
+- `sonderfahrtenPKW`
+- `theorieprueung`
+- `praxispruefung`
+- `motorradKlasseAGrundgebuehr`
+- `uebungsstundeMotorrad`
+- `sonderfahrtenMotorrad`
+- `uebungsstundePKWAnhaenger`
+- `sonderfahrtenPKWAnhaenger`
+- `anhaengerKlasseB96`
+- `leichtkraftradB196`
+- `fuehrerscheinantrag`
+- `sehtest`
+- `ersteHilfeKurs`
+- `passbild`
+- `intensivkursPreis`
 
 Statische Methode:
 
@@ -53,7 +65,7 @@ Struktur:
   "termine": [
     {
       "titel": "Theoriekurs",
-      "datum": "2025-10-27T00:00:00.000Z",
+      "datum": "2026-05-01T00:00:00.000Z",
       "aktiv": true
     }
   ]
@@ -66,7 +78,7 @@ Schema-Felder im Array:
 - `datum`: Date, required.
 - `aktiv`: Boolean, Default `true`.
 
-Default-Erzeugung enthaelt weitere Felder wie `uhrzeit`, `beschreibung` und `maxTeilnehmer`, die im Schema nicht explizit definiert sind. Mit Mongoose Strict-Defaults werden nicht definierte Felder normalerweise nicht persistiert.
+Der Controller leert beim Speichern das Array und fuegt maximal ein Terminobjekt ein.
 
 ## Einstellungen
 
@@ -75,9 +87,11 @@ Datei: `server/src/models/Einstellungen.js`
 Felder:
 
 - `anmeldungStopp`: blockiert die Anmeldung im Frontend.
-- `begrenztePlaetze`: zeigt begrenzte Plaetze bzw. ist als Website-Flag vorgesehen.
-- `kontaktOptionen.whatsapp`: steuert WhatsAppButton im `MainLayout`.
+- `begrenztePlaetze`: Website-Flag fuer begrenzte Plaetze.
+- `kontaktOptionen.whatsapp`: steuert den WhatsAppButton im Locale-Layout.
 - `kontaktOptionen.telefon`: Kontaktoption fuer UI.
+
+Hinweis: `client-next/lib/remote-data.ts` typisiert optional `kontaktOptionen.whatsappNummer`; das Server-Schema speichert dieses Feld aktuell nicht.
 
 ## Bonus
 

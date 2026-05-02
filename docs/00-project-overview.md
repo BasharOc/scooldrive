@@ -2,59 +2,62 @@
 
 ## Zweck
 
-Das Projekt ist eine Fullstack-Webseite fuer die Fahrschule Scooldrive Lueneburg. Es kombiniert eine oeffentliche Marketing- und Informationsseite mit einem Admin-Bereich, der dynamische Daten im Backend veraendert.
+Das Projekt ist eine Fullstack-Webseite fuer die Fahrschule Scooldrive. Es kombiniert mehrsprachige oeffentliche Informationsseiten, Blog, Anmeldung und einen geschuetzten Admin-Bereich fuer dynamische Website-Daten.
 
 ## Hauptsysteme
 
 | Bereich | Rolle | Einstieg |
 | --- | --- | --- |
-| Frontend | React Single Page App mit oeffentlichen Seiten, Blog, Anmeldung und Admin UI | `client/src/App.jsx` |
-| Backend | Express API fuer Admin-Login und dynamische Website-Daten | `server/src/app.js` |
+| Frontend | Next.js 16 App Router mit oeffentlichen Seiten, Blog, Anmeldung und Admin UI | `client-next/app/` |
+| Backend | Express API fuer Admin-Login, dynamische Website-Daten und Registrierungen | `server/src/app.js` |
 | Datenbank | MongoDB ueber Mongoose-Modelle | `server/src/models/*.js` |
-| Deployment | Docker Compose, Nginx, Certbot | `docker-compose.yml`, `nginx/nginx.conf` |
+| Reverse Proxy | Nginx fuer HTTPS, Domain-Routing und API-Proxies | `nginx/nginx.conf` |
+| Deployment | Docker Compose mit Frontend, Backend, Nginx und Certbot | `docker-compose.yml` |
 
 ## Laufzeitbild
 
 ```mermaid
 flowchart LR
   Browser["Browser / Nutzer"] --> Nginx["Nginx"]
-  Nginx --> Frontend["React Build in /usr/share/nginx/html"]
+  Nginx --> Next["Next.js Frontend :3000"]
   Nginx --> ApiProxy["/api Proxy"]
   ApiProxy --> Backend["Express Backend :3000"]
+  Next --> AdminProxy["/api/admin/* Route Handler"]
+  AdminProxy --> Backend
   Backend --> MongoDB["MongoDB ueber MONGODB_URI"]
-  Frontend --> EmailJS["EmailJS fuer Anmeldung"]
-  Frontend --> GA["Google Analytics nach Cookie Consent"]
+  Next --> EmailJS["EmailJS bei live Anmeldung"]
+  Next --> GA["Google Analytics nach Cookie Consent"]
 ```
 
 ## Fachliche Faehigkeiten
 
-- Oeffentliche Seiten fuer Fuehrerschein, Auto, Anhaenger, Motorrad, Theoriekurs, Intensivkurs, Preise und Punkteabbau.
-- Mehrsprachigkeit fuer Deutsch, Englisch und Arabisch.
-- SEO-Metadaten pro Seite ueber `react-helmet-async`.
-- Blog aus statischen Artikeldaten in `client/src/helpers/blogarticles.js`.
-- Anmeldeformular mit mehrstufigem Flow und EmailJS-Versand.
-- Admin-Login per JWT.
-- Admin-Verwaltung von Preisen, Terminen, Einstellungen, Boni und Oeffnungszeiten.
-- Bonus-Ticker und Anmeldung-Stopp werden ueber Backend-Daten gesteuert.
+- Oeffentliche Seiten fuer Auto-Fuehrerschein, Auto-Anhaenger, Motorrad, Theoriekurs, Intensivkurs, Preise und Punkteabbau.
+- Mehrsprachigkeit fuer Deutsch, Englisch und Arabisch ueber Locale-Routen `/{locale}`.
+- SEO-Metadaten pro Seite ueber Next.js `generateMetadata`.
+- Blog aus statischen, dateibasierten Artikeldaten unter `client-next/messages/{locale}/blogs`.
+- Mehrstufige Anmeldung mit Speicherung in MongoDB und anschliessendem EmailJS-Statusabgleich.
+- Admin-Login per Express-JWT, in Next als HTTP-only Cookie gehalten.
+- Admin-Verwaltung von Preisen, Terminen, Einstellungen, Boni, Oeffnungszeiten und gespeicherten Registrierungen.
+- Anmeldung-Stopp und WhatsApp-Sichtbarkeit werden ueber Backend-Daten gesteuert.
 
 ## Wichtige Datenfluesse
 
 ```mermaid
 flowchart TD
-  AdminLogin["/login"] --> AuthApi["POST /api/auth/login"]
-  AuthApi --> JWT["JWT im localStorage"]
-  JWT --> AdminRoute["/admin ProtectedRoute"]
-  AdminRoute --> AdminPanels["Admin Komponenten"]
-  AdminPanels --> ProtectedApi["PUT /api/preise, termine, einstellungen, bonus, oeffnungszeiten"]
+  Login["/login"] --> NextLogin["POST /api/admin/login"]
+  NextLogin --> ExpressAuth["POST /api/auth/login"]
+  ExpressAuth --> Cookie["HTTP-only Cookie scooldrive_admin_token"]
+  Cookie --> Admin["/admin"]
+  Admin --> NextAdminApi["/api/admin/*"]
+  NextAdminApi --> ProtectedApi["Express /api/* mit Bearer Token"]
   ProtectedApi --> Models["Mongoose Modelle"]
 ```
 
 ```mermaid
 flowchart TD
-  PublicPage["Oeffentliche Seite"] --> UseApi["useApiData oder fetch(API_BASE)"]
-  UseApi --> PublicApi["GET /api/*"]
-  PublicApi --> Defaults["getOrCreateDefault()"]
+  PublicPage["Locale-Seite"] --> ServerFetch["getPreise/getTermine/getEinstellungen"]
+  ServerFetch --> ExpressApi["Express GET /api/*"]
+  ExpressApi --> Defaults["getOrCreateDefault()"]
   Defaults --> MongoDoc["Einzelnes Mongo Dokument pro Ressource"]
-  MongoDoc --> UI["Anzeige in Frontend"]
+  MongoDoc --> UI["Server/Client Components"]
 ```
-

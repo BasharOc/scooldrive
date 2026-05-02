@@ -2,53 +2,55 @@
 
 ## Sprache
 
-Zentrale Datei: `client/src/contexts/LanguageContext.jsx`
+Unterstuetzte Locales:
 
-Der Context stellt bereit:
+- `de`
+- `en`
+- `ar`
 
-- `selectedLanguage`
-- `setSelectedLanguage`
-- `languages`
-- `translations`
-- `t`
+Definition:
 
-Unterstuetzte Sprachen:
+- `client-next/types/i18n.ts`
 
-- `DE`
-- `EN`
-- `AR`
+Locale-Routen liegen unter:
 
-Die Navbar speichert die Auswahl in `localStorage.selectedLanguage`.
+- `client-next/app/[locale]/`
+
+`client-next/app/[locale]/layout.tsx` setzt `lang={locale}` und fuer Arabisch `dir="rtl"`.
 
 ## Uebersetzungsstruktur
 
-Der globale `LanguageContext` enthaelt vor allem:
+Zentrale Content-Dateien liegen unter `client-next/messages/`.
 
-- Navbar-Texte
-- Fuehrerschein-Menue
-- Termine/Info-Menue
-- Homepage-Hero
-- Fuehrerschein-Auswahl
+Beispiele:
 
-Viele grosse Seiten definieren zusaetzlich eigene lokale `content`-Objekte fuer DE/EN/AR, zum Beispiel:
+- `client-next/messages/home.ts`
+- `client-next/messages/preise.ts`
+- `client-next/messages/punkte-abbauen.ts`
+- `client-next/messages/registration.ts`
+- `client-next/messages/legal.ts`
 
-- `client/src/features/registration/registrationContent.jsx`
-- `TheorieKursPage.jsx`
-- `IntensivKursPage.jsx`
-- `PreisePage.jsx`
-- `PunkteAbbauenPage.jsx`
-- Komponenten in Homepage, Auto, Anhaenger und Motorrad.
+Die eigentlichen Sprachdaten liegen in Unterordnern:
+
+- `client-next/messages/de/`
+- `client-next/messages/en/`
+- `client-next/messages/ar/`
+
+Die Root-Dateien exportieren meistens locale-gebuendelte Maps wie `homeByLocale`, `preiseByLocale` oder `registrationByLocale`.
 
 ## Blog
 
-Datei: `client/src/helpers/blogarticles.js`
+Blog-Loader:
 
-Struktur:
+- `client-next/lib/content/blogs.ts`
 
-- Array `blogArticles`
-- jedes Element hat `slug`, optional `thumbnail`, und `translations`
-- jede Sprache hat `title`, `teaser`, `content`, optional `meta`
-- `content` ist HTML-String und wird in der Artikelansicht gerendert
+Artikel liegen pro Sprache als TypeScript-Dateien:
+
+- `client-next/messages/de/blogs/*.ts`
+- `client-next/messages/en/blogs/*.ts`
+- `client-next/messages/ar/blogs/*.ts`
+
+Ein Blogartikel gilt nur als vollstaendig, wenn derselbe Slug in allen drei Locale-Ordnern existiert.
 
 Aktuelle Slugs:
 
@@ -62,38 +64,48 @@ Aktuelle Slugs:
 - `fuehrerschein-kosten-lueneburg-preise`
 - `fuehrerschein-umschreiben-lueneburg`
 
-Blogbilder liegen in `client/public/blog/`.
+Blogbilder liegen in:
+
+- `client-next/public/blog/`
 
 ## Assets
 
-Wichtige Dateien in `client/public/`:
+Wichtige Dateien in `client-next/public/`:
 
 | Asset | Verwendung |
 | --- | --- |
 | `logo.png` | Navbar und Branding. |
-| `logo-icon.png` | SEO/Open-Graph-Bild. |
+| `logo-icon.jpg` | Icon/SEO-Bild. |
 | `hero-video.mp4` | Homepage-Hero. |
 | `auto-video.mp4` | Auto-Seiten. |
 | `anhanger-video.mp4` | Anhaenger-Seiten. |
 | `motorrad-video.mp4` | Motorrad-Seiten. |
 | `auto-anhanger.png` | Anhaenger-Bild. |
-| `auto-anhanger-mobile.png` | Navbar/Mobile-Anhaenger-Icon. |
+| `auto-anhanger-mobile.png` | Mobile-/Navbar-Bild. |
 | `motorcycle.jpg` | Motorrad-Bild. |
 | `innovative-methode.jpg` | Content-Bild. |
 | `intensivkurs.jpg` | Intensivkurs-Bild. |
-| `sitemap.xml` | Sitemap fuer Suchmaschinen. |
+| `aufbau.png` | Content-Bild. |
+| `placeholder.jpg` | Fallback-Bild. |
+| `robots.txt` | Robots-Datei. |
 
 ## Google Analytics und Cookies
 
-`client/src/pages/CookieBanner.jsx`:
+Cookie-Banner:
 
-- liest/schreibt `localStorage.cookieConsent`
-- nutzt Framer Motion fuer Banner/Modal
-- laedt Google Analytics nur nach Zustimmung
-- Script-Loader: `client/src/helpers/loadGAScript.jsx`
-- Measurement ID: `VITE_GA_MEASUREMENT_ID`
+- `client-next/components/CookieBanner/CookieBanner.tsx`
+
+Script-Loader:
+
+- `client-next/components/CookieBanner/load-gtag.ts`
+
+Environment:
+
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID`
+
+Google Analytics wird erst nach Zustimmung geladen.
 
 ## Statische Styles
 
-- `client/src/index.css`: Tailwind Import und globale Overflow/Font-Regeln.
-- `client/src/components/Homepage/*.css`: einzelne CSS-Dateien fuer Homepage-Komponenten.
+- `client-next/app/globals.css`: Tailwind Import, globale Variablen und Basisstyles.
+- Komponenten nutzen ueberwiegend Tailwind-Klassen direkt in TSX.

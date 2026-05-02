@@ -9,7 +9,8 @@ Services:
 | Service | Aufgabe |
 | --- | --- |
 | `backend` | Baut `server/Dockerfile`, startet Express auf Port 3000 im Container. |
-| `nginx` | Baut Frontend ueber `Dockerfile.nginx`, liefert statische SPA aus und proxyt API. |
+| `frontend` | Baut `Dockerfile.next`, startet die Next.js Standalone-App auf Port 3000 im Container. |
+| `nginx` | Baut `Dockerfile.nginx`, terminiert HTTPS und proxyt zu Frontend/Backend. |
 | `certbot` | Erstellt LetsEncrypt-Zertifikate per Webroot Challenge. |
 
 Netzwerk:
@@ -31,30 +32,39 @@ Konfigurierte Hosts:
 - `server.scooldrive.com`
 - `workpilot.basharfarhat.com`
 
-Wichtige Regeln:
+Wichtige Regeln fuer `fahrschule-lg.scooldrive.com`:
 
-- HTTP wird fuer Hauptdomain und API-Subdomain nach HTTPS umgeleitet.
+- HTTP wird nach HTTPS umgeleitet.
 - `/.well-known/acme-challenge/` zeigt auf Certbot-Webroot.
-- SPA-Fallback: `try_files $uri $uri/ /index.html`.
-- `/api/` auf Hauptdomain proxyt zu `http://backend:3000/api/`.
-- `server.scooldrive.com` proxyt direkt zu `http://backend:3000`.
+- `/api/admin/` proxyt zu `http://frontend:3000/api/admin/`.
+- `/api/` proxyt zu `http://backend:3000/api/`.
+- `/` proxyt zu `http://frontend:3000`.
+
+`server.scooldrive.com` proxyt direkt zu `http://backend:3000`.
 
 ## Build Images
 
+`Dockerfile.next`:
+
+1. Node 20 Alpine fuer Dependencies.
+2. `client-next/package*.json` kopieren.
+3. `npm ci`.
+4. `client-next/` kopieren.
+5. `npm run build`.
+6. `.next/standalone`, `.next/static` und `public` in Runner kopieren.
+7. `node server.js` starten.
+
 `Dockerfile.nginx`:
 
-1. Node 20 Alpine als Builder.
-2. `client/package*.json` kopieren.
-3. `npm install`.
-4. Client kopieren.
-5. `npm run build`.
-6. Build nach Nginx kopieren.
+1. `nginx:alpine`.
+2. `nginx/nginx.conf` nach `/etc/nginx/conf.d/default.conf` kopieren.
+3. Ports 80 und 443 exposen.
 
 `server/Dockerfile`:
 
 1. Node 20 Alpine.
 2. `server/package*.json` kopieren.
-3. `npm install --only=production`.
+3. Production-Dependencies installieren.
 4. Servercode kopieren.
 5. Port 3000 exposen.
 6. `node src/app.js` starten.
@@ -83,49 +93,56 @@ RATE_LIMIT_MAX_REQUESTS
 Erwartete Variablen:
 
 ```text
-VITE_API_URL
-VITE_EMAILJS_SERVICE_ID
-VITE_EMAILJS_TEMPLATE_ID
-VITE_EMAILJS_PUBLIC_KEY
-VITE_REISTRATION_EMAIL_MODE
-VITE_REGISTRATION_EMAIL_MODE
-VITE_GA_MEASUREMENT_ID
+API_BASE_URL
+NEXT_PUBLIC_API_URL
+NEXT_PUBLIC_EMAIL_MODE
+NEXT_PUBLIC_EMAILJS_SERVICE_ID
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+NEXT_PUBLIC_GA_MEASUREMENT_ID
 ```
 
-Ohne `VITE_API_URL` nutzt das Frontend:
+`docker-compose.yml` nutzt `env_file: ./client-next/.env.production`.
+
+Oeffentliche Server-Fetches nutzen zuerst `API_BASE_URL`, dann eine absolute `NEXT_PUBLIC_API_URL`, sonst:
 
 ```text
-https://server.scooldrive.com/api
+http://localhost:3001/api
 ```
+
+Clientseitige Registrierung nutzt `NEXT_PUBLIC_API_URL` oder denselben lokalen Default.
 
 ## Lokale Entwicklung
-
-Frontend:
-
-```bash
-cd client
-npm install
-npm run dev
-```
 
 Backend:
 
 ```bash
 cd server
 npm install
+PORT=3001 npm run dev
+```
+
+Frontend:
+
+```bash
+cd client-next
+npm install
 npm run dev
 ```
 
-Fuer lokale Fullstack-Entwicklung sollte `VITE_API_URL` auf das lokale Backend zeigen, z. B.:
+Lokales `client-next/.env.local` Beispiel:
 
 ```text
-VITE_API_URL=http://localhost:3000/api
+API_BASE_URL=http://localhost:3001/api
+NEXT_PUBLIC_API_URL=http://localhost:3001/api
+NEXT_PUBLIC_EMAIL_MODE=mock
 ```
 
-Fuer lokale Anmeldetests ohne echten EmailJS-Versand:
+Fuer echten Emailversand:
 
 ```text
-VITE_REISTRATION_EMAIL_MODE=mock
+NEXT_PUBLIC_EMAIL_MODE=live
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=...
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=...
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=...
 ```
-
-Der korrekt geschriebene Alias `VITE_REGISTRATION_EMAIL_MODE=mock` funktioniert ebenfalls.

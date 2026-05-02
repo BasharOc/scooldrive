@@ -6,30 +6,25 @@
 | --- | --- |
 | `README.md` | Einstieg in diese Dokumentation. |
 | `docs/` | Struktur-, API-, Daten- und Betriebsdokumentation. |
-| `client/` | Vite/React Frontend. |
+| `client-next/` | Aktuelles Next.js Frontend inklusive Admin UI. |
 | `server/` | Express/Mongoose Backend. |
-| `docker-compose.yml` | Produktion mit Backend, Nginx und Certbot. |
-| `Dockerfile.nginx` | Baut das Frontend und liefert es per Nginx aus. |
-| `nginx/nginx.conf` | Domains, SSL, SPA-Fallback und API-Proxies. |
-| `.gitignore` | Ausgeschlossene Dateien. |
+| `docker-compose.yml` | Produktion mit Frontend, Backend, Nginx und Certbot. |
+| `Dockerfile.next` | Baut die Next.js Standalone-App. |
+| `Dockerfile.nginx` | Baut nur das Nginx-Image mit Konfiguration. |
+| `nginx/nginx.conf` | Domains, SSL, Frontend-Proxy und API-Proxies. |
 
-## Client
+## Client Next
 
 | Pfad | Aufgabe |
 | --- | --- |
-| `client/src/App.jsx` | Zentrales Routing und globale Provider. |
-| `client/src/main.jsx` | React Root Mount. |
-| `client/src/index.css` | Globale Tailwind-Einbindung und Basis-CSS. |
-| `client/src/App.css` | Vite-Template-Reste, aktuell nicht aktiv in `App.jsx` importiert. |
-| `client/src/pages/` | Seiten mit Route-Bezug. |
-| `client/src/components/` | Wiederverwendbare UI- und Fachkomponenten. |
-| `client/src/components/AnmeldeSteps/` | Einzelne Schritte des Anmeldeformulars. |
-| `client/src/contexts/` | React Contexts, aktuell Sprache. |
-| `client/src/layouts/` | Layout-Huelle fuer oeffentliche Seiten. |
-| `client/src/helpers/` | Blogdaten und Google-Analytics-Script-Loader. |
-| `client/src/utils/` | API-Konstanten. |
-| `client/hooks/` | Gemeinsamer API-Fetch-Hook. |
-| `client/public/` | Statische Bilder, Videos, Blogbilder und Sitemap. |
+| `client-next/app/` | Next.js App Router: Layouts, Seiten, API Route Handler. |
+| `client-next/app/[locale]/` | Oeffentliche Seiten fuer `de`, `en`, `ar`. |
+| `client-next/app/api/admin/` | Next Route Handler als Admin-Proxy zum Express-Backend. |
+| `client-next/components/` | UI- und Fachkomponenten nach Bereichen. |
+| `client-next/lib/` | API-Helfer, Admin-Auth, Metadaten, Blog-Loader. |
+| `client-next/messages/` | Uebersetzungen und statische Inhalte. |
+| `client-next/public/` | Videos, Bilder, Blogbilder, Logo, Robots-Datei. |
+| `client-next/types/` | Gemeinsame TypeScript-Typen. |
 
 ## Server
 
@@ -44,13 +39,11 @@
 | `server/src/utils/initializeAdmin.js` | Initialer Admin aus Environment-Variablen. |
 | `server/Dockerfile` | Production Image fuer Express. |
 
-## Groesse der relevanten Bereiche
+## Zentrale Einstiegspunkte
 
-Das Projekt hat ungefaehr 19.500 Zeilen in den gezaehlten Frontend- und Backend-Dateien. Besonders grosse Dateien sind:
-
-- `client/src/pages/PunkteAbbauenPage.jsx`
-- `client/src/pages/PreisePage.jsx`
-- `client/src/pages/IntensivKursPage.jsx`
-- `client/src/components/Motorrad/MotorradLicenseSteps MotorradLicenseSteps.jsx`
-- `client/src/components/Navbar.jsx`
-- `client/src/helpers/blogarticles.js`
+- `client-next/app/page.tsx`: Redirect von `/` nach `/de`.
+- `client-next/app/[locale]/layout.tsx`: Locale-Chrome, Navbar, Footer, WhatsAppButton und Settings-Fetch.
+- `client-next/app/[locale]/page.tsx`: Homepage.
+- `client-next/app/admin/page.tsx`: geschuetzter Admin-Bereich.
+- `client-next/app/login/page.tsx`: Admin-Login.
+- `server/src/app.js`: Backend-App und API-Mounts.

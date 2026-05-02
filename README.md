@@ -1,8 +1,8 @@
 # Scooldrive Projekt-Dokumentation
 
-Dieses Repository enthaelt die Webseite und das Admin-Backend fuer die Fahrschule Scooldrive Lueneburg.
+Dieses Repository enthaelt die Webseite, den Next.js-Adminbereich und das Express-Backend fuer die Fahrschule Scooldrive.
 
-Die wichtigsten Informationen liegen jetzt in der Dokumentationsmappe:
+Die wichtigsten Informationen liegen in der Dokumentationsmappe:
 
 - [Projektueberblick](docs/00-project-overview.md)
 - [Repository- und Ordnerstruktur](docs/01-repository-structure.md)
@@ -19,19 +19,37 @@ Die wichtigsten Informationen liegen jetzt in der Dokumentationsmappe:
 
 ## Kurzbild
 
-- Frontend: React 19, Vite 6, React Router 7, Tailwind CSS 4, Framer Motion, React Helmet Async.
-- Backend: Node.js, Express, MongoDB ueber Mongoose, JWT-Auth fuer Admin-Operationen.
-- Betrieb: Docker Compose mit Backend-Container, Nginx-Frontend/Reverse-Proxy und Certbot.
-- Fachliche Bereiche: oeffentliche Fahrschul-Seiten, Blog, Anmeldung per EmailJS, Admin-Panel fuer Preise, Termine, Boni, Einstellungen und Oeffnungszeiten.
+- Frontend: Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4, Framer Motion.
+- Backend: Node.js, Express 4, MongoDB ueber Mongoose, JWT-Auth fuer Admin-Operationen.
+- Admin: Next.js-Seiten mit HTTP-only Session-Cookie und Proxy-Routen unter `/api/admin/*`.
+- Betrieb: Docker Compose mit `frontend`, `backend`, `nginx` und `certbot`.
+- Fachliche Bereiche: mehrsprachige Fahrschul-Seiten, Blog, Anmeldung mit EmailJS-Status, Admin-Panel fuer Preise, Termine, Boni, Einstellungen, Oeffnungszeiten und Registrierungen.
 
 ## Startpunkte im Code
 
-- Frontend-App: `client/src/App.jsx`
-- Frontend-Einstieg: `client/src/main.jsx`
+- Frontend-App: `client-next/app/`
+- Locale-Layout: `client-next/app/[locale]/layout.tsx`
+- Admin-UI: `client-next/app/admin/page.tsx`, `client-next/components/Admin/AdminDashboard.tsx`
+- Frontend API-Helfer: `client-next/lib/api.ts`, `client-next/lib/registration-api.ts`
+- Admin-Proxy: `client-next/app/api/admin/_lib.ts`
 - Backend-App: `server/src/app.js`
-- API-Basis im Frontend: `client/src/utils/api.js`
 - Docker-Orchestrierung: `docker-compose.yml`
 - Nginx-Konfiguration: `nginx/nginx.conf`
 
-  
-Website: https://fahrschule-lg.scooldrive.com/de 
+Website: https://fahrschule-lg.scooldrive.com/de
+
+## Lokal starten
+
+```bash
+cd server
+npm install
+PORT=3001 npm run dev
+```
+
+```bash
+cd client-next
+npm install
+npm run dev
+```
+
+Das Next-Frontend laeuft standardmaessig auf `http://localhost:3000`. Das lokale Backend wird von `client-next` standardmaessig unter `http://localhost:3001/api` erwartet.
