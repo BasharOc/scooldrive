@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fahrschule-lg.scooldrive.com/sitemap.xml
