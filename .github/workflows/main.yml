@@ -1,0 +1,22 @@
+name: Deploy Frontend
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd ~/fahrschule
+            git pull origin main
+            docker compose stop frontend
+            docker compose rm -f frontend
+            docker compose up --build -d frontend
+            docker image prune -f
