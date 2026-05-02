@@ -16,7 +16,7 @@ import {
 import { getUpcomingTerminLabel, type TermineApiResponse } from "@/lib/remote-data";
 import type { TheoriekursContent } from "@/messages/theoriekurs";
 import type { Locale } from "@/types/i18n";
-import FaqAccordion from "./FaqAccordion";
+import FaqAccordion from "@/components/shared/FaqAccordion";
 
 type TheoriekursPageContentProps = {
   content: TheoriekursContent;

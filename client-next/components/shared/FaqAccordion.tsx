@@ -7,10 +7,16 @@ import {
   FaChevronUp,
   FaQuestionCircle,
 } from "react-icons/fa";
-import type { TheoriekursContent } from "@/messages/theoriekurs";
 
 type FaqAccordionProps = {
-  faq: TheoriekursContent["faq"];
+  faq: {
+    title: string;
+    subtitle: string;
+    items: readonly {
+      question: string;
+      answer: string;
+    }[];
+  };
 };
 
 export default function FaqAccordion({ faq }: FaqAccordionProps) {
