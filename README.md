@@ -33,3 +33,5 @@ Die wichtigsten Informationen liegen jetzt in der Dokumentationsmappe:
 - Docker-Orchestrierung: `docker-compose.yml`
 - Nginx-Konfiguration: `nginx/nginx.conf`
 
+  
+Website: https://fahrschule-lg.scooldrive.com/de 
