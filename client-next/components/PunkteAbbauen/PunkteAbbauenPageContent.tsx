@@ -1,16 +1,9 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
 import {
   FaBook,
   FaCar,
   FaCarCrash,
   FaCheckCircle,
-  FaChevronDown,
-  FaChevronUp,
   FaExclamationTriangle,
   FaEye,
   FaGraduationCap,
@@ -26,11 +19,10 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import type { PunkteAbbauenContent } from "@/messages/punkte-abbauen";
-import type { Locale } from "@/types/i18n";
+import FaqAccordion from "@/components/shared/FaqAccordion";
 
 type PunkteAbbauenPageContentProps = {
   content: PunkteAbbauenContent;
-  locale: Locale;
 };
 
 const structureIcons = {
@@ -55,21 +47,16 @@ const topicIcons = {
   eye: FaEye,
 } as const;
 
+const WHATSAPP_SVG_PATH =
+  "M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z";
+
 export default function PunkteAbbauenPageContent({
   content,
-  locale,
 }: PunkteAbbauenPageContentProps) {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
   return (
     <div className="mt-[80px] min-h-screen bg-gray-50 px-4 pt-20 pb-16">
       <div className="mx-auto max-w-7xl">
-        <motion.div
-          className="mb-12 text-center"
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="mb-12 text-center">
           <h1 className="mb-6 text-4xl font-bold md:text-5xl lg:text-6xl">
             <span className="text-[#F5BB00]">ASF</span>{" "}
             <span className="text-black">AUFBAUSEMINAR</span>
@@ -77,14 +64,9 @@ export default function PunkteAbbauenPageContent({
           <p className="mx-auto max-w-3xl text-lg text-gray-600 md:text-xl">
             {content.header.subtitle}
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
+        <div className="mb-24">
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
             <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
               <div>
@@ -126,14 +108,9 @@ export default function PunkteAbbauenPageContent({
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
+        <div className="mb-24">
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
             <div className="mb-8 text-center">
               <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
@@ -184,14 +161,9 @@ export default function PunkteAbbauenPageContent({
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
+        <div className="mb-24">
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
             <div className="mb-8 text-center">
               <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
@@ -211,7 +183,9 @@ export default function PunkteAbbauenPageContent({
                     </div>
                     <h3 className="mb-2 font-bold text-gray-800">{card.title}</h3>
                     <p className="mb-2 text-sm text-gray-600">{card.description}</p>
-                    {card.meta ? <p className="mb-2 text-xs text-gray-500">{card.meta}</p> : null}
+                    {card.meta ? (
+                      <p className="mb-2 text-xs text-gray-500">{card.meta}</p>
+                    ) : null}
                     {card.badge ? (
                       <span className="rounded-full bg-[#F5BB00] px-3 py-1 text-xs font-bold text-black">
                         {card.badge}
@@ -222,14 +196,9 @@ export default function PunkteAbbauenPageContent({
               })}
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mb-24"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
+        <div className="mb-24">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
               {content.process.title}
@@ -248,17 +217,9 @@ export default function PunkteAbbauenPageContent({
                   key={step.title}
                   className="relative mb-8 flex items-center last:mb-0"
                 >
-                  <motion.div
-                    className="absolute left-8 z-10 h-6 w-6 -translate-x-1/2 rounded-full border-4 border-white bg-[#F5BB00] shadow-lg"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 0.4, delay: index * 0.2 + 0.3 }}
-                  />
+                  <div className="absolute left-8 z-10 h-6 w-6 -translate-x-1/2 rounded-full border-4 border-white bg-[#F5BB00] shadow-lg" />
 
-                  <motion.div
-                    className="ml-20 flex-1"
-                    whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-                  >
+                  <div className="ml-20 flex-1">
                     <div className="group rounded-2xl border-2 border-gray-200 bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl">
                       <div className="flex items-start space-x-6">
                         <div className="flex flex-shrink-0 flex-col items-center">
@@ -281,7 +242,7 @@ export default function PunkteAbbauenPageContent({
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
               );
             })}
@@ -292,38 +253,25 @@ export default function PunkteAbbauenPageContent({
               const Icon = processIcons[step.icon];
 
               return (
-                <motion.div
-                  key={step.title}
-                  whileHover={{ scale: 1.02 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.9 + index * 0.08 }}
-                >
-                  <div className="rounded-2xl bg-white p-6 shadow-lg">
-                    <div className="mb-4 flex items-center space-x-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F5BB00] text-lg font-bold text-black">
-                        {index + 1}
-                      </div>
-                      <div className="text-gray-600">
-                        <Icon className="text-2xl" />
-                      </div>
+                <div key={step.title} className="rounded-2xl bg-white p-6 shadow-lg">
+                  <div className="mb-4 flex items-center space-x-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F5BB00] text-lg font-bold text-black">
+                      {index + 1}
                     </div>
-                    <h3 className="mb-2 text-lg font-bold text-black">{step.title}</h3>
-                    <p className="mb-2 text-gray-600">{step.description}</p>
-                    <p className="text-sm italic text-gray-500">{step.details}</p>
+                    <div className="text-gray-600">
+                      <Icon className="text-2xl" />
+                    </div>
                   </div>
-                </motion.div>
+                  <h3 className="mb-2 text-lg font-bold text-black">{step.title}</h3>
+                  <p className="mb-2 text-gray-600">{step.description}</p>
+                  <p className="text-sm italic text-gray-500">{step.details}</p>
+                </div>
               );
             })}
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1 }}
-        >
+        <div className="mb-24">
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
             <div className="mb-8 text-center">
               <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
@@ -333,36 +281,27 @@ export default function PunkteAbbauenPageContent({
             </div>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {content.topics.items.map((topic, index) => {
+              {content.topics.items.map((topic) => {
                 const Icon = topicIcons[topic.icon];
 
                 return (
-                  <motion.div
+                  <div
                     key={topic.title}
                     className="rounded-xl bg-gray-100 p-6 text-center transition-shadow duration-300 hover:shadow-lg"
-                    whileHover={{ scale: 1.05 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 1.1 + index * 0.08 }}
                   >
                     <div className="mb-4 flex justify-center text-[#F5BB00]">
                       <Icon className="text-2xl" />
                     </div>
                     <h3 className="mb-2 font-bold text-gray-800">{topic.title}</h3>
                     <p className="text-sm text-gray-600">{topic.description}</p>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-        >
+        <div className="mb-24">
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
             <div className="mb-8 text-center">
               <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
@@ -380,14 +319,9 @@ export default function PunkteAbbauenPageContent({
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.3 }}
-        >
+        <div className="mb-24">
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <div>
@@ -418,14 +352,9 @@ export default function PunkteAbbauenPageContent({
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.4 }}
-        >
+        <div className="mb-24">
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
               <div>
@@ -464,87 +393,38 @@ export default function PunkteAbbauenPageContent({
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.5 }}
-        >
-          <div className="rounded-2xl bg-white p-6 md:p-8">
-            <div className="mb-8 text-center">
-              <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
-                {content.faq.title}
-              </h2>
-              <p className="text-lg text-gray-600">{content.faq.subtitle}</p>
-            </div>
+        <div className="mb-24">
+          <FaqAccordion faq={content.faq} />
+        </div>
 
-            <div className="space-y-4">
-              {content.faq.items.map((item, index) => (
-                <div
-                  key={item.question}
-                  className="overflow-hidden rounded-xl border border-gray-200"
-                >
-                  <button
-                    onClick={() =>
-                      setOpenFaq(openFaq === index ? null : index)
-                    }
-                    className="flex w-full cursor-pointer items-center justify-between bg-gray-50 px-6 py-4 text-left transition-colors duration-200 hover:bg-gray-100"
-                  >
-                    <div className="flex items-center">
-                      <FaQuestionCircle className="mr-3 text-[#F5BB00]" />
-                      <span className="font-semibold text-black">
-                        {item.question}
-                      </span>
-                    </div>
-                    {openFaq === index ? (
-                      <FaChevronUp className="text-gray-500" />
-                    ) : (
-                      <FaChevronDown className="text-gray-500" />
-                    )}
-                  </button>
-
-                  <motion.div
-                    initial={false}
-                    animate={{
-                      height: openFaq === index ? "auto" : 0,
-                      opacity: openFaq === index ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="bg-white px-6 py-4">
-                      <p className="leading-relaxed text-gray-600">
-                        {item.answer}
-                      </p>
-                    </div>
-                  </motion.div>
-                </div>
-              ))}
+        <div className="rounded-2xl bg-gradient-to-r from-black to-gray-800 p-8 text-center md:p-12">
+          <div className="mb-6 flex justify-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] shadow-lg">
+              <svg className="h-9 w-9 text-white" fill="currentColor" viewBox="0 0 448 512">
+                <path d={WHATSAPP_SVG_PATH} />
+              </svg>
             </div>
           </div>
-        </motion.div>
-
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.6 }}
-        >
-          <h2 className="mb-6 text-3xl font-bold text-black md:text-4xl">
+          <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">
             {content.cta.title}
           </h2>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link
-              href={`/${locale}/anmelden`}
-              className="inline-block rounded-full bg-[#F5BB00] px-10 py-4 text-lg font-bold text-black shadow-lg transition-all duration-300 hover:shadow-xl"
-            >
-              {content.cta.button}
-            </Link>
-          </motion.div>
-          <p className="mt-6 text-lg text-gray-600">{content.cta.subtitle}</p>
-        </motion.div>
+          <p className="mb-8 text-lg text-gray-300 md:text-xl">
+            {content.cta.subtitle}
+          </p>
+          <a
+            href="https://wa.me/4917626863142"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 rounded-full bg-[#25D366] px-10 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#20ba5a] active:scale-95"
+          >
+            <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 448 512">
+              <path d={WHATSAPP_SVG_PATH} />
+            </svg>
+            {content.cta.whatsappButton}
+          </a>
+        </div>
       </div>
     </div>
   );

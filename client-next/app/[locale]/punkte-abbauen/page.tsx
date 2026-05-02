@@ -41,10 +41,5 @@ export default async function PunkteAbbauenPage({
     notFound();
   }
 
-  return (
-    <PunkteAbbauenPageContent
-      content={punkteAbbauenByLocale[locale]}
-      locale={locale}
-    />
-  );
+  return <PunkteAbbauenPageContent content={punkteAbbauenByLocale[locale]} />;
 }

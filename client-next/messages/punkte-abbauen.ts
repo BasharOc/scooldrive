@@ -98,8 +98,8 @@ export type PunkteAbbauenContent = {
   };
   cta: {
     title: string;
-    button: string;
     subtitle: string;
+    whatsappButton: string;
   };
 };
 

@@ -227,9 +227,9 @@ export const PUNKTE_ABBAUEN_DE = {
     ],
   },
   cta: {
-    title: "Jetzt zum ASF anmelden",
-    button: "ASF-Kurs buchen",
+    title: "Nicht sicher, was zu tun ist?",
     subtitle:
-      "Sichern Sie sich Ihren Führerschein - melden Sie sich rechtzeitig an!",
+      "Kontaktiere uns direkt auf WhatsApp — wir helfen dir schnell und unkompliziert weiter.",
+    whatsappButton: "WhatsApp schreiben",
   },
 } as const;

@@ -226,8 +226,8 @@ export const PUNKTE_ABBAUEN_AR = {
     ],
   },
   cta: {
-    title: "سجل الآن في ASF",
-    button: "احجز دورة ASF",
-    subtitle: "أمن رخصة القيادة الخاصة بك - سجل في الوقت المناسب!",
+    title: "لست متأكداً ماذا تفعل؟",
+    subtitle: "تواصل معنا مباشرة عبر واتساب — سنساعدك بسرعة وبسهولة.",
+    whatsappButton: "راسلنا على واتساب",
   },
 } as const;

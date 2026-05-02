@@ -227,8 +227,9 @@ export const PUNKTE_ABBAUEN_EN = {
     ],
   },
   cta: {
-    title: "Register for ASF now",
-    button: "Book ASF course",
-    subtitle: "Secure your driver's license - register in time!",
+    title: "Not sure what to do next?",
+    subtitle:
+      "Contact us directly on WhatsApp — we'll help you quickly and easily.",
+    whatsappButton: "Message on WhatsApp",
   },
 } as const;
