@@ -77,34 +77,42 @@ export const HOME_EN: HomeContent = {
       "How you live your independence is as individual as your everyday life. That's why we don't just start with the first driving lesson, but with you.",
     features: [
       {
-        icon: "calendar",
         title: "Flexible appointments",
-        description: "Driving lessons that fit your life",
+        description: "Driving lessons that adapt to your life",
       },
       {
-        icon: "user",
-        title: "Personal support",
-        description: "An instructor who truly understands you",
+        title: "Your dedicated instructor",
+        description: "By your side from the first lesson to the exam",
       },
       {
-        icon: "user",
-        title: "Individual support",
-        description: "If it gets too much, we're here for you",
+        title: "High pass rate",
+        description: "Targeted training on the Lüneburg test routes",
       },
       {
-        icon: "gear",
-        title: "Tailor-made",
-        description: "Your training, perfectly integrated into your life",
+        title: "Your pace, your plan",
+        description: "No standard package – we adapt to you",
       },
     ],
-    bottomText1:
-      "Together we look at what you really need, what formalities await you and how we can best integrate your training into your life.",
-    bottomText2:
-      "And before we tell you too much: Just click through or get an offer that really suits you with our license configurator.",
-    bottomText3: "You are in control with us.",
-    cta: "License Configurator",
+    stepsHeading: "Your licence in 3 steps",
+    steps: [
+      {
+        title: "Initial consultation",
+        description:
+          "We get to know you — your schedule, your pace, your goals. No standard package, but a plan that fits you.",
+      },
+      {
+        title: "Driving lessons",
+        description:
+          "Flexible appointments, one dedicated instructor who truly knows you. You set the pace.",
+      },
+      {
+        title: "Exam",
+        description:
+          "We prepare you specifically for the Lüneburg test routes — so you go into the exam confident and ready.",
+      },
+    ],
+    cta: "Start for free now",
     ctaPath: "/anmelden",
-    closing: "We look forward to accompanying you on your journey!",
   },
   reviews: {
     title: "WHAT YOUR PREDECESSORS SAY.",

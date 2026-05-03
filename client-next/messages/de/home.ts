@@ -77,34 +77,42 @@ export const HOME_DE: HomeContent = {
       "Denn wie du Unabhängigkeit lebst, ist so individuell wie dein Alltag. Genau deshalb starten wir nicht einfach mit der ersten Fahrstunde, sondern mit dir.",
     features: [
       {
-        icon: "calendar",
         title: "Flexible Termine",
-        description: "Fahrstunden, die sich deinem Leben anpassen",
+        description: "Fahrstunden die sich deinem Leben anpassen",
       },
       {
-        icon: "user",
-        title: "Persönliche Betreuung",
-        description: "Ein Fahrlehrer, der dich wirklich versteht",
+        title: "Dein fester Fahrlehrer",
+        description: "Von der ersten Stunde bis zur Prüfung an deiner Seite",
       },
       {
-        icon: "user",
-        title: "Individuelle Betreuung",
-        description: "Wenn's dir zu viel wird, sind wir da",
+        title: "Hohe Erfolgsquote",
+        description: "Gezieltes Training auf den Lüneburger Prüfstrecken",
       },
       {
-        icon: "gear",
-        title: "Maßgeschneidert",
-        description: "Deine Ausbildung, perfekt integriert in deinen Alltag",
+        title: "Dein Tempo, dein Plan",
+        description: "Kein Standardpaket – wir richten uns nach dir",
       },
     ],
-    bottomText1:
-      "Wir schauen gemeinsam, was du wirklich brauchst, welche Formalitäten auf dich zukommen und wie wir deine Ausbildung bestmöglich in dein Leben integrieren.",
-    bottomText2:
-      "Und bevor wir dir jetzt zu viel erzählen: Klick dich einfach mal durch oder hol dir mit unserem Führerscheinkonfigurator ein Angebot, das wirklich zu dir passt.",
-    bottomText3: "Du hast bei uns die Kontrolle.",
-    cta: "Führerschein-Konfigurator",
+    stepsHeading: "In 3 Schritten zu deinem Führerschein",
+    steps: [
+      {
+        title: "Erstgespräch",
+        description:
+          "Wir lernen dich kennen – deine Zeiten, dein Tempo, deine Ziele. Kein Standardpaket, sondern ein Plan der zu dir passt.",
+      },
+      {
+        title: "Fahrstunden",
+        description:
+          "Flexible Termine, ein fester Fahrlehrer der dich wirklich kennt. Du bestimmst das Tempo.",
+      },
+      {
+        title: "Prüfung",
+        description:
+          "Wir bereiten dich gezielt auf die Lüneburger Prüfstrecken vor – damit du sicher und selbstbewusst in die Prüfung gehst.",
+      },
+    ],
+    cta: "Jetzt kostenlos starten",
     ctaPath: "/anmelden",
-    closing: "Wir freuen uns, dich auf deinem Weg zu begleiten!",
   },
   reviews: {
     title: "DAS SAGEN DEINE VORGÄNGER.",

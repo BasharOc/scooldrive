@@ -40,7 +40,11 @@ export type LicenseOptionsContent = {
 };
 
 export type PersonalFeature = {
-  icon: "calendar" | "user" | "gear";
+  title: string;
+  description: string;
+};
+
+export type PersonalApproachStep = {
   title: string;
   description: string;
 };
@@ -51,12 +55,10 @@ export type PersonalApproachContent = {
   header2Highlight: string;
   description: string;
   features: readonly PersonalFeature[];
-  bottomText1: string;
-  bottomText2: string;
-  bottomText3: string;
+  stepsHeading: string;
+  steps: readonly PersonalApproachStep[];
   cta: string;
   ctaPath: string;
-  closing: string;
 };
 
 export type Review = {
