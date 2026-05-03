@@ -8,15 +8,17 @@ export const HOME_DE: HomeContent = {
   },
   hero: {
     badge: "WIR MACHEN DICH MOBIL",
-    title1: "Starte jetzt in deine Freiheit",
-    title2: "mit uns wird jeder Weg zum Erlebnis.",
+    title1: "Dein Führerschein. Deine Freiheit.",
+    title2: "Dein Lüneburg.",
+    subtitle: "Mit uns sitzt du bald selbst am Steuer.",
     features: [
-      "BESTE AUSBILDUNG",
-      "ERSTKLASSIGES TEAM",
-      "KOMPAKTE AUSBILDUNG",
-      "ZUFRIEDENHEITSGARANTIE",
+      "Flexible Fahrstunden – auch abends & am Wochenende",
+      "Kleine Gruppen, persönliche Betreuung",
+      "Hohe Erfolgsquote beim TÜV",
+      "Deine Fahrlehrer kennen die Prüfstrecken in Lüneburg",
     ],
     cta: "JETZT ANMELDEN",
+    socialProof: "★★★★★ 149 Bewertungen · Nr. 1 in der Lüneburger Altstadt",
     warning: "Achtung: Begrenzte Plätze verfügbar!",
   },
   sectionNav: {

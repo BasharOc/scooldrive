@@ -8,15 +8,17 @@ export const HOME_EN: HomeContent = {
   },
   hero: {
     badge: "WE MAKE YOU MOBILE",
-    title1: "Start your journey to freedom now",
-    title2: "with us, every road becomes an adventure.",
+    title1: "Your license. Your freedom.",
+    title2: "Your Lüneburg.",
+    subtitle: "With us, you will soon be behind the wheel yourself.",
     features: [
-      "BEST TRAINING",
-      "FIRST-CLASS TEAM",
-      "COMPACT TRAINING",
-      "SATISFACTION GUARANTEE",
+      "Flexible driving lessons – also evenings & weekends",
+      "Small groups, personal support",
+      "High success rate at the TÜV",
+      "Your instructors know the exam routes in Lüneburg",
     ],
     cta: "SIGN UP NOW",
+    socialProof: "★★★★★ 149 reviews · No. 1 in Lüneburg's old town",
     warning: "Attention: Limited spots available!",
   },
   sectionNav: {

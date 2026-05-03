@@ -28,21 +28,17 @@ export default function HomeHeroSection({
       />
       <div className="absolute inset-0 bg-black/55" />
 
-      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-4 pb-10 pt-28 md:px-8 md:pb-16 md:pt-36">
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-4 pb-10 pt-24 md:px-8 md:pb-16 md:pt-32">
         <div
-          className={`w-full max-w-4xl mt-[30px] ${isArabic ? "ml-auto text-right" : ""}`}
+          className={`w-full max-w-4xl ${isArabic ? "ml-auto text-right" : ""}`}
         >
-          {/* Badge */}
-          <div className="mb-4 flex flex-wrap items-center gap-3">
-            <span className="rounded-full bg-[#F5BB00] px-4 py-1.5 text-sm font-bold tracking-wide text-black">
-              {content.badge}
-            </span>
-            {warningEnabled && content.warning && (
+          {warningEnabled && content.warning && (
+            <div className="mb-4 flex flex-wrap items-center gap-3">
               <span className="rounded-full bg-red-500 px-3 py-1 text-sm font-semibold text-white">
                 {content.warning}
               </span>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Titel – ein inline-Block, Hintergrund läuft nahtlos durch alle Zeilen */}
           <h1 className="mb-5">
@@ -60,6 +56,10 @@ export default function HomeHeroSection({
               {content.title1} {content.title2}
             </span>
           </h1>
+
+          <p className="mb-6 max-w-2xl text-lg font-bold text-white md:text-xl">
+            {content.subtitle}
+          </p>
 
           {/* Features */}
           <div className="mb-6 space-y-2">
@@ -84,6 +84,13 @@ export default function HomeHeroSection({
             <span>{content.cta}</span>
             {!isArabic && <span>→</span>}
           </Link>
+
+          <a
+            href="#reviews"
+            className="mt-4 block max-w-xl text-sm font-bold text-white underline-offset-4 transition-colors hover:text-[#F5BB00] hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5BB00] md:text-base"
+          >
+            {content.socialProof}
+          </a>
         </div>
 
         {/* Spacer damit Inhalt nicht am Boden klebt */}

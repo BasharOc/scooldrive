@@ -9,8 +9,10 @@ export type HeroContent = {
   badge: string;
   title1: string;
   title2: string;
+  subtitle: string;
   features: readonly string[];
   cta: string;
+  socialProof: string;
   warning?: string;
 };
 
