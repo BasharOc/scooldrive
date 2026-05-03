@@ -30,7 +30,9 @@ export default function HomeHeroSection({
 
       <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-4 pb-10 pt-24 md:px-8 md:pb-16 md:pt-32">
         <div
-          className={`w-full max-w-4xl ${isArabic ? "ml-auto text-right" : ""}`}
+          className={`w-full max-w-4xl pt-6 md:pt-8 ${
+            isArabic ? "ml-auto pr-4 text-right md:pr-8" : "pl-4 md:pl-8"
+          }`}
         >
           {warningEnabled && content.warning && (
             <div className="mb-4 flex flex-wrap items-center gap-3">
