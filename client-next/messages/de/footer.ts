@@ -29,6 +29,7 @@ export const FOOTER_DE: FooterContent = {
       { label: "Impressum", path: "/impressum" },
       { label: "Datenschutz", path: "/datenschutz" },
       { label: "AGB", path: "/agb" },
+      { label: "Sitemap", path: "/sitemap" },
     ],
     notice: "„https://Scool Drive-in“ in neuem Tab öffnen",
     noticeUrl: "https://fahrschule-lg.scooldrive.com",

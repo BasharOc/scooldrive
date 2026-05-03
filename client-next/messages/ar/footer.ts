@@ -29,6 +29,7 @@ export const FOOTER_AR: FooterContent = {
       { label: "الإشعار القانوني", path: "/impressum" },
       { label: "سياسة الخصوصية", path: "/datenschutz" },
       { label: "الشروط والأحكام", path: "/agb" },
+      { label: "خريطة الموقع", path: "/sitemap" },
     ],
     notice: "افتح “https://Scool Drive-in” في علامة تبويب جديدة",
     noticeUrl: "https://fahrschule-lg.scooldrive.com",
