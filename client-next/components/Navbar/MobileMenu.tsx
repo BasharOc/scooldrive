@@ -125,7 +125,7 @@ export default function MobileMenu({
                                   <div className="flex-shrink-0 text-xl text-black">{subItem.icon}</div>
                                 )}
                                 <div className="flex-1">
-                                  <h4 className="text-sm font-bold text-black">{subItem.title}</h4>
+                                  <p className="text-sm font-bold text-black">{subItem.title}</p>
                                   <p className="text-xs text-gray-600">{subItem.description}</p>
                                 </div>
                               </motion.div>

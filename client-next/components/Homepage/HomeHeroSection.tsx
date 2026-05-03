@@ -45,7 +45,7 @@ export default function HomeHeroSection({
           </div>
 
           {/* Titel – ein inline-Block, Hintergrund läuft nahtlos durch alle Zeilen */}
-          <div className="mb-5">
+          <h1 className="mb-5">
             <span
               className="inline font-bold text-white text-2xl sm:text-4xl lg:text-4xl"
               style={{
@@ -59,7 +59,7 @@ export default function HomeHeroSection({
             >
               {content.title1} {content.title2}
             </span>
-          </div>
+          </h1>
 
           {/* Features */}
           <div className="mb-6 space-y-2">

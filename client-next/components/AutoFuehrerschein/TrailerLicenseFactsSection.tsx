@@ -42,9 +42,9 @@ export default function TrailerLicenseFactsSection({
                   className="flex w-56 flex-shrink-0 flex-col items-center rounded-2xl border-t-4 border-[#F5BB00] bg-white p-5 text-center shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl md:w-auto"
                 >
                   <Icon className="mb-3 text-4xl text-[#F5BB00]" />
-                  <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-[#F5BB00]">
+                  <p className="mb-2 text-sm font-bold uppercase tracking-wide text-[#F5BB00]">
                     {fact.title}
-                  </h3>
+                  </p>
                   <p className="text-base font-bold text-black">
                     {fact.content}
                   </p>

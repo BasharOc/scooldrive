@@ -68,9 +68,9 @@ export default function LicenseOptionsSection({
           {/* Left Side */}
           <div className="space-y-6">
             <div className="flex flex-col items-center text-center">
-              <span className="inline-block w-full max-w-[640px] rounded-t-xl bg-black px-5 py-2.5 text-[clamp(1.2rem,2vw,2.2rem)] font-bold leading-tight text-white whitespace-nowrap">
+              <h2 className="inline-block w-full max-w-[640px] rounded-t-xl bg-black px-5 py-2.5 text-[clamp(1.2rem,2vw,2.2rem)] font-bold leading-tight text-white whitespace-nowrap">
                 {content.header1}
-              </span>
+              </h2>
               <span className="mt-0 inline-block w-full max-w-[640px] rounded-b-xl bg-black px-4 pb-2.5 pt-1.5 text-[clamp(1rem,1.6vw,1.8rem)] font-bold leading-tight text-white">
                 {content.header2}
               </span>
@@ -100,9 +100,9 @@ export default function LicenseOptionsSection({
                         </div>
                       </div>
                       <div className="rounded-2xl bg-gray-100 p-4">
-                        <h3 className="mb-3 text-sm font-bold text-black">
+                        <p className="mb-3 text-sm font-bold text-black">
                           Theorie
-                        </h3>
+                        </p>
                         <div className="mb-3 h-28 rounded-lg bg-gradient-to-r from-green-400 to-blue-500" />
                         <div className="flex items-center justify-between text-sm text-black">
                           <span>Neue Fragen</span>

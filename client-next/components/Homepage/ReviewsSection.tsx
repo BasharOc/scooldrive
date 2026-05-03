@@ -22,7 +22,7 @@ function ReviewCard({ name, timeAgo, text, rating }: ReviewCardProps) {
     <article className="mx-3 w-[280px] sm:w-[400px] flex-shrink-0 rounded-[1.7rem] bg-white p-6 text-black shadow-[0_10px_28px_rgba(15,23,42,0.12)]">
       <div className="mb-4 flex items-start justify-between gap-4">
         <div>
-          <h3 className="text-sm font-bold uppercase text-black">{name}</h3>
+          <p className="text-sm font-bold uppercase text-black">{name}</p>
           <p className="mt-1 text-xs font-medium uppercase text-[#F5BB00]">
             {timeAgo}
           </p>

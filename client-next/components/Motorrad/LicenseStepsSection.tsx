@@ -116,10 +116,10 @@ export default function LicenseStepsSection({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="mb-4 text-4xl font-bold text-black md:text-5xl">
+          <h2 className="mb-4 text-4xl font-bold text-black md:text-5xl">
             {content.header.title}{" "}
             <span className="text-[#F5BB00]">{content.header.titleHighlight}</span>
-          </h1>
+          </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600 md:text-xl">
             {content.header.subtitle}
           </p>

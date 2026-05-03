@@ -3,10 +3,10 @@ import CookieBanner from "@/components/CookieBanner/CookieBanner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Fahrschule LG München - Führerschein, Auto, Motorrad | Scooldrive",
+  title: "Fahrschule Lüneburg - Führerschein, Auto, Motorrad | Scooldrive",
   description:
-    "Professionelle Fahrschule in München. Auto-, Motorrad- und Anhängerführerschein mit innovativer Methode. ✓ Flexible Kurse ✓ Top-Bestehensquote",
-  keywords: "Fahrschule München, Führerschein, Auto, Motorrad, Anhänger",
+    "Professionelle Fahrschule in Lüneburg. Auto-, Motorrad- und Anhängerführerschein mit innovativer Methode. ✓ Flexible Kurse ✓ Top-Bestehensquote",
+  keywords: "Fahrschule Lüneburg, Führerschein, Auto, Motorrad, Anhänger",
   icons: {
     icon: "/logo-icon.jpg",
     shortcut: "/logo-icon.jpg",

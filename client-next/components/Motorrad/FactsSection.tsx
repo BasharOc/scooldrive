@@ -15,14 +15,14 @@ export default function FactsSection({ content }: FactsSectionProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <motion.h1
+      <motion.h2
         className="mb-12 text-center text-[1.8rem] font-bold tracking-wide text-black md:text-3xl"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
         {content.title}
-      </motion.h1>
+      </motion.h2>
 
       <motion.div
         className="mt-12 overflow-x-auto"
@@ -39,9 +39,9 @@ export default function FactsSection({ content }: FactsSectionProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
             >
-              <h3 className="mb-2 text-sm font-semibold text-[#F5BB00]">
+              <p className="mb-2 text-sm font-semibold text-[#F5BB00]">
                 {fact.title}
-              </h3>
+              </p>
               <p className="text-lg font-bold text-black">{fact.description}</p>
             </motion.div>
           ))}

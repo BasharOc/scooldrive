@@ -26,9 +26,9 @@ export default function InformationSection({
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="whitespace-pre-line text-4xl font-bold leading-tight text-black italic lg:text-5xl">
+            <h2 className="whitespace-pre-line text-4xl font-bold leading-tight text-black italic lg:text-5xl">
               {content.title}
-            </h1>
+            </h2>
 
             <div className="space-y-4 text-lg leading-relaxed text-black">
               {content.paragraphs.map((paragraph) => (

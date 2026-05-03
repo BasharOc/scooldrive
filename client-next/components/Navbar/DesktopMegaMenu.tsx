@@ -83,7 +83,7 @@ export default function DesktopMegaMenu({
                           {item.icon}
                         </div>
                       )}
-                      <h3 className="mb-2 text-center text-sm font-bold text-black">{item.title}</h3>
+                      <p className="mb-2 text-center text-sm font-bold text-black">{item.title}</p>
                       <p className="text-center text-xs text-black">{item.description}</p>
                     </div>
                   </motion.div>

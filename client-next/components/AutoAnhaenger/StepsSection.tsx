@@ -27,9 +27,9 @@ export default function StepsSection({ content, locale }: StepsSectionProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="mb-4 text-4xl font-bold text-black md:text-5xl">
+          <h2 className="mb-4 text-4xl font-bold text-black md:text-5xl">
             {content.title} <span className="text-[#F5BB00]">{content.titleHighlight}</span>
-          </h1>
+          </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600 md:text-xl">
             {content.subtitle}
           </p>
