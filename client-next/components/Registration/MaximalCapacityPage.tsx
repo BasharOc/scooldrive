@@ -40,14 +40,14 @@ export default function MaximalCapacityPage({
         <div className="space-y-6">
           <div>
             <h1 className="mb-2 text-3xl font-bold text-black">{title}</h1>
-            <p className="text-xl font-semibold text-[#F5BB00]">{subtitle}</p>
+            <h2 className="text-xl font-semibold text-[#F5BB00]">{subtitle}</h2>
           </div>
-          <p className="text-lg leading-relaxed text-gray-600">{message}</p>
+          <h3 className="text-lg leading-relaxed text-gray-600">{message}</h3>
           <Link
             href={`/${locale}`}
             className="block w-full rounded-lg bg-[#F5BB00] px-8 py-4 font-semibold text-black transition-colors duration-200 hover:bg-[#F5BB00]/90"
           >
-            {button}
+            <h4>{button}</h4>
           </Link>
         </div>
       </div>

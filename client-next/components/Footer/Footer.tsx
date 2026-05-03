@@ -32,9 +32,9 @@ export default function Footer({ content, locale }: FooterProps) {
               <div className="mb-4 inline-block rounded bg-black px-4 py-2 text-lg font-bold text-white">
                 {content.companyInfo.name}
               </div>
-              <div className="w-fit rounded bg-[#F5BB00] px-2 py-1 text-sm font-semibold text-black">
+              <h4 className="w-fit rounded bg-[#F5BB00] px-2 py-1 text-sm font-semibold text-black">
                 {content.companyInfo.location}
-              </div>
+              </h4>
             </div>
 
             <p className="text-sm leading-relaxed text-gray-700">

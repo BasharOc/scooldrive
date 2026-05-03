@@ -39,10 +39,10 @@ export default function FactsSection({ content }: FactsSectionProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
             >
-              <p className="mb-2 text-sm font-semibold text-[#F5BB00]">
+              <h3 className="mb-2 text-sm font-semibold text-[#F5BB00]">
                 {fact.title}
-              </p>
-              <p className="text-lg font-bold text-black">{fact.description}</p>
+              </h3>
+              <h4 className="text-lg font-bold text-black">{fact.description}</h4>
             </motion.div>
           ))}
         </div>

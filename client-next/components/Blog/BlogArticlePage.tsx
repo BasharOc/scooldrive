@@ -15,6 +15,9 @@ export default function BlogArticlePage({
 }: BlogArticlePageProps) {
   const translation = article.translations[locale];
   const isArabic = locale === "ar";
+  const articleHtml = translation.contentHtml
+    .replace(/<h1(\s[^>]*)?>/gi, "<h2$1>")
+    .replace(/<\/h1>/gi, "</h2>");
 
   return (
     <section
@@ -60,7 +63,6 @@ export default function BlogArticlePage({
         <article className="prose prose-lg max-w-none">
           <div
             className={`blog-article-content leading-relaxed text-gray-800
-              [&>h1]:mt-8 [&>h1]:mb-4 [&>h1]:border-b-2 [&>h1]:border-[#F5BB00] [&>h1]:pb-2 [&>h1]:text-4xl [&>h1]:font-bold [&>h1]:text-black
               [&>h2]:mt-6 [&>h2]:mb-3 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:text-[#F5BB00]
               [&>h3]:mt-6 [&>h3]:mb-3 [&>h3]:text-xl [&>h3]:font-bold [&>h3]:text-black
               [&>h4]:mt-6 [&>h4]:mb-3 [&>h4]:text-lg [&>h4]:font-bold [&>h4]:text-black
@@ -84,7 +86,7 @@ export default function BlogArticlePage({
                   ? "[&>ul]:mb-6 [&>ul]:pr-6 [&>ul>li]:mb-2 [&>ul>li]:list-disc [&>ol]:mb-6 [&>ol]:pr-6 [&>ol>li]:mb-2 [&>ol>li]:list-decimal [&>blockquote]:border-r-4 [&>blockquote]:border-[#F5BB00] [&>blockquote]:pr-6"
                   : "[&>ul]:mb-6 [&>ul]:pl-6 [&>ul>li]:mb-2 [&>ul>li]:list-disc [&>ol]:mb-6 [&>ol]:pl-6 [&>ol>li]:mb-2 [&>ol>li]:list-decimal [&>blockquote]:border-l-4 [&>blockquote]:border-[#F5BB00] [&>blockquote]:pl-6"
               }`}
-            dangerouslySetInnerHTML={{ __html: translation.contentHtml }}
+            dangerouslySetInnerHTML={{ __html: articleHtml }}
           />
         </article>
 

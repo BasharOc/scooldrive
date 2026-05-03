@@ -20,7 +20,14 @@ export const FOOTER_AR: FooterContent = {
     },
     {
       title: "أخرى",
-      links: [{ label: "مواعيدنا", path: "/theoriekurs" }],
+      links: [
+        { label: "مواعيدنا", path: "/theoriekurs" },
+        { label: "دورات مكثفة", path: "/intensivkurse" },
+        { label: "الأسعار", path: "/preise" },
+        { label: "تخفيض النقاط", path: "/punkte-abbauen" },
+        { label: "المدونة", path: "/blogs" },
+        { label: "سجل الآن", path: "/anmelden" },
+      ],
     },
   ],
   bottom: {

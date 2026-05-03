@@ -34,9 +34,9 @@ export default function RegistrationHeader({
         </motion.button>
         <div className={`${activeBonus ? "mr-[0%]" : "mr-[15%] sm:mr-[10%]"} text-center`}>
           <h1 className="text-xl font-bold">{content.navigation.title}</h1>
-          <p className="text-sm text-gray-600">
+          <h4 className="text-sm font-normal text-gray-600">
             {content.navigation.stepOf} {currentStep} {content.navigation.von} {totalSteps}
-          </p>
+          </h4>
         </div>
         <div>
           <BonusNotice activeBonus={activeBonus} content={content} />

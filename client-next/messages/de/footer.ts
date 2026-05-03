@@ -20,7 +20,14 @@ export const FOOTER_DE: FooterContent = {
     },
     {
       title: "SONSTIGES",
-      links: [{ label: "Unsere Termine", path: "/theoriekurs" }],
+      links: [
+        { label: "Unsere Termine", path: "/theoriekurs" },
+        { label: "Intensivkurse", path: "/intensivkurse" },
+        { label: "Preise", path: "/preise" },
+        { label: "Punkte abbauen", path: "/punkte-abbauen" },
+        { label: "Blog", path: "/blogs" },
+        { label: "Jetzt anmelden", path: "/anmelden" },
+      ],
     },
   ],
   bottom: {

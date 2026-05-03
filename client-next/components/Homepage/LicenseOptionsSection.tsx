@@ -162,9 +162,9 @@ export default function LicenseOptionsSection({
                     <h3 className="text-[clamp(1.1rem,1.4vw,1.8rem)] font-bold uppercase leading-tight text-black">
                       {option.title}
                     </h3>
-                    <div className="mt-0.5 text-[clamp(0.85rem,0.95vw,1.2rem)] font-semibold text-slate-500">
+                    <h4 className="mt-0.5 text-[clamp(0.85rem,0.95vw,1.2rem)] font-semibold text-slate-500">
                       {option.subtitle}
-                    </div>
+                    </h4>
                     <p className="mt-1 text-[clamp(0.85rem,0.9vw,1.1rem)] leading-relaxed text-slate-600">
                       {option.description}
                     </p>

@@ -21,14 +21,14 @@ export default function RequirementsSummarySection({
   return (
     <div className="mt-24 bg-gray-50 px-4 py-6">
       <div className="mx-auto max-w-7xl">
-        <motion.h1
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="mb-6 text-center text-2xl font-bold text-black"
         >
           {content.title}
-        </motion.h1>
+        </motion.h2>
 
         <div className="overflow-x-auto py-4">
           <div className="flex min-w-max justify-center gap-6 pb-4">
@@ -48,9 +48,9 @@ export default function RequirementsSummarySection({
                   <h3 className="mb-2 text-lg font-bold uppercase tracking-wide text-[#F5BB00]">
                     {item.title}
                   </h3>
-                  <p className="text-lg font-bold leading-relaxed text-black">
+                  <h4 className="text-lg font-bold leading-relaxed text-black">
                     {item.content}
-                  </p>
+                  </h4>
                 </motion.div>
               );
             })}

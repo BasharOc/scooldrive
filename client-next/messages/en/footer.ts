@@ -20,7 +20,14 @@ export const FOOTER_EN: FooterContent = {
     },
     {
       title: "OTHERS",
-      links: [{ label: "Our Appointments", path: "/theoriekurs" }],
+      links: [
+        { label: "Our Appointments", path: "/theoriekurs" },
+        { label: "Intensive Courses", path: "/intensivkurse" },
+        { label: "Prices", path: "/preise" },
+        { label: "Reduce Points", path: "/punkte-abbauen" },
+        { label: "Blog", path: "/blogs" },
+        { label: "Register Now", path: "/anmelden" },
+      ],
     },
   ],
   bottom: {

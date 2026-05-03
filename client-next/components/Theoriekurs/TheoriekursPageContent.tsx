@@ -136,9 +136,9 @@ export default function TheoriekursPageContent({
                     <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-[#F5BB00] text-black md:h-32 md:w-32">
                       <Icon className="text-3xl" />
                     </div>
-                    <p className="max-w-24 text-sm font-bold leading-tight text-black md:max-w-32 md:text-base">
+                    <h3 className="max-w-24 text-sm font-bold leading-tight text-black md:max-w-32 md:text-base">
                       {item.title}
-                    </p>
+                    </h3>
                   </div>
                 );
               })}
