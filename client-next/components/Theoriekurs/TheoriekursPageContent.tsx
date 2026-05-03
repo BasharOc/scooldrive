@@ -14,9 +14,11 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import { getUpcomingTerminLabel, type TermineApiResponse } from "@/lib/remote-data";
+import { createSectionNav } from "@/lib/section-nav";
 import type { TheoriekursContent } from "@/messages/theoriekurs";
 import type { Locale } from "@/types/i18n";
 import FaqAccordion from "@/components/shared/FaqAccordion";
+import SectionNav from "@/components/shared/SectionNav";
 
 type TheoriekursPageContentProps = {
   content: TheoriekursContent;
@@ -49,11 +51,19 @@ export default function TheoriekursPageContent({
   const announcementTitle = nextDate
     ? content.nextCourse.datedTitle.replace("{date}", nextDate)
     : content.nextCourse.fallbackTitle;
+  const sectionNav = createSectionNav(locale, [
+    { id: "ueberblick", label: "intro" },
+    { id: "termine", label: "dates" },
+    { id: "inhalte", label: "contents" },
+    { id: "vorteile", label: "advantages" },
+    { id: "faq", label: "faq" },
+    { id: "preise", label: "prices" },
+  ]);
 
   return (
     <div className="mt-[100px] min-h-screen bg-gray-50 px-4 pt-20 pb-16">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12">
+        <div id="termine" className="mb-12 scroll-mt-28 md:scroll-mt-32">
           <div className="rounded-2xl bg-gradient-to-r from-[#F5BB00] to-[#e5a800] p-6 text-center shadow-2xl md:p-8">
             <div className="mb-4 flex items-center justify-center">
               <FaCalendarAlt className="mr-3 text-3xl text-black" />
@@ -74,7 +84,10 @@ export default function TheoriekursPageContent({
           </div>
         </div>
 
-        <div className="mb-12 text-center">
+        <div
+          id="ueberblick"
+          className="mb-12 scroll-mt-28 text-center md:scroll-mt-32"
+        >
           <h1 className="mb-6 text-4xl font-bold text-black md:text-5xl lg:text-6xl">
             {content.header.title}
             <span className="text-[#F5BB00]">{content.header.highlight}</span>
@@ -83,8 +96,9 @@ export default function TheoriekursPageContent({
             {content.header.subtitle}
           </p>
         </div>
+        <SectionNav content={sectionNav} className="mb-12 rounded-b-[28px]" />
 
-        <div className="mb-24">
+        <div className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <div className="rounded-2xl bg-white p-6 md:p-8">
             <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
               <div>
@@ -116,7 +130,7 @@ export default function TheoriekursPageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="inhalte" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
               {content.courseContents.title}
@@ -146,7 +160,7 @@ export default function TheoriekursPageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="vorteile" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <div className="rounded-2xl bg-white p-6 md:p-8">
             <h2 className="mb-8 text-center text-3xl font-bold text-black md:text-4xl">
               {content.advantages.title}
@@ -172,11 +186,11 @@ export default function TheoriekursPageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="faq" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <FaqAccordion faq={content.faq} />
         </div>
 
-        <div className="mb-24">
+        <div id="preise" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <div className="rounded-2xl bg-gradient-to-r from-[#F5BB00] to-[#e5a800] p-6 text-center shadow-2xl md:p-8">
             <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
               {content.price.title}

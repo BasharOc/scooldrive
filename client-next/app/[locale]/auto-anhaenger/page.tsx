@@ -5,7 +5,9 @@ import {
   RequirementsSummarySection,
   StepsSection,
 } from "@/components/AutoAnhaenger";
+import SectionNav from "@/components/shared/SectionNav";
 import { generatePageMetadata } from "@/lib/metadata";
+import { createSectionNav } from "@/lib/section-nav";
 import { autoAnhaengerByLocale } from "@/messages/auto-anhaenger";
 import { isLocale, SUPPORTED_LOCALES } from "@/types/i18n";
 import { notFound } from "next/navigation";
@@ -47,13 +49,25 @@ export default async function AutoAnhaengerPage({
   }
 
   const content = autoAnhaengerByLocale[locale];
+  const sectionNav = createSectionNav(locale, [
+    { id: "voraussetzungen", label: "requirements" },
+    { id: "ablauf", label: "process" },
+    { id: "checkliste", label: "checklist" },
+  ]);
 
   return (
     <>
       <HeroSection content={content.hero} locale={locale} />
-      <RequirementsSummarySection content={content.facts} />
-      <StepsSection content={content.steps} locale={locale} />
-      <ChecklistSection content={content.checklist} />
+      <SectionNav content={sectionNav} />
+      <section id="voraussetzungen" className="scroll-mt-28 md:scroll-mt-32">
+        <RequirementsSummarySection content={content.facts} />
+      </section>
+      <section id="ablauf" className="scroll-mt-28 md:scroll-mt-32">
+        <StepsSection content={content.steps} locale={locale} />
+      </section>
+      <section id="checkliste" className="scroll-mt-28 md:scroll-mt-32">
+        <ChecklistSection content={content.checklist} />
+      </section>
     </>
   );
 }

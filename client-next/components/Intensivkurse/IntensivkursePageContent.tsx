@@ -18,9 +18,11 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import type { PreiseApiResponse } from "@/lib/remote-data";
+import { createSectionNav } from "@/lib/section-nav";
 import type { IntensivkurseContent } from "@/messages/intensivkurse";
 import type { Locale } from "@/types/i18n";
 import FaqAccordion from "@/components/shared/FaqAccordion";
+import SectionNav from "@/components/shared/SectionNav";
 
 type IntensivkursePageContentProps = {
   content: IntensivkurseContent;
@@ -54,11 +56,22 @@ export default function IntensivkursePageContent({
     remoteData?.preise?.intensivkursPreis != null
       ? `${remoteData.preise.intensivkursPreis}€`
       : content.pricing.fallbackPrice;
+  const sectionNav = createSectionNav(locale, [
+    { id: "ueberblick", label: "intro" },
+    { id: "vorteile", label: "advantages" },
+    { id: "ablauf", label: "process" },
+    { id: "voraussetzungen", label: "requirements" },
+    { id: "preise", label: "prices" },
+    { id: "faq", label: "faq" },
+  ]);
 
   return (
     <div className="mt-[80px] min-h-screen bg-gray-50 px-4 pt-20 pb-16">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12 text-center">
+        <div
+          id="ueberblick"
+          className="mb-12 scroll-mt-28 text-center md:scroll-mt-32"
+        >
           <h1 className="mb-6 text-4xl font-bold text-black md:text-5xl lg:text-6xl">
             {content.header.title.split(" ")[0]}
             <span className="text-[#F5BB00]">
@@ -69,6 +82,7 @@ export default function IntensivkursePageContent({
             {content.header.subtitle}
           </p>
         </div>
+        <SectionNav content={sectionNav} className="mb-12 rounded-b-[28px]" />
 
         <div className="mb-24">
           <div className="rounded-2xl bg-white p-6 md:p-8">
@@ -114,7 +128,7 @@ export default function IntensivkursePageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="vorteile" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <div className="rounded-2xl bg-white p-6 md:p-8">
             <div className="mb-8 text-center">
               <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
@@ -146,7 +160,7 @@ export default function IntensivkursePageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="ablauf" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
               {content.process.title}
@@ -228,7 +242,10 @@ export default function IntensivkursePageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div
+          id="voraussetzungen"
+          className="mb-24 scroll-mt-28 md:scroll-mt-32"
+        >
           <div className="rounded-2xl bg-white p-6 md:p-8">
             <div className="mb-6 flex items-center">
               <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#F5BB00]">
@@ -269,7 +286,7 @@ export default function IntensivkursePageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="preise" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <div className="rounded-2xl bg-white p-6 md:p-8">
             <div className="mb-8 flex items-center justify-center">
               <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#F5BB00]">
@@ -316,7 +333,7 @@ export default function IntensivkursePageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="faq" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <FaqAccordion faq={content.faq} />
         </div>
 

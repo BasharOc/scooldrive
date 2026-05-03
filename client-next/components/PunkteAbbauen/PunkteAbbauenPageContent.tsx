@@ -18,11 +18,15 @@ import {
   FaUserPlus,
   FaUsers,
 } from "react-icons/fa";
+import { createSectionNav } from "@/lib/section-nav";
 import type { PunkteAbbauenContent } from "@/messages/punkte-abbauen";
+import type { Locale } from "@/types/i18n";
 import FaqAccordion from "@/components/shared/FaqAccordion";
+import SectionNav from "@/components/shared/SectionNav";
 
 type PunkteAbbauenPageContentProps = {
   content: PunkteAbbauenContent;
+  locale: Locale;
 };
 
 const structureIcons = {
@@ -52,11 +56,27 @@ const WHATSAPP_SVG_PATH =
 
 export default function PunkteAbbauenPageContent({
   content,
+  locale,
 }: PunkteAbbauenPageContentProps) {
+  const sectionNav = createSectionNav(locale, [
+    { id: "ueberblick", label: "intro" },
+    { id: "verstoesse", label: "violations" },
+    { id: "aufbau", label: "structure" },
+    { id: "ablauf", label: "process" },
+    { id: "themen", label: "topics" },
+    { id: "vorteile", label: "advantages" },
+    { id: "voraussetzungen", label: "requirements" },
+    { id: "preise", label: "prices" },
+    { id: "faq", label: "faq" },
+  ]);
+
   return (
     <div className="mt-[80px] min-h-screen bg-gray-50 px-4 pt-20 pb-16">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12 text-center">
+        <div
+          id="ueberblick"
+          className="mb-12 scroll-mt-28 text-center md:scroll-mt-32"
+        >
           <h1 className="mb-6 text-4xl font-bold md:text-5xl lg:text-6xl">
             <span className="text-[#F5BB00]">ASF</span>{" "}
             <span className="text-black">AUFBAUSEMINAR</span>
@@ -65,6 +85,7 @@ export default function PunkteAbbauenPageContent({
             {content.header.subtitle}
           </p>
         </div>
+        <SectionNav content={sectionNav} className="mb-12 rounded-b-[28px]" />
 
         <div className="mb-24">
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
@@ -110,7 +131,7 @@ export default function PunkteAbbauenPageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="verstoesse" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
             <div className="mb-8 text-center">
               <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
@@ -163,7 +184,7 @@ export default function PunkteAbbauenPageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="aufbau" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
             <div className="mb-8 text-center">
               <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
@@ -198,7 +219,7 @@ export default function PunkteAbbauenPageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="ablauf" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
               {content.process.title}
@@ -271,7 +292,7 @@ export default function PunkteAbbauenPageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="themen" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
             <div className="mb-8 text-center">
               <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
@@ -301,7 +322,7 @@ export default function PunkteAbbauenPageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="vorteile" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
             <div className="mb-8 text-center">
               <h2 className="mb-4 text-3xl font-bold text-black md:text-4xl">
@@ -321,7 +342,10 @@ export default function PunkteAbbauenPageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div
+          id="voraussetzungen"
+          className="mb-24 scroll-mt-28 md:scroll-mt-32"
+        >
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <div>
@@ -354,7 +378,7 @@ export default function PunkteAbbauenPageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="preise" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
               <div>
@@ -395,7 +419,7 @@ export default function PunkteAbbauenPageContent({
           </div>
         </div>
 
-        <div className="mb-24">
+        <div id="faq" className="mb-24 scroll-mt-28 md:scroll-mt-32">
           <FaqAccordion faq={content.faq} />
         </div>
 

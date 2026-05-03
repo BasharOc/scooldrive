@@ -3,7 +3,8 @@ import FaqAccordion from "@/components/Homepage/FaqAccordion";
 import HomeHeroSection from "@/components/Homepage/HomeHeroSection";
 import LicenseOptionsSection from "@/components/Homepage/LicenseOptionsSection";
 import PersonalApproachSection from "@/components/Homepage/PersonalApproachSection";
-import ReviewsSection from "@/components/Homepage/ReviewsSection";
+// import ReviewsSection from "@/components/Homepage/ReviewsSection";
+import ReviewsSectionV3 from "@/components/Homepage/ReviewsSectionV3";
 import SchoolLocationSection from "@/components/Homepage/SchoolLocationSection";
 import TrafficRulesSection from "@/components/Homepage/TrafficRulesSection";
 import SectionNav from "@/components/shared/SectionNav";
@@ -82,7 +83,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         />
       </div>
       <div id="reviews" className="scroll-mt-28 md:scroll-mt-32">
-        <ReviewsSection content={content.reviews} locale={typedLocale} />
+        <ReviewsSectionV3 content={content.reviews} locale={typedLocale} />
       </div>
       <div id="garantien" className="scroll-mt-28 md:scroll-mt-32">
         <TrafficRulesSection
