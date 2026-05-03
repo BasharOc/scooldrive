@@ -5,7 +5,6 @@ Diese Datei sammelt Dinge, die beim erneuten Lesen des Projekts aufgefallen sind
 ## Next/Frontend
 
 - `client-next/README.md` wurde produktbezogen aktualisiert, sollte aber bei neuen Workflows mitgezogen werden.
-- `client-next/app/layout.tsx` setzt globale Default-Metadaten mit "Muenchen", waehrend viele Inhalte und Domain-Texte auf Lueneburg ausgerichtet sind. Das sollte fachlich entschieden und vereinheitlicht werden.
 - `client-next/lib/metadata.ts` nutzt als Open-Graph-Bild `/logo-icon.png`, vorhanden ist aktuell `client-next/public/logo-icon.jpg`.
 - `client-next/public/vite.svg` ist noch aus dem alten Template uebrig.
 - `TOTAL_REGISTRATION_STEPS` ist `10`, der sichtbare Abschluss liegt bei Schritt 9. Das kann im Fortschrittsbalken bewusst sein, wirkt aber pruefenswert.
