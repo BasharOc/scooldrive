@@ -87,7 +87,7 @@ export default function HomeHeroSection({
 
           <a
             href="#reviews"
-            className="mt-4 block max-w-xl text-sm font-bold text-white underline-offset-4 transition-colors hover:text-[#F5BB00] hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5BB00] md:text-base"
+            className="mt-4 block max-w-xl text-sm font-bold text-white underline decoration-white/80 decoration-2 underline-offset-4 transition-colors hover:text-[#F5BB00] hover:decoration-[#F5BB00] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5BB00] md:text-base"
           >
             {content.socialProof}
           </a>
