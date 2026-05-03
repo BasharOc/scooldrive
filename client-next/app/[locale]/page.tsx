@@ -6,6 +6,7 @@ import PersonalApproachSection from "@/components/Homepage/PersonalApproachSecti
 import ReviewsSection from "@/components/Homepage/ReviewsSection";
 import SchoolLocationSection from "@/components/Homepage/SchoolLocationSection";
 import TrafficRulesSection from "@/components/Homepage/TrafficRulesSection";
+import SectionNav from "@/components/shared/SectionNav";
 import { getEinstellungen, getOeffnungszeiten } from "@/lib/api";
 import {
   formatOeffnungszeiten,
@@ -73,26 +74,42 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         locale={typedLocale}
         warningEnabled={remoteData?.begrenztePlaetze ?? false}
       />
-      <LicenseOptionsSection
-        content={content.licenseOptions}
-        locale={typedLocale}
-      />
-      <PersonalApproachSection
-        content={content.personalApproach}
-        locale={typedLocale}
-      />
-      <ReviewsSection content={content.reviews} locale={typedLocale} />
-      <TrafficRulesSection content={content.trafficRules} locale={typedLocale} />
-      <SchoolLocationSection
-        content={content.schoolLocation}
-        runtimeData={{
-          hours:
-            formatOeffnungszeiten(oeffnungszeiten) ||
-            content.schoolLocation.schoolInfo.hours,
-          phoneEnabled: remoteData?.kontaktOptionen?.telefon ?? true,
-        }}
-      />
-      <FaqAccordion content={content.faq} />
+      <SectionNav content={content.sectionNav} />
+      <div id="fuhrerscheine" className="scroll-mt-28 md:scroll-mt-32">
+        <LicenseOptionsSection
+          content={content.licenseOptions}
+          locale={typedLocale}
+        />
+      </div>
+      <div id="reviews" className="scroll-mt-28 md:scroll-mt-32">
+        <ReviewsSection content={content.reviews} locale={typedLocale} />
+      </div>
+      <div id="garantien" className="scroll-mt-28 md:scroll-mt-32">
+        <TrafficRulesSection
+          content={content.trafficRules}
+          locale={typedLocale}
+        />
+      </div>
+      <div id="angebot">
+        <PersonalApproachSection
+          content={content.personalApproach}
+          locale={typedLocale}
+        />
+      </div>
+      <div id="standort" className="scroll-mt-28 md:scroll-mt-32">
+        <SchoolLocationSection
+          content={content.schoolLocation}
+          runtimeData={{
+            hours:
+              formatOeffnungszeiten(oeffnungszeiten) ||
+              content.schoolLocation.schoolInfo.hours,
+            phoneEnabled: remoteData?.kontaktOptionen?.telefon ?? true,
+          }}
+        />
+      </div>
+      <div id="faq" className="scroll-mt-28 md:scroll-mt-32">
+        <FaqAccordion content={content.faq} />
+      </div>
     </>
   );
 }

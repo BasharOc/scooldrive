@@ -1,3 +1,5 @@
+import type { SectionNavContent } from "@/components/shared/SectionNav";
+
 export type HomeSeo = {
   title: string;
   description: string;
@@ -124,6 +126,7 @@ export type FaqContent = {
 export type HomeContent = {
   seo: HomeSeo;
   hero: HeroContent;
+  sectionNav: SectionNavContent;
   licenseOptions: LicenseOptionsContent;
   personalApproach: PersonalApproachContent;
   reviews: ReviewsContent;

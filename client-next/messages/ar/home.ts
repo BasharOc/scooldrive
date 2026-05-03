@@ -19,6 +19,16 @@ export const HOME_AR: HomeContent = {
     cta: "سجّل الآن",
     warning: "تنبيه: الأماكن محدودة",
   },
+  sectionNav: {
+    ariaLabel: "أقسام الصفحة الرئيسية",
+    items: [
+      { id: "fuhrerscheine", label: "الرخص" },
+      { id: "reviews", label: "التقييمات" },
+      { id: "garantien", label: "الضمانات" },
+      { id: "standort", label: "الموقع" },
+      { id: "faq", label: "الأسئلة" },
+    ],
+  },
   licenseOptions: {
     header1: "اختبر رخصتك رقمياً",
     header2: "تعلّم متى وأينما تريد",

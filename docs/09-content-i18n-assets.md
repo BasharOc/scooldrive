@@ -18,6 +18,8 @@ Locale-Routen liegen unter:
 
 `client-next/app/[locale]/layout.tsx` setzt `lang={locale}` und fuer Arabisch `dir="rtl"`.
 
+Standort-Hinweis: Alle Sprachvarianten beschreiben Scooldrive Lüneburg. Neue Inhalte muessen fachlich zu Lüneburg, Haagestraße 3 und den Lüneburger Fahrschul-/Verkehrsthemen passen.
+
 ## Uebersetzungsstruktur
 
 Zentrale Content-Dateien liegen unter `client-next/messages/`.
@@ -76,6 +78,7 @@ Wichtige Dateien in `client-next/public/`:
 | --- | --- |
 | `logo.png` | Navbar und Branding. |
 | `logo-icon.jpg` | Icon/SEO-Bild. |
+| `fuhrerschein_gold_app_framed.svg` | Gerahmtes App-Mockup in der Homepage-LicenseOptionsSection; Frame ist im SVG integriert. |
 | `hero-video.mp4` | Homepage-Hero. |
 | `auto-video.mp4` | Auto-Seiten. |
 | `anhanger-video.mp4` | Anhaenger-Seiten. |
@@ -88,6 +91,8 @@ Wichtige Dateien in `client-next/public/`:
 | `aufbau.png` | Content-Bild. |
 | `placeholder.jpg` | Fallback-Bild. |
 | `robots.txt` | Robots-Datei. |
+
+Nicht mehr fuer das Homepage-App-Mockup verwenden: `fuhrerschein_gold_app_v4.svg` mit zusaetzlichem manuellem Phone-Frame in TSX. Das aktuelle Mockup nutzt direkt `fuhrerschein_gold_app_framed.svg`.
 
 ## Google Analytics und Cookies
 

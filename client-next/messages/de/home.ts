@@ -19,6 +19,16 @@ export const HOME_DE: HomeContent = {
     cta: "JETZT ANMELDEN",
     warning: "Achtung: Begrenzte Plätze verfügbar!",
   },
+  sectionNav: {
+    ariaLabel: "Abschnitte der Startseite",
+    items: [
+      { id: "fuhrerscheine", label: "Führerscheine" },
+      { id: "reviews", label: "Bewertungen" },
+      { id: "garantien", label: "Garantien" },
+      { id: "standort", label: "Standort" },
+      { id: "faq", label: "FAQ" },
+    ],
+  },
   licenseOptions: {
     header1: "Führerschein digital erleben",
     header2: "Lernen, wann und wo du willst",

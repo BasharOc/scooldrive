@@ -1,6 +1,8 @@
 # Scooldrive Projekt-Dokumentation
 
-Dieses Repository enthaelt die Webseite, den Next.js-Adminbereich und das Express-Backend fuer die Fahrschule Scooldrive.
+Dieses Repository enthaelt die Webseite, den Next.js-Adminbereich und das Express-Backend fuer die Fahrschule Scooldrive in Lüneburg.
+
+Wichtig: Der fachliche Standort und alle SEO-/Content-Aussagen beziehen sich auf Lüneburg. Nicht auf andere Staedte ausweichen.
 
 Die wichtigsten Informationen liegen in der Dokumentationsmappe:
 
@@ -24,6 +26,7 @@ Die wichtigsten Informationen liegen in der Dokumentationsmappe:
 - Admin: Next.js-Seiten mit HTTP-only Session-Cookie und Proxy-Routen unter `/api/admin/*`.
 - Betrieb: Docker Compose mit `frontend`, `backend`, `nginx` und `certbot`.
 - Fachliche Bereiche: mehrsprachige Fahrschul-Seiten, Blog, Anmeldung mit EmailJS-Status, Admin-Panel fuer Preise, Termine, Boni, Einstellungen, Oeffnungszeiten und Registrierungen.
+- SEO/Rendering: Die oeffentlichen Locale-Seiten werden mit dem Next App Router als statisches HTML/ISR ausgeliefert und sind fuer Crawler direkt lesbar.
 
 ## Startpunkte im Code
 

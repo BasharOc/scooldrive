@@ -19,6 +19,16 @@ export const HOME_EN: HomeContent = {
     cta: "SIGN UP NOW",
     warning: "Attention: Limited spots available!",
   },
+  sectionNav: {
+    ariaLabel: "Homepage sections",
+    items: [
+      { id: "fuhrerscheine", label: "Licenses" },
+      { id: "reviews", label: "Reviews" },
+      { id: "garantien", label: "Guarantees" },
+      { id: "standort", label: "Location" },
+      { id: "faq", label: "FAQ" },
+    ],
+  },
   licenseOptions: {
     header1: "Experience your license digitally",
     header2: "Learn whenever and wherever you want",

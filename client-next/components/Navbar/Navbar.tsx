@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import DesktopMegaMenu from "@/components/Navbar/DesktopMegaMenu";
 import {
   getLocalizedSwitchPath,
@@ -121,12 +120,8 @@ export default function Navbar({ content, locale }: NavbarProps) {
   };
 
   return (
-    <div className="fixed left-1/2 top-8 z-50 mb-32 w-full max-w-[90%] -translate-x-1/2">
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className="relative rounded-2xl border border-gray-800 bg-black/90 px-6 py-[5px] shadow-2xl backdrop-blur-md"
-      >
+    <div className="fixed left-1/2 top-[calc(env(safe-area-inset-top)+1rem)] z-50 mb-32 w-full max-w-[90%] -translate-x-1/2">
+      <nav className="relative rounded-2xl border border-gray-800 bg-black/90 px-6 shadow-2xl backdrop-blur-md">
         {/* Header zeigt Logo, Hauptnavigation, CTA, Sprachwechsel und Mobile-Trigger. */}
         <NavbarHeader
           content={content}
@@ -172,7 +167,7 @@ export default function Navbar({ content, locale }: NavbarProps) {
           onMegaMenuEnter={handleMegaMenuEnter}
           onMegaMenuLeave={handleMegaMenuLeave}
         />
-      </motion.nav>
+      </nav>
 
       {/* MobileMenu ist das komplette Slide-in-Menü für kleine Viewports. */}
       <MobileMenu

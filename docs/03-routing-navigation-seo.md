@@ -27,6 +27,8 @@ Das Frontend nutzt den Next.js App Router.
 
 `generateStaticParams()` erzeugt die drei Locales `de`, `en`, `ar` fuer die oeffentlichen Seiten. Ungueltige Locales werden mit `notFound()` beendet.
 
+Der Root-Redirect `/` -> `/de` ist eine normale interne Sprachweiterleitung zur deutschen Lüneburg-Startseite. Er unterscheidet nicht nach User-Agent, Referrer oder Geraet.
+
 ## Navigation
 
 Die zentrale Navigation liegt unter `client-next/components/Navbar/`.
@@ -52,10 +54,17 @@ Gemeinsamer Helfer:
 
 Die meisten oeffentlichen Seiten lesen ihre SEO-Texte aus `client-next/messages/*` und rufen `generatePageMetadata()` auf. Blogartikel erzeugen eigene Article-Metadaten inklusive Coverbild und Alternates in `client-next/app/[locale]/blogs/[slug]/page.tsx`.
 
+Standort-Regel: SEO-Titel, Descriptions, Keywords, Blogtexte und rechtliche Inhalte sind auf Scooldrive Lüneburg ausgerichtet.
+
+Rendering-Regel: Die oeffentlichen Locale-Seiten sind statisch vorgerendert bzw. ISR-Seiten (`Revalidate 1m`). Google und andere Crawler bekommen HTML-Inhalte direkt ausgeliefert, keinen leeren Client-Screen.
+
+Heading-Regel: Pro oeffentlicher Seite genau ein `h1`. Nachfolgende Struktur: `h2` fuer Hauptabschnitte, `h3` fuer Unterabschnitte/Karten, `h4` fuer tiefere Details. Blog-Content darf kein zweites Artikel-`h1` erzeugen.
+
 ## Sitemap und Robots
 
 - Sitemap: `client-next/app/sitemap.ts`
 - Robots-Datei: `client-next/public/robots.txt`
+- `robots.txt` erlaubt die Website grundsaetzlich, schliesst aber `/admin` per `Disallow: /admin` aus.
 
 ## Bekannte Routing-Auffaelligkeiten
 

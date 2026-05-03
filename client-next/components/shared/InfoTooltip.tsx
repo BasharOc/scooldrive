@@ -96,14 +96,16 @@ export default function InfoTooltip({
           <FaInfoCircle className="text-lg" />
         </button>
 
-        {isOpen && (
-          <div
-            className={`absolute z-50 w-72 rounded-2xl bg-white p-4 shadow-xl ring-1 ring-black/10 ${popupClasses[position]}`}
-          >
-            <div aria-hidden="true" className={tailClasses[position]} />
-            {content}
-          </div>
-        )}
+        <div
+          className={`absolute z-50 w-72 rounded-2xl bg-white p-4 shadow-xl ring-1 ring-black/10 transition-all duration-200 ${popupClasses[position]} ${
+            isOpen
+              ? "visible scale-100 opacity-100"
+              : "invisible scale-95 opacity-0 pointer-events-none"
+          }`}
+        >
+          <div aria-hidden="true" className={tailClasses[position]} />
+          {content}
+        </div>
       </div>
     </div>
   );

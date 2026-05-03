@@ -1,6 +1,8 @@
 # Scooldrive Next Frontend
 
-Aktuelles Frontend fuer Scooldrive auf Basis von Next.js 16 App Router, React 19, TypeScript und Tailwind CSS 4.
+Aktuelles Frontend fuer Scooldrive Lüneburg auf Basis von Next.js 16 App Router, React 19, TypeScript und Tailwind CSS 4.
+
+Standort-Hinweis: Inhalte, Metadaten und SEO-Texte muessen auf Lüneburg ausgerichtet bleiben.
 
 ## Entwicklung
 
@@ -41,6 +43,13 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID=
 - `lib/`: API-Helfer, Admin-Auth, SEO-Metadaten, Blog-Loader.
 - `messages/`: lokalisierte Inhalte.
 - `public/`: Bilder, Videos, Blog-Cover und Robots-Datei.
+
+## SEO und Rendering
+
+- `/` leitet nach `/de`.
+- Die oeffentlichen Locale-Seiten nutzen `generateStaticParams()` und werden als statisches HTML mit ISR erzeugt.
+- Jede oeffentliche Inhaltsseite soll genau ein fachliches `h1` haben. Abschnittstitel folgen als `h2`, Karten/Unterpunkte als `h3` und tiefere Details als `h4`.
+- `/admin` ist in `public/robots.txt` per `Disallow: /admin` von der Indexierung ausgeschlossen.
 
 ## Scripts
 

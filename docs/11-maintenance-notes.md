@@ -9,6 +9,12 @@ Diese Datei sammelt Dinge, die beim erneuten Lesen des Projekts aufgefallen sind
 - `client-next/public/vite.svg` ist noch aus dem alten Template uebrig.
 - `TOTAL_REGISTRATION_STEPS` ist `10`, der sichtbare Abschluss liegt bei Schritt 9. Das kann im Fortschrittsbalken bewusst sein, wirkt aber pruefenswert.
 
+## Standort und SEO
+
+- Projektstandort ist Lüneburg. Neue Default-Metadaten, Blogtexte, Alt-Texte, Dokumentation und Seitentitel muessen bei Scooldrive Lüneburg bleiben.
+- Oeffentliche Seiten sollen weiterhin genau ein fachliches `h1` ausgeben und statisch/ISR crawlbar bleiben.
+- `client-next/components/Homepage/LicenseOptionsSection.tsx` nutzt fuer das App-Mockup `client-next/public/fuhrerschein_gold_app_framed.svg`; keinen zusaetzlichen Phone-Frame im TSX darum bauen.
+
 ## API und Datenmodell
 
 - `EinstellungenApiResponse` kennt optional `kontaktOptionen.whatsappNummer`, das Mongoose-Schema `Einstellungen` speichert dieses Feld aktuell nicht explizit.

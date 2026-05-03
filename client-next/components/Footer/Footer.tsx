@@ -11,7 +11,7 @@ export default function Footer({ content, locale }: FooterProps) {
   const isArabic = locale === "ar";
 
   return (
-    <footer className="bg-gray-100 px-4 py-16">
+    <footer id="footer" className="bg-gray-100 px-4 py-16">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex flex-col items-start justify-between gap-6 rounded-3xl bg-white p-8 md:flex-row md:items-center">
           <h2 className="max-w-3xl text-base font-bold italic text-black sm:text-1xl lg:text-3xl">

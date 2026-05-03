@@ -14,6 +14,8 @@
 
 `client-next/app/layout.tsx` ist das Root-Layout. Es setzt globale Metadaten, importiert `globals.css` und rendert den `CookieBanner`.
 
+Die globalen Fallback-Metadaten sind auf Scooldrive Lüneburg ausgerichtet. Seiten-Metadaten und Content duerfen fachlich nicht auf andere Staedte umschwenken.
+
 `client-next/app/page.tsx` leitet `/` auf `/de` weiter.
 
 `client-next/app/[locale]/layout.tsx`:
@@ -88,3 +90,11 @@ Admin:
 
 - `client-next/app/api/admin/*` proxyt zum Express-Backend.
 - `client-next/components/Admin/api.ts` ruft diese Proxy-Routen mit `credentials: "same-origin"` auf.
+
+## Semantik und Crawler
+
+- Oeffentliche Locale-Seiten werden ueber `generateStaticParams()` statisch erzeugt und per ISR aktualisiert.
+- Jede oeffentliche Inhaltsseite soll genau ein sichtbares, fachliches `h1` haben.
+- Hero-Titel sind echte `h1`, keine reinen `span`-Titel.
+- Wiederverwendbare Abschnittstitel sind `h2`; Karten- und Unterpunkt-Titel sind `h3`; Detailzeilen, die als Untertitel einer Karte dienen, koennen `h4` sein.
+- Blogartikel normalisieren eingebettete `h1` aus `contentHtml` zu `h2`, damit die Artikelseite nur ein `h1` behaelt.

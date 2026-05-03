@@ -2,7 +2,9 @@
 
 ## Zweck
 
-Das Projekt ist eine Fullstack-Webseite fuer die Fahrschule Scooldrive. Es kombiniert mehrsprachige oeffentliche Informationsseiten, Blog, Anmeldung und einen geschuetzten Admin-Bereich fuer dynamische Website-Daten.
+Das Projekt ist eine Fullstack-Webseite fuer die Fahrschule Scooldrive in Lüneburg. Es kombiniert mehrsprachige oeffentliche Informationsseiten, Blog, Anmeldung und einen geschuetzten Admin-Bereich fuer dynamische Website-Daten.
+
+Alle fachlichen Standort-, SEO- und Content-Aussagen beziehen sich auf Lüneburg.
 
 ## Hauptsysteme
 
@@ -34,6 +36,7 @@ flowchart LR
 - Oeffentliche Seiten fuer Auto-Fuehrerschein, Auto-Anhaenger, Motorrad, Theoriekurs, Intensivkurs, Preise und Punkteabbau.
 - Mehrsprachigkeit fuer Deutsch, Englisch und Arabisch ueber Locale-Routen `/{locale}`.
 - SEO-Metadaten pro Seite ueber Next.js `generateMetadata`.
+- Statisches HTML/ISR fuer oeffentliche Seiten, damit Crawler Inhalte ohne Client-JavaScript lesen koennen.
 - Blog aus statischen, dateibasierten Artikeldaten unter `client-next/messages/{locale}/blogs`.
 - Mehrstufige Anmeldung mit Speicherung in MongoDB und anschliessendem EmailJS-Statusabgleich.
 - Admin-Login per Express-JWT, in Next als HTTP-only Cookie gehalten.
