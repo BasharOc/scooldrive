@@ -23,6 +23,12 @@ export const HOME_DE: HomeContent = {
     header1: "Führerschein digital erleben",
     header2: "Lernen, wann und wo du willst",
     cta: "JETZT ANMELDEN",
+    appTooltip: {
+      title: "Lern-App inklusive",
+      body: "Im Laufe des Führerscheins bekommst du Zugang zur Lern-App – ideal zur Vorbereitung auf die Theorieprüfung. Die App kostet einmalig 85 €.",
+      priceNote: "Preise können sich ändern.",
+      pricesLink: "Aktuelle Preise ansehen →",
+    },
     options: [
       {
         id: "auto",

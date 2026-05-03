@@ -27,6 +27,12 @@ export type LicenseOptionsContent = {
   cta: string;
   options: readonly LicenseOption[];
   more: string;
+  appTooltip: {
+    title: string;
+    body: string;
+    priceNote: string;
+    pricesLink: string;
+  };
 };
 
 export type PersonalFeature = {

@@ -23,6 +23,12 @@ export const HOME_EN: HomeContent = {
     header1: "Experience your license digitally",
     header2: "Learn whenever and wherever you want",
     cta: "SIGN UP NOW",
+    appTooltip: {
+      title: "Learning app included",
+      body: "During your driving course you get access to the learning app – ideal for preparing for the theory exam. The app costs a one-time fee of €85.",
+      priceNote: "Prices may change.",
+      pricesLink: "View current prices →",
+    },
     options: [
       {
         id: "auto",

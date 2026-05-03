@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   FaArrowRight,
@@ -6,6 +7,7 @@ import {
   FaMotorcycle,
   FaTrailer,
 } from "react-icons/fa";
+import InfoTooltip from "@/components/shared/InfoTooltip";
 import type { LicenseOptionsContent } from "@/components/Homepage/types";
 import type { Locale } from "@/types/i18n";
 
@@ -78,57 +80,37 @@ export default function LicenseOptionsSection({
 
             <div className="flex justify-center">
               <div className="relative">
-                <div className="h-[400px] w-52 rounded-[2rem] bg-black p-2 shadow-[0_25px_60px_rgba(0,0,0,0.18)]">
-                  <div className="relative h-full w-full overflow-hidden rounded-[1.7rem] bg-white">
-                    <div className="flex items-center justify-between px-5 py-4 text-xs font-medium text-black">
-                      <span>12:57</span>
-                      <div className="flex items-center gap-1">
-                        <div className="h-2 w-5 rounded-full bg-green-500" />
-                        <span>100%</span>
-                      </div>
+                <Image
+                  src="/fuhrerschein_gold_app_framed.svg"
+                  alt="Führerschein Lern-App Screenshot"
+                  width={384}
+                  height={660}
+                  className="h-auto w-52 drop-shadow-[0_25px_60px_rgba(0,0,0,0.18)]"
+                />
+
+                <InfoTooltip
+                  position="top-right"
+                  className="absolute bottom-[2%] -right-14"
+                  content={
+                    <div>
+                      <p className="mb-2 text-sm font-bold text-black">
+                        {content.appTooltip.title}
+                      </p>
+                      <p className="mb-3 text-sm leading-relaxed text-gray-700">
+                        {content.appTooltip.body}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        {content.appTooltip.priceNote}{" "}
+                        <Link
+                          href={`/${locale}/preise`}
+                          className="font-semibold text-yellow-700 hover:underline"
+                        >
+                          {content.appTooltip.pricesLink}
+                        </Link>
+                      </p>
                     </div>
-                    <div className="px-4">
-                      <div className="mb-6 rounded-2xl bg-gray-100 p-4">
-                        <div className="mb-3 flex items-center justify-between">
-                          <span className="text-sm font-bold">PREMIUM</span>
-                          <div className="rounded bg-red-500 px-2 py-1 text-xs text-white">
-                            -96%
-                          </div>
-                        </div>
-                        <div className="text-right text-xs text-gray-500">
-                          1100/1150
-                        </div>
-                      </div>
-                      <div className="rounded-2xl bg-gray-100 p-4">
-                        <p className="mb-3 text-sm font-bold text-black">
-                          Theorie
-                        </p>
-                        <div className="mb-3 h-28 rounded-lg bg-gradient-to-r from-green-400 to-blue-500" />
-                        <div className="flex items-center justify-between text-sm text-black">
-                          <span>Neue Fragen</span>
-                          <FaArrowRight />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="absolute inset-x-0 bottom-0 border-t border-black/20 bg-white px-6 py-4">
-                      <div className="grid grid-cols-4 gap-4 text-center text-[11px] text-black">
-                        {["Start", "Lernen", "Tests", "Mehr"].map(
-                          (label, i) => (
-                            <div
-                              key={label}
-                              className="flex flex-col items-center gap-2"
-                            >
-                              <div
-                                className={`h-8 w-8 rounded ${i === 0 ? "bg-[#F5BB00]" : "bg-gray-300"}`}
-                              />
-                              <span>{label}</span>
-                            </div>
-                          ),
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  }
+                />
               </div>
             </div>
 
