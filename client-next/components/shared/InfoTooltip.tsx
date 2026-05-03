@@ -80,10 +80,12 @@ export default function InfoTooltip({
     // without conflicting with the inner relative context.
     <div className={className}>
       <div ref={ref} className="relative inline-flex">
+        <span className="pointer-events-none absolute inset-0 rounded-full bg-[#F5BB00]/35 blur-md" />
+        <span className="pointer-events-none absolute inset-0 animate-ping rounded-full bg-[#F5BB00]/30" />
         <button
           type="button"
           aria-label="Info"
-          className={`flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#F5BB00] shadow-md transition-colors duration-200 hover:bg-[#F5BB00] hover:text-black ${
+          className={`relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#F5BB00] shadow-[0_0_0_6px_rgba(245,187,0,0.18),0_12px_28px_rgba(245,187,0,0.38)] transition-all duration-200 hover:scale-105 hover:bg-[#F5BB00] hover:text-black hover:shadow-[0_0_0_8px_rgba(245,187,0,0.24),0_16px_34px_rgba(245,187,0,0.5)] ${
             tapOpen ? "bg-[#F5BB00] text-black" : "bg-white text-[#F5BB00]"
           }`}
           onMouseEnter={() => setHoverOpen(true)}
