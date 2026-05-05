@@ -111,8 +111,6 @@ export const HOME_EN: HomeContent = {
           "We prepare you specifically for the Lüneburg test routes — so you go into the exam confident and ready.",
       },
     ],
-    cta: "Start for free now",
-    ctaPath: "/anmelden",
   },
   reviews: {
     title: "WHAT YOUR PREDECESSORS SAY.",

@@ -57,8 +57,6 @@ export type PersonalApproachContent = {
   features: readonly PersonalFeature[];
   stepsHeading: string;
   steps: readonly PersonalApproachStep[];
-  cta: string;
-  ctaPath: string;
 };
 
 export type Review = {

@@ -111,8 +111,6 @@ export const HOME_DE: HomeContent = {
           "Wir bereiten dich gezielt auf die Lüneburger Prüfstrecken vor – damit du sicher und selbstbewusst in die Prüfung gehst.",
       },
     ],
-    cta: "Jetzt kostenlos starten",
-    ctaPath: "/anmelden",
   },
   reviews: {
     title: "DAS SAGEN DEINE VORGÄNGER.",
